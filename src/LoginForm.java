@@ -99,6 +99,10 @@ public class LoginForm extends JPanel {
                         .addContainerGap(42, Short.MAX_VALUE))
             );
             frame1.pack();
+            String path = System.getProperty("user.dir");
+            System.out.println(path);
+            frame1.setIconImage(new ImageIcon(path+"\\image\\nknu_logo.png").getImage());
+            frame1.setVisible(true);
             frame1.setLocationRelativeTo(frame1.getOwner());
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

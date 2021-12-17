@@ -1,22 +1,19 @@
 import javax.swing.*;
 import javax.swing.GroupLayout;
-/*
- * Created by JFormDesigner on Fri Dec 17 15:05:43 CST 2021
- */
 
-
-
-/**
- * @author peiChun lu
- */
 public class TeacherPage extends JFrame {
     public TeacherPage() {
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        String path = System.getProperty("user.dir");
+        System.out.println(path);
+        this.setIconImage(new ImageIcon(path+"\\image\\nknu_logo.png").getImage());
+        this.setVisible(true);
+        this.setTitle("KYUTES Teacher");
         initComponents();
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - peiChun lu
         label1 = new JLabel();
 
         //======== this ========
@@ -30,24 +27,21 @@ public class TeacherPage extends JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(158, 158, 158)
+                    .addGap(166, 166, 166)
                     .addComponent(label1)
-                    .addContainerGap(197, Short.MAX_VALUE))
+                    .addContainerGap(189, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(95, 95, 95)
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(131, Short.MAX_VALUE)
                     .addComponent(label1)
-                    .addContainerGap(156, Short.MAX_VALUE))
+                    .addGap(120, 120, 120))
         );
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }

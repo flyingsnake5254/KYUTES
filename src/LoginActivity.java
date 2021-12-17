@@ -12,6 +12,7 @@ public class LoginActivity extends JPanel {
     private ArrayList<String> passwords;
     private ArrayList<String> identity;
     private ArrayList<String> firstLogin;
+    private Statement st;
     public LoginActivity() {
         initComponents();
         getDBdata();
@@ -24,7 +25,7 @@ public class LoginActivity extends JPanel {
         identity = new ArrayList<>();
         firstLogin = new ArrayList<>();
 
-        Statement st = new GetDBdata().getStatement();
+        st = new GetDBdata().getStatement();
         try {
             st.execute("SELECT * FROM user");
             ResultSet rs = st.getResultSet();
@@ -55,7 +56,15 @@ public class LoginActivity extends JPanel {
                     else{
                         if(iden.equals("manager")){
                             frame.dispose();
-                            new MamagerPage();
+                            String sql = "update user set state='online' where account='"+tAccount+"'";
+                            try {
+                                st.executeUpdate(sql);
+                                new MamagerPage(tAccount);
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                                JOptionPane.showMessageDialog(null,"未知錯誤","錯誤",JOptionPane.ERROR_MESSAGE);
+                            }
+
                         }
                         else if(iden.equals("teacher")){
                             frame.dispose();

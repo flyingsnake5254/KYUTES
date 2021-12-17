@@ -1,22 +1,20 @@
 import javax.swing.*;
 import javax.swing.GroupLayout;
-/*
- * Created by JFormDesigner on Fri Dec 17 14:59:59 CST 2021
- */
 
-
-
-/**
- * @author peiChun lu
- */
 public class StudentPage extends JFrame {
     public StudentPage() {
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        String path = System.getProperty("user.dir");
+        System.out.println(path);
+        this.setIconImage(new ImageIcon(path+"\\image\\nknu_logo.png").getImage());
+        this.setVisible(true);
+        this.setTitle("KYUTES Student");
         initComponents();
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - peiChun lu
+
         panel1 = new JPanel();
         label1 = new JLabel();
 
@@ -72,12 +70,9 @@ public class StudentPage extends JFrame {
         );
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
-    }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - peiChun lu
+    }
     private JPanel panel1;
     private JLabel label1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }

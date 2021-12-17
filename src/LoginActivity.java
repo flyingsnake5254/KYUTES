@@ -12,6 +12,7 @@ public class LoginActivity extends JPanel {
     private ArrayList<String> passwords;
     private ArrayList<String> identity;
     private ArrayList<String> firstLogin;
+    String tAccount;
     private Statement st;
     public LoginActivity() {
         initComponents();
@@ -39,12 +40,21 @@ public class LoginActivity extends JPanel {
             ex.printStackTrace();
         }
     }
+    private void setOnline(){
+        String sql = "update user set state='online' where account='"+tAccount+"'";
+        try {
+            st.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"未知錯誤","錯誤",JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void buttonLoginListener(){
         buttonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tAccount = tfAccount.getText();
+                tAccount = tfAccount.getText();
                 String tPassword = tfPassword.getText();
 
                 if(accounts.contains(tAccount) && passwords.get(accounts.indexOf(tAccount)).equals(tPassword)){
@@ -56,23 +66,18 @@ public class LoginActivity extends JPanel {
                     else{
                         if(iden.equals("manager")){
                             frame.dispose();
-                            String sql = "update user set state='online' where account='"+tAccount+"'";
-                            try {
-                                st.executeUpdate(sql);
-                                new MamagerPage(tAccount);
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                                JOptionPane.showMessageDialog(null,"未知錯誤","錯誤",JOptionPane.ERROR_MESSAGE);
-                            }
-
+                            setOnline();
+                            new MamagerPage(tAccount);
                         }
                         else if(iden.equals("teacher")){
                             frame.dispose();
-                            new TeacherPage();
+                            setOnline();
+                            new TeacherPage(tAccount);
                         }
                         else if(iden.equals("student")){
                             frame.dispose();
-                            new StudentPage();
+                            setOnline();
+                            new StudentPage(tAccount);
                         }
                         else{
                             JOptionPane.showMessageDialog(null,"未知錯誤","錯誤",JOptionPane.ERROR_MESSAGE);

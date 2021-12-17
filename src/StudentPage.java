@@ -1,8 +1,16 @@
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class StudentPage extends JFrame {
-    public StudentPage() {
+    private String userAccount;
+    private Statement st;
+    public StudentPage(String userAccount) {
+        this.userAccount = userAccount;
+        st = new GetDBdata().getStatement();
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String path = System.getProperty("user.dir");
@@ -11,6 +19,22 @@ public class StudentPage extends JFrame {
         this.setVisible(true);
         this.setTitle("KYUTES Student");
         initComponents();
+        frameClose();
+    }
+
+    private void frameClose(){
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                String sql = "update user set state='offline' where account='"+userAccount+"'";
+                try {
+                    st.executeUpdate(sql);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initComponents() {

@@ -15,7 +15,7 @@ new FormModel {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "Welcome"
+					"text": "student"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

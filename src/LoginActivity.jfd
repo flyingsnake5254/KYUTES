@@ -4,21 +4,21 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space ::91:x, comp label3:::p::p, space :p:290:p}, seq {par l {seq l {space :p:96:p, par t {comp button1:::p::p, seq {comp label2:::p:75:p, space :::p, par l:::p {comp passwordField1::::200:x, comp textField2::::200:x}}}}, seq l {space :p:142:p, comp label1:::p:175:p}}, space ::81:x}}"
-			"$verticalGroup": "par l {seq l {space :p:25:p, comp label1:::p:36:p, space :p:34:p, par b {comp textField2::b:p::p, comp label2::b:p:27:p}, space :p:31:p, par b {comp label3::b:p::p, comp passwordField1::b:p::p}, space :p:31:p, comp button1:::p::p, space ::42:x}}"
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:96:p, par l:::p {seq t {space :p:18:p, comp button2:::p::p, space ::63:x, comp button1:::p::p}, seq l {par l:::p {comp label2::::75:x, comp label3::::75:x}, space :::p, par l:::p {comp passwordField1::::200:x, comp textField2::::200:x}}}}, seq l {space :p:161:p, comp label1:::p:175:p}}, space ::126:x}}"
+			"$verticalGroup": "par l {seq l {space :p:23:p, comp label1:::p:36:p, space :p:36:p, par b {comp textField2::b:p::p, comp label2::b:p:27:p}, space :p:31:p, par b {comp passwordField1::b:p::p, comp label3::b:p::p}, space :p:31:p, par b {comp button1::b:p::p, comp button2::b:p::p}, space ::38:x}}"
 		} ) {
 			name: "frame1"
 			"title": "KYUTES"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "KYUTES Login"
+				"text": "KYUTES 登入"
 				"horizontalAlignment": 0
-				"font": new java.awt.Font( "Consolas", 1, 20 )
+				"font": new java.awt.Font( "微軟正黑體", 1, 20 )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
-				"text": "account"
-				"font": new java.awt.Font( "Consolas", 1, 18 )
+				"text": "帳號"
+				"font": new java.awt.Font( "微軟正黑體", 1, 18 )
 				"horizontalAlignment": 0
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -27,9 +27,9 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
-				"text": "password"
+				"text": "密碼"
 				"horizontalAlignment": 0
-				"font": new java.awt.Font( "Consolas", 1, 18 )
+				"font": new java.awt.Font( "微軟正黑體", 1, 18 )
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "passwordField1"
@@ -37,12 +37,17 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
-				"text": "Login"
-				"font": new java.awt.Font( "Consolas", 1, 18 )
+				"text": "登入"
+				"font": new java.awt.Font( "微軟正黑體", 1, 18 )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "第一次登入"
+				"font": new java.awt.Font( "微軟正黑體", 1, 18 )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 45, 15 )
-			"size": new java.awt.Dimension( 460, 325 )
+			"size": new java.awt.Dimension( 505, 325 )
 		} )
 	}
 }

@@ -30,16 +30,16 @@ public class TeacherPage extends JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(154, 154, 154)
+                    .addGap(158, 158, 158)
                     .addComponent(label1)
-                    .addContainerGap(224, Short.MAX_VALUE))
+                    .addContainerGap(197, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(93, 93, 93)
+                    .addGap(95, 95, 95)
                     .addComponent(label1)
-                    .addContainerGap(158, Short.MAX_VALUE))
+                    .addContainerGap(156, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());

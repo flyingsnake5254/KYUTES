@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:154:p, comp label1:::p::p, space ::224:x}}"
-			"$verticalGroup": "par l {seq l {space :p:93:p, comp label1:::p::p, space ::158:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:158:p, comp label1:::p::p, space ::197:x}}"
+			"$verticalGroup": "par l {seq l {space :p:95:p, comp label1:::p::p, space ::156:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {

@@ -1,7 +1,9 @@
+import Manager.CreateAccount;
+
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -23,7 +25,6 @@ public class MamagerPage extends JFrame {
         this.setTitle("KYUTES Manager");
         initComponents();
         frameClose();
-        buttonBuildAccount();
     }
 
     private void frameClose(){
@@ -41,25 +42,26 @@ public class MamagerPage extends JFrame {
         });
     }
 
-    // 建立使用者帳號
-    private void buttonBuildAccount(){
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buildAccount();
-            }
-        });
-    }
-
-    private void buildAccount(){
+    private void b_buildAccount(ActionEvent e) {
+        // TODO add your code here
+        panel1.removeAll();
+        CreateAccount createAccount = new CreateAccount();
+        createAccount.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        createAccount.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(createAccount);
+        this.invalidate();
+        this.validate();
 
     }
+
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
         label1 = new JLabel();
-        button1 = new JButton();
+        b_buildAccount = new JButton();
+        panel1 = new JPanel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -67,31 +69,57 @@ public class MamagerPage extends JFrame {
         //---- label1 ----
         label1.setText("Manager");
 
-        //---- button1 ----
-        button1.setText("\u5efa\u7acb\u4f7f\u7528\u8005\u5e33\u865f");
+        //---- b_buildAccount ----
+        b_buildAccount.setText("\u5efa\u7acb\u4f7f\u7528\u8005\u5e33\u865f");
+        b_buildAccount.addActionListener(e -> b_buildAccount(e));
+
+        //======== panel1 ========
+        {
+            panel1.setBackground(new Color(255, 255, 153));
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
+            .border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder
+            .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.
+            awt.Font.BOLD,12),java.awt.Color.red),panel1. getBorder()))
+            ;panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+            ){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}})
+            ;
+
+            GroupLayout panel1Layout = new GroupLayout(panel1);
+            panel1.setLayout(panel1Layout);
+            panel1Layout.setHorizontalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGap(0, 884, Short.MAX_VALUE)
+            );
+            panel1Layout.setVerticalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGap(0, 599, Short.MAX_VALUE)
+            );
+        }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(15, 15, 15)
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(23, 23, 23)
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addComponent(button1)))
-                    .addContainerGap(846, Short.MAX_VALUE))
+                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(b_buildAccount, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(18, 18, 18)
+                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(23, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(19, 19, 19)
-                    .addComponent(label1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(button1)
-                    .addContainerGap(520, Short.MAX_VALUE))
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(b_buildAccount)))
+                    .addContainerGap(15, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -101,6 +129,7 @@ public class MamagerPage extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label1;
-    private JButton button1;
+    private JButton b_buildAccount;
+    private JPanel panel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

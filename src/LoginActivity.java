@@ -12,6 +12,7 @@ public class LoginActivity extends JPanel {
     private ArrayList<String> passwords;
     private ArrayList<String> identity;
     private ArrayList<String> firstLogin;
+    private ArrayList<String> state;
     String tAccount;
     private Statement st;
     public LoginActivity() {
@@ -59,28 +60,44 @@ public class LoginActivity extends JPanel {
 
                 if(accounts.contains(tAccount) && passwords.get(accounts.indexOf(tAccount)).equals(tPassword)){
                     String iden = identity.get(accounts.indexOf(tAccount));
-                    String state = firstLogin.get(accounts.indexOf(tAccount));
-                    if(state.equals("true")){
+                    String isFirstLogin = firstLogin.get(accounts.indexOf(tAccount));
+                    if(isFirstLogin.equals("true")){
                         JOptionPane.showMessageDialog(null,"初次登入者，請點選\"第一次登入\"按鈕!","注意",JOptionPane.WARNING_MESSAGE);
                     }
                     else{
-                        if(iden.equals("manager")){
-                            frame.dispose();
-                            setOnline();
-                            new MamagerPage(tAccount);
+                        st = new GetDBdata().getStatement();
+                        state = new ArrayList<>();
+                        try {
+                            st.execute("SELECT * FROM user");
+                            ResultSet rs = st.getResultSet();
+                            while(rs.next()){
+                                state.add(rs.getString("state"));
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
                         }
-                        else if(iden.equals("teacher")){
-                            frame.dispose();
-                            setOnline();
-                            new TeacherPage(tAccount);
-                        }
-                        else if(iden.equals("student")){
-                            frame.dispose();
-                            setOnline();
-                            new StudentPage(tAccount);
+                        if(state.get(accounts.indexOf(tAccount)).equals("online")){
+                            JOptionPane.showMessageDialog(null,"已有其他設備登入此帳號!","錯誤",JOptionPane.ERROR_MESSAGE);
                         }
                         else{
-                            JOptionPane.showMessageDialog(null,"未知錯誤","錯誤",JOptionPane.ERROR_MESSAGE);
+                            if(iden.equals("manager")){
+                                frame.dispose();
+                                setOnline();
+                                new MamagerPage(tAccount);
+                            }
+                            else if(iden.equals("teacher")){
+                                frame.dispose();
+                                setOnline();
+                                new TeacherPage(tAccount);
+                            }
+                            else if(iden.equals("student")){
+                                frame.dispose();
+                                setOnline();
+                                new StudentPage(tAccount);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null,"未知錯誤","錯誤",JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
                 }

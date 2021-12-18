@@ -1,0 +1,42 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {par l {seq l {space :p:27:p, par l {seq {comp b_inputCSV:::p::p, space :p:41:p, comp l_fileName:::p:188:p}, comp panel1:::p::p}}, seq l {space :p:26:p, comp selectIdentity:::p::p}}, space ::41:x}}"
+			"$verticalGroup": "par l {seq l {space :p:18:p, par l {comp b_inputCSV:::p::p, comp l_fileName:::p:30:p}, space u:::p, comp selectIdentity:::p::p, space :p:27:p, comp panel1:::p::p, space ::36:x}}"
+		} ) {
+			name: "this"
+			"preferredSize": new java.awt.Dimension( 892, 621 )
+			"background": new java.awt.Color( 153, 255, 153, 255 )
+			"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "b_inputCSV"
+				"text": "匯入CSV"
+				"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_inputCSV", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "l_fileName"
+				"horizontalTextPosition": 10
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "selectIdentity"
+				"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "selectIdentity", true ) )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "selectIdentityMouseClicked", true ) )
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "selectIdentityItemStateChanged", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {space :0:822:x}"
+				"$verticalGroup": "par l {space :0:467:x}"
+			} ) {
+				name: "panel1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 890, 620 )
+		} )
+	}
+}

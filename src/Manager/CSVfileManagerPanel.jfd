@@ -1,0 +1,24 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel1::l:::x}"
+			"$verticalGroup": "par l {seq l {comp panel1:::p::p, space :0:0:x}}"
+		} ) {
+			name: "this"
+			"background": new java.awt.Color( 0, 255, 204, 255 )
+			"preferredSize": new java.awt.Dimension( 783, 451 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {space :0:790:x}"
+				"$verticalGroup": "par l {space :0:459:x}"
+			} ) {
+				name: "panel1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 790, 450 )
+		} )
+	}
+}

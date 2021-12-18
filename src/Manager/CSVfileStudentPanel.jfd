@@ -1,0 +1,104 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel1::l:::x}"
+			"$verticalGroup": "par l {comp panel1::l:::x}"
+		} ) {
+			name: "this"
+			"preferredSize": new java.awt.Dimension( 783, 451 )
+			"background": new java.awt.Color( 204, 153, 255, 255 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+				"$columnSpecs": "59, 198"
+				"$rowSpecs": "0, 0, 0, 0, 0, 0, 0"
+				"$hGap": 5
+				"$vGap": 5
+				"$alignTop": true
+				"$alignLeft": true
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 102, 102, 255 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label9"
+					"text": "欄位名稱"
+					"horizontalAlignment": 0
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label10"
+					"text": "*帳號"
+					"horizontalAlignment": 4
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField8"
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label11"
+					"text": "*密碼"
+					"horizontalAlignment": 4
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField9"
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label12"
+					"text": "*科系"
+					"horizontalAlignment": 4
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 3
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField10"
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 3
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label13"
+					"text": "*年級"
+					"horizontalAlignment": 4
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridy": 4
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField11"
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 4
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField12"
+					"font": new java.awt.Font( "微軟正黑體", 0, 16 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 5
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 780, 520 )
+		} )
+	}
+}

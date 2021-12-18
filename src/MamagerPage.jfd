@@ -4,13 +4,17 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:23:p, comp label1:::p:189:p, space ::846:x}}"
-			"$verticalGroup": "par l {seq l {space :p:19:p, comp label1:::p:52:p, space ::562:x}}"
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:23:p, comp label1:::p:189:p}, seq l {space :p:15:p, comp button1:::p::p}}, space ::846:x}}"
+			"$verticalGroup": "par l {seq l {space :p:19:p, comp label1:::p:52:p, space u:::p, comp button1:::p::p, space ::520:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Manager"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "建立使用者帳號"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

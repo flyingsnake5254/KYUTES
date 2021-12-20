@@ -1,3 +1,5 @@
+package Manager;
+
 public class SecretData {
     public static String DB_PASSWORD = "Holmes5254";
     public static String DB_NAME = "kyutes";
@@ -9,3 +11,4 @@ public class SecretData {
             ,"電子工程學系","電機工程學系","軟體工程與管理學系"
     };
 }
+

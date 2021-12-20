@@ -3,19 +3,25 @@ JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:15:p, par l {comp label1:::p:118:p, comp b_buildAccount:::::x}, space s:::p, comp panel1:::p::p, space ::23:x}}"
-			"$verticalGroup": "par l {seq l {space :p:19:p, par l {comp panel1:::p::p, seq {comp label1:::p:52:p, space s:::p, comp b_buildAccount:::p::p}}, space ::15:x}}"
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0, 934"
+			"$rowSpecs": "32, 30, 30, 30, 484"
+			"$hGap": 5
+			"$vGap": 5
+			"$alignTop": true
+			"$alignLeft": true
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Manager"
-			} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "b_buildAccount"
 				"text": "建立使用者帳號"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_buildAccount", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {space :0:884:x}"
@@ -23,6 +29,16 @@ new FormModel {
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 255, 255, 153, 255 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 1
+				"gridheight": 4
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "帳號管理"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

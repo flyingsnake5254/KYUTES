@@ -21,30 +21,7 @@ public class InputCSVfilePanel extends JPanel {
             selectIdentity.addItem(s);
     }
 
-    File csvFile;
 
-    private void b_inputCSV(ActionEvent e) {
-        // TODO add your code here
-        JFileChooser jFileChooser = new JFileChooser();
-        int state = jFileChooser.showOpenDialog(null);
-        if(state == JFileChooser.APPROVE_OPTION){
-            csvFile = jFileChooser.getSelectedFile();
-            String fileType;
-            int index;
-            if((index = csvFile.getName().lastIndexOf(".")) != -1){
-                fileType = csvFile.getName().substring(index + 1);
-                if(fileType.equals("csv")){
-                    l_fileName.setText(csvFile.getName());
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"不支援此類型檔案","錯誤",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"不支援此類型檔案","錯誤",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
 
     private void selectIdentity(ActionEvent e) {
         // TODO add your code here
@@ -98,8 +75,6 @@ public class InputCSVfilePanel extends JPanel {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
-        b_inputCSV = new JButton();
-        l_fileName = new JLabel();
         selectIdentity = new JComboBox();
         panel1 = new JPanel();
 
@@ -107,20 +82,12 @@ public class InputCSVfilePanel extends JPanel {
         setPreferredSize(new Dimension(892, 621));
         setBackground(new Color(153, 255, 153));
         setBorder(null);
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-        ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-        .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-        . Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-        propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-        ;} } );
-
-        //---- b_inputCSV ----
-        b_inputCSV.setText("\u532f\u5165CSV");
-        b_inputCSV.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        b_inputCSV.addActionListener(e -> b_inputCSV(e));
-
-        //---- l_fileName ----
-        l_fileName.setHorizontalTextPosition(SwingConstants.LEADING);
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
 
         //---- selectIdentity ----
         selectIdentity.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
@@ -140,11 +107,11 @@ public class InputCSVfilePanel extends JPanel {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGap(0, 822, Short.MAX_VALUE)
+                    .addGap(0, 866, Short.MAX_VALUE)
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGap(0, 467, Short.MAX_VALUE)
+                    .addGap(0, 517, Short.MAX_VALUE)
             );
         }
 
@@ -153,40 +120,26 @@ public class InputCSVfilePanel extends JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup()
                 .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
                     .addGroup(layout.createParallelGroup()
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addGroup(layout.createParallelGroup()
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(b_inputCSV)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(l_fileName, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))
-                                .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(26, 26, 26)
-                            .addComponent(selectIdentity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(selectIdentity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup()
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup()
-                        .addComponent(b_inputCSV)
-                        .addComponent(l_fileName, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addContainerGap()
                     .addComponent(selectIdentity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(27, 27, 27)
+                    .addGap(33, 33, 33)
                     .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(36, Short.MAX_VALUE))
+                    .addContainerGap(31, Short.MAX_VALUE))
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
-    private JButton b_inputCSV;
-    private JLabel l_fileName;
     private JComboBox selectIdentity;
     private JPanel panel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

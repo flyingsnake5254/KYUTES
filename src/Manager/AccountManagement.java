@@ -25,6 +25,7 @@ public class AccountManagement extends JPanel {
         initComponents();
         setComboBox();
         dataTable.setVisible(false);
+        b_delete.setVisible(false);
     }
     
     private void setComboBox(){
@@ -163,11 +164,13 @@ public class AccountManagement extends JPanel {
             }
             // show data
             if(matchIndex.size() == 0){
+                b_delete.setVisible(false);
                 JOptionPane.showMessageDialog(null,
                         "無符合資料","訊息",JOptionPane.DEFAULT_OPTION);
             }
             else{
                 // table setting
+                b_delete.setVisible(true);
                 DefaultTableModel dtm = new DefaultTableModel(matchIndex.size(),9);
                 dataTable.setModel(dtm);
                 dataTable.getColumnModel().getColumn(0).setHeaderValue("帳號");
@@ -198,6 +201,23 @@ public class AccountManagement extends JPanel {
 
     }
 
+    private void b_delete(ActionEvent e) {
+        // TODO add your code here
+        int[] s = dataTable.getSelectedRows();
+        DefaultTableModel df = (DefaultTableModel) dataTable.getModel();
+        Statement st = new GetDBdata().getStatement();
+        for(int i = 0 ; i < s.length ; i ++) {
+            df.removeRow(s[i]);
+            try {
+                System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+                st.execute("delete from user where account='" + df.getValueAt(s[i],0) + "'");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
@@ -219,18 +239,19 @@ public class AccountManagement extends JPanel {
         cb_sub = new JComboBox();
         l_grade = new JLabel();
         cb_grade = new JComboBox();
+        b_delete = new JButton();
         b_search = new JButton();
         scrollPane1 = new JScrollPane();
         dataTable = new JTable();
 
         //======== this ========
         setBackground(new Color(102, 255, 153));
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
-        .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax
-        . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
-        12 ) ,java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans
-        .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e.
-        getPropertyName () ) )throw new RuntimeException( ) ;} } );
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
+        EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing
+        .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
+        java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))
+        throw new RuntimeException();}});
 
         //======== panel1 ========
         {
@@ -337,6 +358,14 @@ public class AccountManagement extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
+            //---- b_delete ----
+            b_delete.setText("\u522a\u9664\u5e33\u865f");
+            b_delete.setBackground(new Color(255, 51, 51));
+            b_delete.addActionListener(e -> b_delete(e));
+            panel1.add(b_delete, new GridBagConstraints(12, 2, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+
             //---- b_search ----
             b_search.setText("\u641c\u5c0b");
             b_search.addActionListener(e -> b_search(e));
@@ -388,6 +417,7 @@ public class AccountManagement extends JPanel {
     private JComboBox cb_sub;
     private JLabel l_grade;
     private JComboBox cb_grade;
+    private JButton b_delete;
     private JButton b_search;
     private JScrollPane scrollPane1;
     private JTable dataTable;

@@ -1,3 +1,4 @@
+import Manager.AccountManagement;
 import Manager.CreateAccount;
 
 import java.awt.*;
@@ -54,6 +55,17 @@ public class MamagerPage extends JFrame {
 
     }
 
+    private void b_accountManage(ActionEvent e) {
+        // TODO add your code here
+        panel1.removeAll();
+        AccountManagement accountManagement = new AccountManagement();
+        accountManagement.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        accountManagement.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(accountManagement);
+        this.invalidate();
+        this.validate();
+    }
+
 
 
     private void initComponents() {
@@ -62,7 +74,7 @@ public class MamagerPage extends JFrame {
         label1 = new JLabel();
         b_buildAccount = new JButton();
         panel1 = new JPanel();
-        button1 = new JButton();
+        b_accountManage = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -88,31 +100,33 @@ public class MamagerPage extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(255, 255, 153));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
+            . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder
+            . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .
+            awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) )
+            ; panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+            ) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
+            ;
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGap(0, 884, Short.MAX_VALUE)
+                    .addGap(0, 934, Short.MAX_VALUE)
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGap(0, 599, Short.MAX_VALUE)
+                    .addGap(0, 589, Short.MAX_VALUE)
             );
         }
         contentPane.add(panel1, new GridBagConstraints(1, 1, 1, 4, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
 
-        //---- button1 ----
-        button1.setText("\u5e33\u865f\u7ba1\u7406");
-        contentPane.add(button1, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+        //---- b_accountManage ----
+        b_accountManage.setText("\u5e33\u865f\u7ba1\u7406");
+        b_accountManage.addActionListener(e -> b_accountManage(e));
+        contentPane.add(b_accountManage, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
         pack();
@@ -125,6 +139,6 @@ public class MamagerPage extends JFrame {
     private JLabel label1;
     private JButton b_buildAccount;
     private JPanel panel1;
-    private JButton button1;
+    private JButton b_accountManage;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

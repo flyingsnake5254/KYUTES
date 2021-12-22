@@ -4,14 +4,31 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:990:x}"
-			"$verticalGroup": "par l {space :0:620:x}"
+			"$horizontalGroup": "par l {comp panel1::l:::x}"
+			"$verticalGroup": "par l {comp panel1::l:::x}"
 		} ) {
 			name: "this"
-			"background": new java.awt.Color( 255, 51, 51, 255 )
+			"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+				"$columnSpecs": "98, 1202"
+				"$rowSpecs": "106, 600"
+				"$hGap": 5
+				"$vGap": 5
+				"$alignTop": true
+				"$alignLeft": true
+			} ) {
+				name: "panel1"
+				"background": #ColorUIResource0
+				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+					name: "tabbedPane1"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridwidth": 2
+					"gridheight": 2
+				} )
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 990, 620 )
+			"size": new java.awt.Dimension( 945, 560 )
 		} )
 	}
 }

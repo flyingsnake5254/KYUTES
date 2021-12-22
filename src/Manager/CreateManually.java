@@ -163,25 +163,26 @@ public class CreateManually extends JPanel {
         cb_subject = new JComboBox();
         l_grade = new JLabel();
         cb_grade = new JComboBox();
+        button1 = new JButton();
         label4 = new JLabel();
         tf_password = new JTextField();
         label5 = new JLabel();
         tf_num = new JTextField();
-        button1 = new JButton();
 
         //======== this ========
-        setBackground(new Color(255, 204, 153));
+        setBackground(new Color(204, 204, 204));
         setBorder(null);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-        EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
-        . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ),
-        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () ))
-        throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+        . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
+        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
+        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
+        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+        ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+        ;
         setLayout(new GridBagLayout());
-        ((GridBagLayout)getLayout()).columnWidths = new int[] {93, 107, 71, 225, 74, 138, 197, 0};
+        ((GridBagLayout)getLayout()).columnWidths = new int[] {98, 107, 71, 225, 74, 138, 93, 197, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 119, 0, 0, 0, 0, 34, 0, 516, 0};
-        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
         ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
         //---- label6 ----
@@ -233,6 +234,14 @@ public class CreateManually extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
+        //---- button1 ----
+        button1.setText("\u5275\u5efa\u5e33\u865f");
+        button1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 12));
+        button1.addActionListener(e -> button1(e));
+        add(button1, new GridBagConstraints(6, 2, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 5, 5), 0, 0));
+
         //---- label4 ----
         label4.setText("*\u9810\u8a2d\u5bc6\u78bc");
         label4.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -260,14 +269,6 @@ public class CreateManually extends JPanel {
         add(tf_num, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-
-        //---- button1 ----
-        button1.setText("\u5275\u5efa\u5e33\u865f");
-        button1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 12));
-        button1.addActionListener(e -> button1(e));
-        add(button1, new GridBagConstraints(5, 7, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 5), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -280,10 +281,10 @@ public class CreateManually extends JPanel {
     private JComboBox cb_subject;
     private JLabel l_grade;
     private JComboBox cb_grade;
+    private JButton button1;
     private JLabel label4;
     private JTextField tf_password;
     private JLabel label5;
     private JTextField tf_num;
-    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

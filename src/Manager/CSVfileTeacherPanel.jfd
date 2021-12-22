@@ -13,7 +13,7 @@ new FormModel {
 		} ) {
 			name: "this"
 			"preferredSize": new java.awt.Dimension( 783, 451 )
-			"background": new java.awt.Color( 102, 102, 0, 255 )
+			"background": new java.awt.Color( 204, 204, 204, 255 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "欄位名稱"
@@ -138,6 +138,7 @@ new FormModel {
 				"$verticalGroup": "par l {space :0:503:x}"
 			} ) {
 				name: "panel1"
+				"background": new java.awt.Color( 204, 204, 204, 255 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridwidth": 4
 				"gridheight": 13

@@ -9,7 +9,7 @@ new FormModel {
 		} ) {
 			name: "this"
 			"preferredSize": new java.awt.Dimension( 783, 451 )
-			"background": new java.awt.Color( 204, 153, 255, 255 )
+			"background": new java.awt.Color( 204, 204, 204, 255 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "66, 265, 0, 0"
 				"$rowSpecs": "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0"
@@ -19,7 +19,7 @@ new FormModel {
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
-				"background": new java.awt.Color( 0, 102, 102, 255 )
+				"background": new java.awt.Color( 204, 204, 204, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label9"
 					"text": "欄位名稱"

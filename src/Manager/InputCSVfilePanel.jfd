@@ -3,13 +3,17 @@ JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, par l {comp panel1:::p::p, comp selectIdentity:::p::p}, space ::18:x}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp selectIdentity:::p::p, space :p:33:p, comp panel1:::p::p, space ::31:x}}"
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0, 0, 1056"
+			"$rowSpecs": "37, 0, 0, 627"
+			"$hGap": 5
+			"$vGap": 5
+			"$alignTop": true
+			"$alignLeft": true
 		} ) {
 			name: "this"
 			"preferredSize": new java.awt.Dimension( 892, 621 )
-			"background": new java.awt.Color( 153, 255, 153, 255 )
+			"background": new java.awt.Color( 204, 204, 204, 255 )
 			"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "selectIdentity"
@@ -17,16 +21,25 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "selectIdentity", true ) )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "selectIdentityMouseClicked", true ) )
 				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "selectIdentityItemStateChanged", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 1
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {space :0:866:x}"
-				"$verticalGroup": "par l {space :0:517:x}"
+				"$horizontalGroup": "par l {space :0:1161:x}"
+				"$verticalGroup": "par l {space :0:652:x}"
 			} ) {
 				name: "panel1"
+				"background": new java.awt.Color( 204, 204, 204, 255 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 2
+				"gridwidth": 2
+				"gridheight": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 890, 620 )
+			"size": new java.awt.Dimension( 1200, 730 )
 		} )
 	}
 }

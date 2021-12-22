@@ -4,21 +4,21 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {comp panel1:::p:1050:p, space :0:0:x}}"
-			"$verticalGroup": "par l {comp panel1::l:::x}"
+			"$horizontalGroup": "par l {comp panel1::l::1150:x}"
+			"$verticalGroup": "par l {comp panel1::t::700:x}"
 		} ) {
 			name: "this"
 			"background": new java.awt.Color( 102, 255, 153, 255 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "0, 45, 165, 45, 165, 46, 0, 0, 0, 0, 0, 0, 45, 0"
-				"$rowSpecs": "29, 0, 27, 31"
+				"$columnSpecs": "77, 45, 165, 45, 165, 46, 104, 20, 78, 0, 98, 0, 146"
+				"$rowSpecs": "29, 0, 27, 516, 0"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
-				"background": new java.awt.Color( 153, 153, 255, 255 )
+				"background": new java.awt.Color( 204, 204, 204, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "帳號"
@@ -147,36 +147,42 @@ new FormModel {
 					"gridy": 2
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "b_search"
+					"text": "搜尋"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_search", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 8
+					"gridy": 2
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {space :0:953:x};par l {seq l {space :::p, comp scrollPane1:::p:941:p, space :::x}}"
+					"$verticalGroup": "par l {space :0:516:x};par l {seq t {space :::p, comp scrollPane1::::504:x, space :::p}}"
+				} ) {
+					name: "panel2"
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "dataTable"
+						} )
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 3
+					"gridwidth": 10
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "b_delete"
 					"text": "刪除帳號"
 					"background": new java.awt.Color( 255, 51, 51, 255 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_delete", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 12
-					"gridy": 2
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "b_search"
-					"text": "搜尋"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_search", true ) )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 13
-					"gridy": 2
-				} )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane1"
-					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "dataTable"
-					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 1
-					"gridy": 3
-					"gridwidth": 13
+					"gridx": 10
+					"gridy": 4
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 985, 545 )
+			"size": new java.awt.Dimension( 1150, 700 )
 		} )
 	}
 }

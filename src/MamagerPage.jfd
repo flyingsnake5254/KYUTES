@@ -3,15 +3,15 @@ JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridBagLayout ) {
-			"$columnSpecs": "0, 934"
-			"$rowSpecs": "32, 30, 30, 30, 484"
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0, 0, 1287"
+			"$rowSpecs": "0, 0, 0, 0, 0, 593"
 			"$hGap": 5
 			"$vGap": 5
 			"$alignTop": true
 			"$alignLeft": true
 		} ) {
-			name: "this"
+			name: "mainpanel"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Manager"
@@ -24,15 +24,16 @@ new FormModel {
 				"gridy": 1
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {space :0:934:x}"
-				"$verticalGroup": "par l {space :0:589:x}"
+				"$horizontalGroup": "par l {space :0:1312:x}"
+				"$verticalGroup": "par l {space :0:733:x}"
 			} ) {
 				name: "panel1"
-				"background": new java.awt.Color( 255, 255, 153, 255 )
+				"background": new java.awt.Color( 204, 204, 204, 255 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
 				"gridy": 1
-				"gridheight": 4
+				"gridheight": 5
+				"gridwidth": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "b_accountManage"
@@ -41,9 +42,23 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 2
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "b_groupManage"
+				"text": "測驗群組管理"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_groupManage", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "b_subjectManage"
+				"text": "測驗科目管理"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_subjectManage", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 4
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1060, 665 )
+			"size": new java.awt.Dimension( 1470, 770 )
 		} )
 	}
 }

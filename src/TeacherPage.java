@@ -43,29 +43,19 @@ public class TeacherPage extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
-        label1 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
-
-        //---- label1 ----
-        label1.setText("Teacher");
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(166, 166, 166)
-                    .addComponent(label1)
-                    .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(0, 1053, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addContainerGap(131, Short.MAX_VALUE)
-                    .addComponent(label1)
-                    .addGap(120, 120, 120))
+                .addGap(0, 618, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -74,6 +64,5 @@ public class TeacherPage extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
-    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -26,6 +26,8 @@ public class AccountManagement extends JPanel {
         setComboBox();
         dataTable.setVisible(false);
         b_delete.setVisible(false);
+        dataTable.getTableHeader().setReorderingAllowed(false);
+
     }
     
     private void setComboBox(){
@@ -76,9 +78,11 @@ public class AccountManagement extends JPanel {
     private void b_search(ActionEvent e) {
         // TODO add your code here
         // get DB data
-        ArrayList<String> accounts, password, phone, email, names, times, identity, subjects, grade, year, month, day;
+        ArrayList<String> accounts, password, phone, email, names, times, identity
+                , subjects, grade, year, month, day;
         accounts = new ArrayList<>();
         password = new ArrayList<>();
+     
         phone = new ArrayList<>();
         email = new ArrayList<>();
         names = new ArrayList<>();
@@ -194,6 +198,7 @@ public class AccountManagement extends JPanel {
                     dataTable.setValueAt(times.get(matchIndex.get(i)),i,8);
                 }
                 dataTable.setVisible(true);
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -204,19 +209,34 @@ public class AccountManagement extends JPanel {
     private void b_delete(ActionEvent e) {
         // TODO add your code here
         int[] s = dataTable.getSelectedRows();
+        ArrayList<String> deleteAccount = new ArrayList<>();
+        // get selected account
+        for(int i = 0 ; i < s.length ; i ++){
+            deleteAccount.add(dataTable.getModel().getValueAt(s[i],0).toString());
+        }
         DefaultTableModel df = (DefaultTableModel) dataTable.getModel();
         Statement st = new GetDBdata().getStatement();
-        for(int i = 0 ; i < s.length ; i ++) {
-            df.removeRow(s[i]);
-            try {
-                System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-                st.execute("delete from user where account='" + df.getValueAt(s[i],0) + "'");
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+
+        for(int i = 0 ; i < deleteAccount.size() ; i ++) {
+            // search deleted account
+            STOP_SEARCH:
+            for(int j = 0 ; j < dataTable.getRowCount() ; j ++){
+                if(dataTable.getModel().getValueAt(j,0).toString().equals(deleteAccount.get(i))){
+                    try {
+                        st.execute("delete from user where account='" + deleteAccount.get(i) + "'");
+                        df.removeRow(j);
+                        break STOP_SEARCH;
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
             }
         }
 
     }
+
+
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -239,28 +259,29 @@ public class AccountManagement extends JPanel {
         cb_sub = new JComboBox();
         l_grade = new JLabel();
         cb_grade = new JComboBox();
-        b_delete = new JButton();
         b_search = new JButton();
+        panel2 = new JPanel();
         scrollPane1 = new JScrollPane();
         dataTable = new JTable();
+        b_delete = new JButton();
 
         //======== this ========
         setBackground(new Color(102, 255, 153));
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
-        EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing
-        .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
-        java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener()
-        {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))
-        throw new RuntimeException();}});
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {
-            panel1.setBackground(new Color(153, 153, 255));
+            panel1.setBackground(new Color(204, 204, 204));
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 50, 170, 50, 170, 51, 0, 0, 0, 0, 0, 0, 50, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {34, 0, 32, 31, 0};
-            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {82, 50, 170, 50, 170, 51, 109, 25, 83, 0, 103, 0, 146, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {34, 0, 32, 521, 0, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
             //---- label1 ----
             label1.setText("\u5e33\u865f");
@@ -358,41 +379,64 @@ public class AccountManagement extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
+            //---- b_search ----
+            b_search.setText("\u641c\u5c0b");
+            b_search.addActionListener(e -> b_search(e));
+            panel1.add(b_search, new GridBagConstraints(8, 2, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+
+            //======== panel2 ========
+            {
+
+                //======== scrollPane1 ========
+                {
+                    scrollPane1.setViewportView(dataTable);
+                }
+
+                GroupLayout panel2Layout = new GroupLayout(panel2);
+                panel2.setLayout(panel2Layout);
+                panel2Layout.setHorizontalGroup(
+                    panel2Layout.createParallelGroup()
+                        .addGroup(panel2Layout.createParallelGroup()
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 941, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 953, Short.MAX_VALUE)
+                );
+                panel2Layout.setVerticalGroup(
+                    panel2Layout.createParallelGroup()
+                        .addGroup(panel2Layout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+                                .addContainerGap()))
+                        .addGap(0, 516, Short.MAX_VALUE)
+                );
+            }
+            panel1.add(panel2, new GridBagConstraints(1, 3, 10, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+
             //---- b_delete ----
             b_delete.setText("\u522a\u9664\u5e33\u865f");
             b_delete.setBackground(new Color(255, 51, 51));
             b_delete.addActionListener(e -> b_delete(e));
-            panel1.add(b_delete, new GridBagConstraints(12, 2, 1, 1, 0.0, 0.0,
+            panel1.add(b_delete, new GridBagConstraints(10, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
-
-            //---- b_search ----
-            b_search.setText("\u641c\u5c0b");
-            b_search.addActionListener(e -> b_search(e));
-            panel1.add(b_search, new GridBagConstraints(13, 2, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 0), 0, 0));
-
-            //======== scrollPane1 ========
-            {
-                scrollPane1.setViewportView(dataTable);
-            }
-            panel1.add(scrollPane1, new GridBagConstraints(1, 3, 13, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
+                new Insets(0, 0, 0, 5), 0, 0));
         }
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup()
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 1050, GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(panel1, GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup()
-                .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -417,9 +461,10 @@ public class AccountManagement extends JPanel {
     private JComboBox cb_sub;
     private JLabel l_grade;
     private JComboBox cb_grade;
-    private JButton b_delete;
     private JButton b_search;
+    private JPanel panel2;
     private JScrollPane scrollPane1;
     private JTable dataTable;
+    private JButton b_delete;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

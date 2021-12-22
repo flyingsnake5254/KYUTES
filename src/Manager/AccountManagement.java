@@ -215,9 +215,31 @@ public class AccountManagement extends JPanel {
             deleteAccount.add(dataTable.getModel().getValueAt(s[i],0).toString());
         }
         DefaultTableModel df = (DefaultTableModel) dataTable.getModel();
+        // refresh group num
+
         Statement st = new GetDBdata().getStatement();
 
         for(int i = 0 ; i < deleteAccount.size() ; i ++) {
+            // delete group name
+            try {
+                Statement st2 = new GetDBdata().getStatement();
+                st2.execute("select student_group from user where account = '"+
+                        deleteAccount.get(i)+"'");
+                ResultSet rs2 = st2.getResultSet();
+                String delG = "";
+                while(rs2.next()){
+                    delG = rs2.getString("student_group");
+                }
+                String peopleNum="0";
+                st2.execute("select people_num from all_group where name='"+delG+"'");
+                ResultSet rs3 = st2.getResultSet();
+                while(rs3.next())
+                    peopleNum = rs3.getString("people_num");
+                String newP = String.valueOf(Integer.parseInt(peopleNum) - 1);
+                st2.execute("update all_group set people_num='"+newP+"'");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             // search deleted account
             STOP_SEARCH:
             for(int j = 0 ; j < dataTable.getRowCount() ; j ++){

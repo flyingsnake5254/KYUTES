@@ -67,6 +67,34 @@ public class GroupSearch extends JPanel {
         }
     }
 
+    private void b_delete(ActionEvent e) {
+        // TODO add your code here
+        int[] selectIndex = table1.getSelectedRows();
+        ArrayList<String> selectGroup = new ArrayList<>();
+        for(int i = 0 ; i < selectIndex.length ; i ++){
+            selectGroup.add(table1.getValueAt(i,0).toString());
+        }
+        Statement st = new GetDBdata().getStatement();
+        for(int i = 0 ; i < selectGroup.size() ; i ++){
+            try {
+                st.execute("delete from all_group where name='"+selectGroup.get(i)+"'");
+                st.execute("drop table "+selectGroup.get(i));
+                st.execute("update user set student_group='' where student_group='"
+                +selectGroup.get(i)+"'");
+                // delete table row
+                for(int j = 0 ; j < table1.getRowCount() ; j ++){
+                    if(table1.getValueAt(j,0).toString().equals(selectGroup.get(i))){
+                        DefaultTableModel df = (DefaultTableModel) table1.getModel();
+                        df.removeRow(j);
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
@@ -79,11 +107,12 @@ public class GroupSearch extends JPanel {
 
         //======== this ========
         setBackground(new Color(51, 255, 51));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-        0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-        . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-        red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-        beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+        . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
+        . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
+        12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans
+        . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
+        getPropertyName () )) throw new RuntimeException( ); }} );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 86, 0, 617, 65, 71, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 448, 37, 0};
@@ -116,6 +145,8 @@ public class GroupSearch extends JPanel {
 
         //---- b_delete ----
         b_delete.setText("\u522a\u9664");
+        b_delete.setBackground(Color.red);
+        b_delete.addActionListener(e -> b_delete(e));
         add(b_delete, new GridBagConstraints(6, 5, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));

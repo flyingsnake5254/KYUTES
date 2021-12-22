@@ -18,6 +18,9 @@ public class GroupManage extends JPanel {
         GroupSearch groupSearch = new GroupSearch();
         groupSearch.setSize(new Dimension(tabbedPane1.getWidth(), tabbedPane1.getHeight()));
         tabbedPane1.add("群組查詢",groupSearch);
+        GroupCreate groupCreate = new GroupCreate();
+        groupCreate.setSize(new Dimension(tabbedPane1.getWidth(), tabbedPane1.getHeight()));
+        tabbedPane1.add("群組建立",groupCreate);
     }
 
     private void initComponents() {

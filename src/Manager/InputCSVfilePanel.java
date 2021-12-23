@@ -75,6 +75,7 @@ public class InputCSVfilePanel extends JPanel {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
+        label1 = new JLabel();
         selectIdentity = new JComboBox();
         panel1 = new JPanel();
 
@@ -82,18 +83,22 @@ public class InputCSVfilePanel extends JPanel {
         setPreferredSize(new Dimension(892, 621));
         setBackground(new Color(204, 204, 204));
         setBorder(null);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax
-        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-        .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
-        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
-        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .
-        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
+        0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
+        .BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.
+        red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
+        beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
         setLayout(new GridBagLayout());
-        ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 1056, 0};
+        ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 1056, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {42, 0, 0, 627, 0};
-        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
+        ((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0E-4};
         ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0E-4};
+
+        //---- label1 ----
+        label1.setText("\u8eab\u5206");
+        add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 5, 5), 0, 0));
 
         //---- selectIdentity ----
         selectIdentity.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
@@ -105,7 +110,7 @@ public class InputCSVfilePanel extends JPanel {
             }
         });
         selectIdentity.addItemListener(e -> selectIdentityItemStateChanged(e));
-        add(selectIdentity, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+        add(selectIdentity, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -117,14 +122,14 @@ public class InputCSVfilePanel extends JPanel {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGap(0, 1161, Short.MAX_VALUE)
+                    .addGap(0, 1145, Short.MAX_VALUE)
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGap(0, 652, Short.MAX_VALUE)
             );
         }
-        add(panel1, new GridBagConstraints(1, 2, 2, 2, 0.0, 0.0,
+        add(panel1, new GridBagConstraints(2, 2, 2, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -132,6 +137,7 @@ public class InputCSVfilePanel extends JPanel {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
+    private JLabel label1;
     private JComboBox selectIdentity;
     private JPanel panel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

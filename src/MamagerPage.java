@@ -25,7 +25,7 @@ public class MamagerPage extends JFrame {
         System.out.println(path);
         this.setIconImage(new ImageIcon(path+"\\image\\nknu_logo.png").getImage());
         this.setVisible(true);
-        this.setTitle("KYUTES Manager");
+        this.setTitle("KYUTES 系統管理者");
         this.setSize(1000,800);
         initComponents();
         this.add(mainpanel);
@@ -109,12 +109,11 @@ public class MamagerPage extends JFrame {
 
         //======== mainpanel ========
         {
-            mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            mainpanel.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder ( 0
+            , 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
+            , new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,
+            mainpanel. getBorder () ) ); mainpanel. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+            ) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
             mainpanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 1287, 0};
             ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 593, 0};
@@ -122,7 +121,7 @@ public class MamagerPage extends JFrame {
             ((GridBagLayout)mainpanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
             //---- label1 ----
-            label1.setText("Manager");
+            label1.setText("\u7cfb\u7d71\u7ba1\u7406\u8005");
             mainpanel.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));

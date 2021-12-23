@@ -21,6 +21,12 @@ public class GroupManage extends JPanel {
         GroupCreate groupCreate = new GroupCreate();
         groupCreate.setSize(new Dimension(tabbedPane1.getWidth(), tabbedPane1.getHeight()));
         tabbedPane1.add("群組建立",groupCreate);
+        GroupMemberDelete groupMemberDelete = new GroupMemberDelete();
+        groupMemberDelete.setSize(new Dimension(tabbedPane1.getWidth(), tabbedPane1.getHeight()));
+        tabbedPane1.add("群組成員查詢與刪除",groupMemberDelete);
+        GroupMemberAdd groupMemberAdd = new GroupMemberAdd();
+        groupMemberAdd.setSize(new Dimension(tabbedPane1.getWidth(), tabbedPane1.getHeight()));
+        tabbedPane1.add("新增群組成員",groupMemberAdd);
     }
 
     private void initComponents() {
@@ -31,12 +37,12 @@ public class GroupManage extends JPanel {
 
         //======== this ========
         setBackground(new Color(214, 214, 214));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-        . EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax
-        . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,
-        12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans
-        . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .
-        getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+        border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER
+        , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
+        .BOLD ,12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (
+        new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r"
+        .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {

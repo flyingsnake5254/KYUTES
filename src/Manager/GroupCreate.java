@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -111,83 +112,90 @@ public class GroupCreate extends JPanel {
     private void b_create(ActionEvent e) {
         // TODO add your code here
         boolean createState = true;
-        ArrayList<String> allGroupName = new ArrayList<>();
-        Statement ss = new GetDBdata().getStatement();
-        try {
-            ss.execute("select * from all_group");
-            ResultSet rs = ss.getResultSet();
-            while(rs.next()){
-                allGroupName.add(rs.getString("name"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            createState = false;
-        }
-        boolean hasCreate = false;
-        String groupName = tf_groupName.getText().trim();
-        for(int i = 0 ; i < allGroupName.size() ; i ++){
-            if(groupName.equals(allGroupName.get(i))){
-                hasCreate = true;
-                break;
-            }
-        }
-
-
-        if(hasCreate){
+        if(tf_groupName.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,
-                    "此群組已存在","錯誤",JOptionPane.ERROR_MESSAGE);
+                    "群組名稱不可為空",
+                    "錯誤",JOptionPane.ERROR_MESSAGE);
         }
         else{
-            int[] selectRow = dataTable.getSelectedRows();
-            if(selectRow.length == 0){
-                Statement st = new GetDBdata().getStatement();
-                try {
-                    st.execute("insert into all_group (name,people_num,suject_num) values " +
-                            "('"+groupName+"','0','0')");
-                    st.execute("create table "+groupName+" (" +
-                            "name varchar(30) not null default ''," +
-                            "primary key(name))");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    createState = false;
+            ArrayList<String> allGroupName = new ArrayList<>();
+            Statement ss = new GetDBdata().getStatement();
+            try {
+                ss.execute("select * from all_group");
+                ResultSet rs = ss.getResultSet();
+                while(rs.next()){
+                    allGroupName.add(rs.getString("name"));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                createState = false;
+            }
+            boolean hasCreate = false;
+            String groupName = tf_groupName.getText().trim();
+            for(int i = 0 ; i < allGroupName.size() ; i ++){
+                if(groupName.equals(allGroupName.get(i))){
+                    hasCreate = true;
+                    break;
                 }
             }
+
+
+            if(hasCreate){
+                JOptionPane.showMessageDialog(null,
+                        "此群組已存在","錯誤",JOptionPane.ERROR_MESSAGE);
+            }
             else{
-                ArrayList<String> selectAccount = new ArrayList<>();
-                for(int i = 0 ; i < selectRow.length ; i ++){
-                    selectAccount.add(dataTable.getValueAt(i,0).toString());
-                }
-                Statement st = new GetDBdata().getStatement();
-                try {
-                    st.execute("insert into all_group (name,people_num,suject_num) values " +
-                            "('"+groupName+"','" + selectAccount.size() + "','0')");
-                    st.execute("create table "+groupName+" (" +
-                            "name varchar(30) not null default ''," +
-                            "primary key(name))");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    createState = false;
-                }
-
-                for(int i = 0 ; i < selectAccount.size() ; i ++){
-
+                int[] selectRow = dataTable.getSelectedRows();
+                if(selectRow.length == 0){
+                    Statement st = new GetDBdata().getStatement();
                     try {
-                        st.execute("update user set student_group='"+groupName+"' " +
-                                "where account='"+selectAccount.get(i)+"'");
-
+                        st.execute("insert into all_group (name,people_num,suject_num) values " +
+                                "('"+groupName+"','0','0')");
+                        st.execute("create table "+groupName+" (" +
+                                "name varchar(30) not null default ''," +
+                                "primary key(name))");
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                         createState = false;
                     }
                 }
-            }
-            if(createState)
-                JOptionPane.showMessageDialog(null,
-                        "創建成功","訊息",JOptionPane.DEFAULT_OPTION);
-            else
-                JOptionPane.showMessageDialog(null,
-                        "創建失敗","錯誤",JOptionPane.ERROR_MESSAGE);
+                else{
+                    ArrayList<String> selectAccount = new ArrayList<>();
+                    for(int i = 0 ; i < selectRow.length ; i ++){
+                        selectAccount.add(dataTable.getValueAt(i,0).toString());
+                    }
+                    Statement st = new GetDBdata().getStatement();
+                    try {
+                        st.execute("insert into all_group (name,people_num,suject_num) values " +
+                                "('"+groupName+"','" + selectAccount.size() + "','0')");
+                        st.execute("create table "+groupName+" (" +
+                                "name varchar(30) not null default ''," +
+                                "primary key(name))");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        createState = false;
+                    }
 
+                    for(int i = 0 ; i < selectAccount.size() ; i ++){
+
+                        try {
+                            st.execute("update user set student_group='"+groupName+"' " +
+                                    "where account='"+selectAccount.get(i)+"'");
+
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            createState = false;
+                        }
+                    }
+                }
+                if(createState)
+                    JOptionPane.showMessageDialog(null,
+                            "創建成功","訊息",JOptionPane.DEFAULT_OPTION);
+                else
+                    JOptionPane.showMessageDialog(null,
+                            "創建失敗","錯誤",JOptionPane.ERROR_MESSAGE);
+
+            }
         }
     }
 
@@ -206,7 +214,7 @@ public class GroupCreate extends JPanel {
         dataTable = new JTable();
 
         //======== this ========
-        setBackground(new Color(153, 153, 255));
+        setBackground(new Color(214, 214, 214));
         setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
         , 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
         , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,

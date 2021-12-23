@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -72,9 +73,10 @@ public class GroupSearch extends JPanel {
         int[] selectIndex = table1.getSelectedRows();
         ArrayList<String> selectGroup = new ArrayList<>();
         for(int i = 0 ; i < selectIndex.length ; i ++){
-            selectGroup.add(table1.getValueAt(i,0).toString());
+            selectGroup.add(table1.getValueAt(selectIndex[i],0).toString());
         }
         Statement st = new GetDBdata().getStatement();
+        DefaultTableModel df = (DefaultTableModel) table1.getModel();
         for(int i = 0 ; i < selectGroup.size() ; i ++){
             try {
                 st.execute("delete from all_group where name='"+selectGroup.get(i)+"'");
@@ -83,8 +85,8 @@ public class GroupSearch extends JPanel {
                 +selectGroup.get(i)+"'");
                 // delete table row
                 for(int j = 0 ; j < table1.getRowCount() ; j ++){
-                    if(table1.getValueAt(j,0).toString().equals(selectGroup.get(i))){
-                        DefaultTableModel df = (DefaultTableModel) table1.getModel();
+                    if(table1.getModel().getValueAt(j,0).toString().equals(selectGroup.get(i))){
+
                         df.removeRow(j);
                     }
                 }
@@ -106,13 +108,14 @@ public class GroupSearch extends JPanel {
         b_delete = new JButton();
 
         //======== this ========
-        setBackground(new Color(51, 255, 51));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-        . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
-        . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
-        12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans
-        . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
-        getPropertyName () )) throw new RuntimeException( ); }} );
+        setBackground(new Color(214, 214, 214));
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
+        .border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder
+        .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.
+        awt.Font.BOLD,12),java.awt.Color.red), getBorder()))
+        ; addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+        ){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}})
+        ;
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 86, 0, 617, 65, 71, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 448, 37, 0};

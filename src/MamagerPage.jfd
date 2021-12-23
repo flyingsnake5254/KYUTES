@@ -14,7 +14,7 @@ new FormModel {
 			name: "mainpanel"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Manager"
+				"text": "系統管理者"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "b_buildAccount"

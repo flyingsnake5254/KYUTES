@@ -230,13 +230,16 @@ public class AccountManagement extends JPanel {
                 while(rs2.next()){
                     delG = rs2.getString("student_group");
                 }
-                String peopleNum="0";
+                String peopleNum="";
                 st2.execute("select people_num from all_group where name='"+delG+"'");
+
                 ResultSet rs3 = st2.getResultSet();
                 while(rs3.next())
                     peopleNum = rs3.getString("people_num");
+                // t
+                System.out.println(peopleNum);
                 String newP = String.valueOf(Integer.parseInt(peopleNum) - 1);
-                st2.execute("update all_group set people_num='"+newP+"'");
+                st2.execute("update all_group set people_num='"+newP+"' where name='"+delG+"'");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

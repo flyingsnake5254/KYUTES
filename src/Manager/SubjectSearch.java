@@ -6,6 +6,7 @@ package Manager;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,6 +69,38 @@ public class SubjectSearch extends JPanel {
             try {
                 st.execute("delete from suject where name='" + selectSuject.get(i) + "'");
                 st.execute("drop table " + selectSuject.get(i));
+                //取得有這科目的所有群組
+                // all_group suject num - 1
+                // table group name delete
+                ArrayList<String> allGroups = new ArrayList<>();
+                ArrayList<String> groupSujectNum = new ArrayList<>();
+                st.execute("select name,suject_num from all_group");
+                ResultSet rs = st.getResultSet();
+                while(rs.next()){
+                    allGroups.add(rs.getString("name"));
+                    groupSujectNum.add(rs.getString("suject_num"));
+                }
+                ArrayList<String> groupHasSuject = new ArrayList<>();
+                for(int j = 0 ; j < allGroups.size() ; j ++){
+                    ArrayList<String> groupSuject = new ArrayList<>();
+                    st.execute("select name from " + allGroups.get(j));
+                    rs = st.getResultSet();
+                    while(rs.next()){
+                        groupSuject.add(rs.getString("name"));
+                    }
+                    if(groupSuject.contains(selectSuject.get(i))){
+                        groupHasSuject.add(allGroups.get(j));
+                    }
+                }
+                for(int j = 0 ; j < groupHasSuject.size() ; j ++){
+                    st.execute("update all_group set suject_num='"
+                            + (Integer.parseInt(groupSujectNum.get(allGroups.indexOf(groupHasSuject.get(j))))-1)
+                    + "' where name='"+groupHasSuject.get(j)+"'");
+                    st.execute("delete from "+groupHasSuject.get(j)
+                            +" where name='"+selectSuject.get(i)+"'");
+                }
+
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

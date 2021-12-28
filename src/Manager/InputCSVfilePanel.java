@@ -4,9 +4,10 @@
 
 package Manager;
 
+import DataClass.Data;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -14,18 +15,22 @@ import javax.swing.GroupLayout;
  * @author peiChun lu
  */
 public class InputCSVfilePanel extends JPanel {
-    static String[] comboBoxItems = {"","學生","教師","管理者"};
     public InputCSVfilePanel() {
         initComponents();
-        for(String s : comboBoxItems)
-            selectIdentity.addItem(s);
+        comboBoxInitial();
+    }
+
+    private void comboBoxInitial(){
+        selectIdentity.addItem("");
+        selectIdentity.addItem(Data.USER_IDENTITY_STUDENT_CN);
+        selectIdentity.addItem(Data.USER_IDENTITY_EXAM_MANAGER_CN);
+        selectIdentity.addItem(Data.USER_IDENTITY_SYSTEM_MANAGER_CN);
     }
 
 
-
-    private void selectIdentity(ActionEvent e) {
+    private void cbSelectIdentity(ActionEvent e) {
         // TODO add your code here
-        if(selectIdentity.getSelectedItem().toString().equals("學生")){
+        if(selectIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_STUDENT_CN)){
             panel1.removeAll();
             CSVfileStudentPanel studentPanel = new CSVfileStudentPanel();
             studentPanel.setSize(panel1.getWidth(),panel1.getHeight());
@@ -35,18 +40,18 @@ public class InputCSVfilePanel extends JPanel {
             this.invalidate();
             this.validate();
         }
-        else if(selectIdentity.getSelectedItem().toString().equals("教師")){
+        else if(selectIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_EXAM_MANAGER_CN)){
             panel1.removeAll();
-            CSVfileTeacherPanel teacherPanel = new CSVfileTeacherPanel();
+            CSVfileExamManagerPanel teacherPanel = new CSVfileExamManagerPanel();
             teacherPanel.setSize(panel1.getWidth(),panel1.getHeight());
             teacherPanel.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
             panel1.add(teacherPanel);
             this.invalidate();
             this.validate();
         }
-        else if(selectIdentity.getSelectedItem().toString().equals("管理者")){
+        else if(selectIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_SYSTEM_MANAGER_CN)){
             panel1.removeAll();
-            CSVfileManagerPanel managerPanel = new CSVfileManagerPanel();
+            CSVfileSystemManagerPanel managerPanel = new CSVfileSystemManagerPanel();
             managerPanel.setSize(panel1.getWidth(),panel1.getHeight());
             managerPanel.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
             panel1.add(managerPanel);
@@ -68,10 +73,6 @@ public class InputCSVfilePanel extends JPanel {
         // TODO add your code here
     }
 
-    private void selectIdentityItemStateChanged(ItemEvent e) {
-        // TODO add your code here
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
@@ -83,11 +84,12 @@ public class InputCSVfilePanel extends JPanel {
         setPreferredSize(new Dimension(892, 621));
         setBackground(new Color(204, 204, 204));
         setBorder(null);
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
-        0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
-        .BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.
-        red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
-        beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0, 1056, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {42, 0, 0, 627, 0};
@@ -102,14 +104,7 @@ public class InputCSVfilePanel extends JPanel {
 
         //---- selectIdentity ----
         selectIdentity.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        selectIdentity.addActionListener(e -> selectIdentity(e));
-        selectIdentity.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                selectIdentityMouseClicked(e);
-            }
-        });
-        selectIdentity.addItemListener(e -> selectIdentityItemStateChanged(e));
+        selectIdentity.addActionListener(e -> cbSelectIdentity(e));
         add(selectIdentity, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));

@@ -25,9 +25,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "selectIdentity"
 				"font": new java.awt.Font( "微軟正黑體", 0, 16 )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "selectIdentity", true ) )
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "selectIdentityMouseClicked", true ) )
-				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "selectIdentityItemStateChanged", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cbSelectIdentity", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
 				"gridy": 1

@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {seq {space :p:96:p, par l:::p {seq t {space :p:18:p, comp button2:::p::p, space ::63:x, comp button1:::p::p}, seq l {par l:::p {comp label2::::75:x, comp label3::::75:x}, space :::p, par l:::p {comp passwordField1::::200:x, comp textField2::::200:x}}}}, seq l {space :p:161:p, comp label1:::p:175:p}}, space ::126:x}}"
-			"$verticalGroup": "par l {seq l {space :p:23:p, comp label1:::p:36:p, space :p:36:p, par b {comp textField2::b:p::p, comp label2::b:p:27:p}, space :p:31:p, par b {comp passwordField1::b:p::p, comp label3::b:p::p}, space :p:31:p, par b {comp button1::b:p::p, comp button2::b:p::p}, space ::38:x}}"
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:96:p, par l:::p {seq t {space :p:18:p, comp button2:::p::p, space ::63:x, comp bLogin:::p::p}, seq l {par l:::p {comp label2::::75:x, comp label3::::75:x}, space :::p, par l:::p {comp tfPassword::::200:x, comp tfAccount::::200:x}}}}, seq l {space :p:161:p, comp label1:::p:175:p}}, space ::126:x}}"
+			"$verticalGroup": "par l {seq l {space :p:23:p, comp label1:::p:36:p, space :p:36:p, par b {comp tfAccount::b:p::p, comp label2::b:p:27:p}, space :p:31:p, par b {comp tfPassword::b:p::p, comp label3::b:p::p}, space :p:31:p, par b {comp bLogin::b:p::p, comp button2::b:p::p}, space ::38:x}}"
 		} ) {
 			name: "frame1"
 			"title": "KYUTES"
@@ -22,7 +22,7 @@ new FormModel {
 				"horizontalAlignment": 0
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField2"
+				name: "tfAccount"
 				"font": new java.awt.Font( "Consolas", 1, 18 )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -32,13 +32,14 @@ new FormModel {
 				"font": new java.awt.Font( "微軟正黑體", 1, 18 )
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "passwordField1"
+				name: "tfPassword"
 				"font": new java.awt.Font( "Consolas", 0, 18 )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "bLogin"
 				"text": "登入"
 				"font": new java.awt.Font( "微軟正黑體", 1, 18 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bLogin", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"

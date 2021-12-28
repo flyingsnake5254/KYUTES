@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
+import DataClass.GetDBdata;
 
 /**
  * @author peiChun lu

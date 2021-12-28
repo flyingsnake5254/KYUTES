@@ -4,6 +4,11 @@
 
 package Manager;
 
+import DataClass.Data;
+import DataClass.Dialog;
+import DataClass.User;
+import DataClass.Users;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -28,44 +33,32 @@ public class CSVfileStudentPanel extends JPanel {
 
     }
 
-    private void b_submit(ActionEvent e) {
+    private void bSubmit(ActionEvent e) {
         // TODO add your code here
         startCreateAccount();
     }
-    ArrayList<String> accounts, passwords, subjects, grades, names, phones, emails;
+    ArrayList<String> accounts, passwords, department, grades, names, phones, emails;
     Scanner scanner;
     private void wrongTitle(){
-        JOptionPane.showMessageDialog(
-                null,
-                "欄位名稱錯誤",
-                "錯誤",
-                JOptionPane.ERROR_MESSAGE
-        );
+        Dialog.wrong("欄位名稱錯誤");
     }
     private void startCreateAccount(){
         // 欄位名稱為空
         String sAccount, sPasswd, sSub, sGrade, sName, sPhone, sEmail;
-        sAccount = tf_account.getText().trim();
-        sPasswd = tf_password.getText().trim();
-        sSub = tf_subject.getText().trim();
-        sGrade = tf_grade.getText().trim();
-        sName = tf_name.getText().trim();
-        sPhone = tf_phone.getText().trim();
-        sEmail = tf_email.getText().trim();
+        sAccount = tfAccount.getText().trim();
+        sPasswd = tfPassword.getText().trim();
+        sSub = tfSubject.getText().trim();
+        sGrade = tfGrade.getText().trim();
+        sName = tfName.getText().trim();
+        sPhone = tfPhone.getText().trim();
+        sEmail = tfEmail.getText().trim();
         if(sAccount.equals("") || sPasswd.equals("") || sSub.equals("") || sGrade.equals("")){
-            JOptionPane.showMessageDialog(null
-            ,"必要欄位不可為空"
-            ,"錯誤",JOptionPane.ERROR_MESSAGE);
+            Dialog.wrong("必要欄位不可為空");
         }
         else{
             // 檢查是否匯入檔案
             if(csvFile == null){
-                JOptionPane.showMessageDialog(
-                        null,
-                        "尚未匯入檔案",
-                        "錯誤",
-                        JOptionPane.ERROR_MESSAGE
-                );
+                Dialog.wrong("尚未匯入檔案");
             }
             else{
                 boolean state = true;
@@ -103,7 +96,7 @@ public class CSVfileStudentPanel extends JPanel {
                             boolean createState = true;
                             accounts = new ArrayList<>();
                             passwords = new ArrayList<>();
-                            subjects = new ArrayList<>();
+                            department = new ArrayList<>();
                             grades = new ArrayList<>();
                             phones = new ArrayList<>();
                             names = new ArrayList<>();
@@ -112,7 +105,7 @@ public class CSVfileStudentPanel extends JPanel {
                                 String[] inputData = scanner.next().trim().split(",");
                                 accounts.add(inputData[iAccount]);
                                 passwords.add(inputData[iPasswd]);
-                                subjects.add(inputData[iSub]);
+                                department.add(inputData[iSub]);
                                 grades.add(inputData[iGrade]);
                                 if(iName != -1)
                                     names.add(inputData[iName]);
@@ -123,55 +116,41 @@ public class CSVfileStudentPanel extends JPanel {
                             }
                             scanner.close();
                             boolean hasCreated = false;
-
-                            Statement st = new GetDBdata().getStatement();
-//
-                            // write to database
-                            String sql = "insert into user (account,password,department,grade,identity,create_time";
-                            if(names.size() != 0)
-                                sql += ",user_name";
-                            if(phones.size() != 0)
-                                sql += ",phone_number";
-                            if(emails.size() != 0)
-                                sql += ",user_email";
-                            sql += ") values ";
+                            Users users = new Users();
                             for(int i = 0 ; i < accounts.size() ; i ++){
-                                String sql2 = "(";
-                                sql2 += "'" + accounts.get(i) + "'";
-                                sql2 += ",'" + passwords.get(i) + "'";
-                                sql2 += ",'" + subjects.get(i) + "'";
-                                sql2 += ",'" + grades.get(i) + "'";
-                                sql2 += ",'" + "student" + "'";
-                                sql2 += ",'" + LocalDate.now() + "'";
-                                if(names.size() != 0)
-                                    sql2 += ",'" + names.get(i) + "'";
-                                if(phones.size() != 0)
-                                    sql2 += ",'" + phones.get(i) + "'";
-                                if(emails.size() != 0)
-                                    sql2 += ",'" + emails.get(i) + "'";
-                                sql2 += ")";
-                                st.execute(sql + sql2);
+                                if(users.accountHasCreated(accounts.get(i))){
+                                    hasCreated = true;
+                                    break;
+                                }
                             }
-                            if(createState)
-                                JOptionPane.showMessageDialog(null,"創建成功","訊息",JOptionPane.DEFAULT_OPTION);
+                            if(hasCreated)
+                                Dialog.wrong("存在已建立之帳號");
+                            else{
+                                // write to database
+                                for(int i = 0 ; i < accounts.size() ; i ++){
+                                    User.createAccount(accounts.get(i));
+                                    User.setPassword(accounts.get(i),passwords.get(i));
+                                    User.setDepartment(accounts.get(i) , department.get(i));
+                                    User.setGrade(accounts.get(i) , grades.get(i));
+                                    User.setIdentity(accounts.get(i) , Data.USER_IDENTITY_STUDENT);
+                                    User.setCreateTime(accounts.get(i) , LocalDate.now() + "");
+                                    if(names.size() != 0)
+                                        User.setUserName(accounts.get(i) , names.get(i));
+                                    if(phones.size() != 0)
+                                        User.setUserName(accounts.get(i) , phones.get(i));
+                                    if(emails.size() != 0)
+                                        User.setUserName(accounts.get(i) , emails.get(i));
+                                }
+                                if(createState)
+                                    Dialog.message("創建成功");
+                            }
                         }
                     }
 
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "未知錯誤",
-                            "錯誤",
-                            JOptionPane.ERROR_MESSAGE
-                    );
-                    state = false;
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                    JOptionPane.showMessageDialog(null,"存在已被創建之帳號"
-                    ,"錯誤"
-                    ,JOptionPane.ERROR_MESSAGE);
+                    Dialog.wrong("未知錯誤");
                     state = false;
                 }
             }
@@ -179,7 +158,7 @@ public class CSVfileStudentPanel extends JPanel {
     }
 
     private File csvFile = null;
-    private void b_inputFile(ActionEvent e) {
+    private void bInputFile(ActionEvent e) {
         // TODO add your code here
         JFileChooser jFileChooser = new JFileChooser();
         int state = jFileChooser.showOpenDialog(null);
@@ -190,14 +169,14 @@ public class CSVfileStudentPanel extends JPanel {
             if((index = csvFile.getName().lastIndexOf(".")) != -1){
                 fileType = csvFile.getName().substring(index + 1);
                 if(fileType.equals("csv")){
-                    l_fileName.setText(csvFile.getName());
+                    lFileName.setText(csvFile.getName());
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"不支援此類型檔案","錯誤",JOptionPane.ERROR_MESSAGE);
+                    Dialog.wrong("不支援此類型檔案");
                 }
             }
             else{
-                JOptionPane.showMessageDialog(null,"不支援此類型檔案","錯誤",JOptionPane.ERROR_MESSAGE);
+                Dialog.wrong("不支援此類型檔案");
             }
         }
     }
@@ -208,23 +187,23 @@ public class CSVfileStudentPanel extends JPanel {
         panel1 = new JPanel();
         label9 = new JLabel();
         label10 = new JLabel();
-        tf_account = new JTextField();
+        tfAccount = new JTextField();
         label11 = new JLabel();
-        tf_password = new JTextField();
+        tfPassword = new JTextField();
         label12 = new JLabel();
-        tf_subject = new JTextField();
+        tfSubject = new JTextField();
         label13 = new JLabel();
-        tf_grade = new JTextField();
-        tf_name = new JTextField();
+        tfGrade = new JTextField();
+        tfName = new JTextField();
         label1 = new JLabel();
-        tf_phone = new JTextField();
+        tfPhone = new JTextField();
         label2 = new JLabel();
-        tf_email = new JTextField();
+        tfEmail = new JTextField();
         label3 = new JLabel();
         label4 = new JLabel();
-        b_inputFile = new JButton();
-        l_fileName = new JLabel();
-        b_submit = new JButton();
+        bInputFile = new JButton();
+        lFileName = new JLabel();
+        bSubmit = new JButton();
 
         //======== this ========
         setPreferredSize(new Dimension(783, 451));
@@ -261,9 +240,9 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_account ----
-            tf_account.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_account, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+            //---- tfAccount ----
+            tfAccount.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfAccount, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -275,9 +254,9 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_password ----
-            tf_password.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_password, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+            //---- tfPassword ----
+            tfPassword.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfPassword, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -289,9 +268,9 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_subject ----
-            tf_subject.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_subject, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+            //---- tfSubject ----
+            tfSubject.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfSubject, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -303,15 +282,15 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_grade ----
-            tf_grade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_grade, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+            //---- tfGrade ----
+            tfGrade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfGrade, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_name ----
-            tf_name.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_name, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
+            //---- tfName ----
+            tfName.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfName, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -323,9 +302,9 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_phone ----
-            tf_phone.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_phone, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
+            //---- tfPhone ----
+            tfPhone.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfPhone, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -337,9 +316,9 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- tf_email ----
-            tf_email.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(tf_email, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0,
+            //---- tfEmail ----
+            tfEmail.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(tfEmail, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -358,24 +337,24 @@ public class CSVfileStudentPanel extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_inputFile ----
-            b_inputFile.setText("\u532f\u5165CSV");
-            b_inputFile.addActionListener(e -> b_inputFile(e));
-            panel1.add(b_inputFile, new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0,
+            //---- bInputFile ----
+            bInputFile.setText("\u532f\u5165CSV");
+            bInputFile.addActionListener(e -> bInputFile(e));
+            panel1.add(bInputFile, new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- l_fileName ----
-            l_fileName.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            panel1.add(l_fileName, new GridBagConstraints(1, 9, 1, 1, 0.0, 0.0,
+            //---- lFileName ----
+            lFileName.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            panel1.add(lFileName, new GridBagConstraints(1, 9, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_submit ----
-            b_submit.setText("\u5275\u5efa\u5e33\u865f");
-            b_submit.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-            b_submit.addActionListener(e -> b_submit(e));
-            panel1.add(b_submit, new GridBagConstraints(3, 11, 1, 1, 0.0, 0.0,
+            //---- bSubmit ----
+            bSubmit.setText("\u5275\u5efa\u5e33\u865f");
+            bSubmit.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+            bSubmit.addActionListener(e -> bSubmit(e));
+            panel1.add(bSubmit, new GridBagConstraints(3, 11, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
         }
@@ -401,22 +380,22 @@ public class CSVfileStudentPanel extends JPanel {
     private JPanel panel1;
     private JLabel label9;
     private JLabel label10;
-    private JTextField tf_account;
+    private JTextField tfAccount;
     private JLabel label11;
-    private JTextField tf_password;
+    private JTextField tfPassword;
     private JLabel label12;
-    private JTextField tf_subject;
+    private JTextField tfSubject;
     private JLabel label13;
-    private JTextField tf_grade;
-    private JTextField tf_name;
+    private JTextField tfGrade;
+    private JTextField tfName;
     private JLabel label1;
-    private JTextField tf_phone;
+    private JTextField tfPhone;
     private JLabel label2;
-    private JTextField tf_email;
+    private JTextField tfEmail;
     private JLabel label3;
     private JLabel label4;
-    private JButton b_inputFile;
-    private JLabel l_fileName;
-    private JButton b_submit;
+    private JButton bInputFile;
+    private JLabel lFileName;
+    private JButton bSubmit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

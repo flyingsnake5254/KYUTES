@@ -15,6 +15,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
+import DataClass.Data;
+import DataClass.GetDBdata;
 
 /**
  * @author peiChun lu
@@ -27,8 +29,8 @@ public class GroupCreate extends JPanel {
     
     private void comboInit(){
         cb_suject.addItem("全部");
-        for(int i = 0 ; i < SecretData.SUBJECTS.length ; i ++){
-            cb_suject.addItem(SecretData.SUBJECTS[i]);
+        for(int i = 0 ; i < Data.SUBJECTS.length ; i ++){
+            cb_suject.addItem(Data.SUBJECTS[i]);
         }
         cb_grade.addItem("全部");
         cb_grade.addItem("一年級");

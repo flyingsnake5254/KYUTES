@@ -4,6 +4,8 @@
 
 package Manager;
 
+import DataClass.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
@@ -23,241 +25,159 @@ public class AccountManagement extends JPanel {
     
     public AccountManagement() {
         initComponents();
-        setComboBox();
+        comboBoxInitial();
         dataTable.setVisible(false);
-        b_delete.setVisible(false);
+        bDelete.setVisible(false);
         dataTable.getTableHeader().setReorderingAllowed(false);
 
     }
     
-    private void setComboBox(){
-        cb_year.addItem("全部");
-        cb_month.addItem("全部");
-        cb_day.addItem("全部");
-        cb_identity.addItem("全部");
-        cb_identity.addItem("學生");
-        cb_identity.addItem("教師");
-        cb_identity.addItem("管理者");
-        cb_sub.addItem("全部");
-        for(String ssub : SecretData.SUBJECTS)
-            cb_sub.addItem(ssub);
-        cb_grade.addItem("全部");
-        cb_grade.addItem("一年級");
-        cb_grade.addItem("二年級");
-        cb_grade.addItem("三年級");
-        cb_grade.addItem("四年級");
+    private void comboBoxInitial(){
+        cbYear.addItem("全部");
+        cbMonth.addItem("全部");
+        cbDay.addItem("全部");
+        cbSub.addItem("全部");
+        cbGrade.addItem("全部");
+        cbIdentity.addItem("全部");
+        for(String s : Data.USER_IDENTITIES_CN)
+            cbIdentity.addItem(s);
+        
+        for(String s : Data.SUBJECTS)
+            cbSub.addItem(s);
+        
+        for(String s : Data.STUDENT_GRADES)
+            cbGrade.addItem(s);
+        
         String[] data = LocalDate.now().toString().split("-");
         int y = Integer.parseInt(data[0]);
         for(int i = 0 ; i < 10 ; i ++, y --){
-            cb_year.addItem(String.valueOf(y));
+            cbYear.addItem(String.valueOf(y));
         }
         for(int i = 1 ; i <= 12 ; i ++)
-            cb_month.addItem(String.valueOf(i));
+            cbMonth.addItem(String.valueOf(i));
         for(int i = 1 ; i <= 31 ; i ++)
-            cb_day.addItem(String.valueOf(i));
+            cbDay.addItem(String.valueOf(i));
         
         
     }
 
-    private void cb_identity(ActionEvent e) {
+    private void cbIdentity(ActionEvent e) {
         // TODO add your code here
-        if(cb_identity.getSelectedItem().toString().equals("學生")){
-            l_sub.setVisible(true);
-            cb_sub.setVisible(true);
-            l_grade.setVisible(true);
-            cb_grade.setVisible(true);
+        if(cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_STUDENT_CN)){
+            lSub.setVisible(true);
+            cbSub.setVisible(true);
+            lGrade.setVisible(true);
+            cbGrade.setVisible(true);
         }
         else{
-            l_sub.setVisible(false);
-            cb_sub.setVisible(false);
-            l_grade.setVisible(false);
-            cb_grade.setVisible(false);
+            lSub.setVisible(false);
+            cbSub.setVisible(false);
+            lGrade.setVisible(false);
+            cbGrade.setVisible(false);
         }
     }
 
-    private void b_search(ActionEvent e) {
+    private void bSearch(ActionEvent e) {
         // TODO add your code here
-        // get DB data
-        ArrayList<String> accounts, password, phone, email, names, times, identity
-                , subjects, grade, year, month, day;
-        accounts = new ArrayList<>();
-        password = new ArrayList<>();
-     
-        phone = new ArrayList<>();
-        email = new ArrayList<>();
-        names = new ArrayList<>();
-        times = new ArrayList<>();
-        identity = new ArrayList<>();
-        subjects = new ArrayList<>();
-        grade = new ArrayList<>();
-        year = new ArrayList<>();
-        month = new ArrayList<>();
-        day = new ArrayList<>();
-        Statement st = new GetDBdata().getStatement();
-        try {
-            st.execute("select * from user");
-            ResultSet rs = st.getResultSet();
-            while(rs.next()){
-                accounts.add(rs.getString("account"));
-                password.add(rs.getString("password"));
-                phone.add(rs.getString("phone_number"));
-                email.add(rs.getString("user_email"));
-                names.add(rs.getString("user_name"));
-                times.add(rs.getString("create_time"));
-                identity.add(rs.getString("identity"));
-                subjects.add(rs.getString("department"));
-                grade.add(rs.getString("grade"));
+        Users users = new Users();
+        ArrayList<User> userArrayList= users.getUsers();
+        int tableIndex = 0;
+        DefaultTableModel dtm = new DefaultTableModel(userArrayList.size(),9);
+        dataTable.setModel(dtm);
+        dataTable.getColumnModel().getColumn(0).setHeaderValue("帳號");
+        dataTable.getColumnModel().getColumn(1).setHeaderValue("密碼");
+        dataTable.getColumnModel().getColumn(2).setHeaderValue("姓名");
+        dataTable.getColumnModel().getColumn(3).setHeaderValue("手機");
+        dataTable.getColumnModel().getColumn(4).setHeaderValue("E-mail");
+        dataTable.getColumnModel().getColumn(5).setHeaderValue("身分");
+        dataTable.getColumnModel().getColumn(6).setHeaderValue("科系");
+        dataTable.getColumnModel().getColumn(7).setHeaderValue("年級");
+        dataTable.getColumnModel().getColumn(8).setHeaderValue("創建時間");
+        for(int i = 0 ; i < userArrayList.size() ; i ++) {
+            // check account
+            if(!tfAccount.getText().trim().equals("")){
+                if(!userArrayList.get(i).getAccount().equals(tfAccount.getText().trim()))
+                    continue;
             }
-            // year, month, day
-            for(int i = 0 ; i < times.size() ; i ++){
-                String[] s = times.get(i).split("-");
-                year.add(s[0]);
-                month.add(s[1]);
-                day.add(s[2]);
+            // check name
+            if(!tfName.getText().trim().equals("")){
+                if(!userArrayList.get(i).getUserName().equals(tfName.getText().trim()))
+                    continue;
             }
-            ArrayList<Integer> matchIndex = new ArrayList<>();
-            // check
-            HashMap<String,String> map = new HashMap<>();
-            map.put("學生","student");
-            map.put("教師","teacher");
-            map.put("管理者","manager");
-            for(int i = 0 ; i < accounts.size() ; i ++){
-                // check account
-                if(!tf_account.getText().trim().equals("")){
-                    if(!accounts.get(i).equals(tf_account.getText().trim()))
-                        continue;
-                }
-                // check name
-                if(!tf_name.getText().trim().equals("")){
-                    if(!names.get(i).equals(tf_name.getText().trim()))
-                        continue;
-                }
-                // check year
-                if(!cb_year.getSelectedItem().toString().equals("全部")){
-                    if(!cb_year.getSelectedItem().toString().equals(year.get(i)))
-                        continue;
-                }
-                // check month
-                if(!cb_month.getSelectedItem().toString().equals("全部")){
-                    if(!cb_month.getSelectedItem().toString().equals(month.get(i)))
-                        continue;
-                }
-                // check day
-                if(!cb_day.getSelectedItem().toString().equals("全部")){
-                    if(!cb_day.getSelectedItem().toString().equals(day.get(i)))
-                        continue;
-                }
-                // check identity
-                if(!cb_identity.getSelectedItem().toString().equals("全部")){
-                    if(!map.get(cb_identity.getSelectedItem().toString()).equals(identity.get(i)))
-                        continue;
-                }
-                if(cb_identity.getSelectedItem().toString().equals("學生")){
-                    // check subject
-                    if(!cb_sub.getSelectedItem().toString().equals("全部")){
-                        if(!cb_sub.getSelectedItem().toString().equals(subjects.get(i)))
-                            continue;
-                    }
-                    // check grade
-                    if(!cb_grade.getSelectedItem().toString().equals("全部")){
-                        if(!cb_grade.getSelectedItem().toString().equals(grade.get(i)))
-                            continue;
-                    }
-                }
-                matchIndex.add(i);
+            // check year
+            if(!cbYear.getSelectedItem().toString().equals("全部")){
+                if(!cbYear.getSelectedItem().toString().equals(userArrayList.get(i).getYear()))
+                    continue;
             }
-            // show data
-            if(matchIndex.size() == 0){
-                b_delete.setVisible(false);
-                JOptionPane.showMessageDialog(null,
-                        "無符合資料","訊息",JOptionPane.DEFAULT_OPTION);
+            // check month
+            if(!cbMonth.getSelectedItem().toString().equals("全部")){
+                if(!cbMonth.getSelectedItem().toString().equals(userArrayList.get(i).getMonth()))
+                    continue;
             }
-            else{
-                // table setting
-                b_delete.setVisible(true);
-                DefaultTableModel dtm = new DefaultTableModel(matchIndex.size(),9);
-                dataTable.setModel(dtm);
-                dataTable.getColumnModel().getColumn(0).setHeaderValue("帳號");
-                dataTable.getColumnModel().getColumn(1).setHeaderValue("密碼");
-                dataTable.getColumnModel().getColumn(2).setHeaderValue("姓名");
-                dataTable.getColumnModel().getColumn(3).setHeaderValue("手機");
-                dataTable.getColumnModel().getColumn(4).setHeaderValue("E-mail");
-                dataTable.getColumnModel().getColumn(5).setHeaderValue("身分");
-                dataTable.getColumnModel().getColumn(6).setHeaderValue("科系");
-                dataTable.getColumnModel().getColumn(7).setHeaderValue("年級");
-                dataTable.getColumnModel().getColumn(8).setHeaderValue("創建時間");
-                for(int i = 0 ; i < matchIndex.size() ; i ++){
-                    dataTable.setValueAt(accounts.get(matchIndex.get(i)),i,0);
-                    dataTable.setValueAt(password.get(matchIndex.get(i)),i,1);
-                    dataTable.setValueAt(names.get(matchIndex.get(i)),i,2);
-                    dataTable.setValueAt(phone.get(matchIndex.get(i)),i,3);
-                    dataTable.setValueAt(email.get(matchIndex.get(i)),i,4);
-                    dataTable.setValueAt(identity.get(matchIndex.get(i)),i,5);
-                    dataTable.setValueAt(subjects.get(matchIndex.get(i)),i,6);
-                    dataTable.setValueAt(grade.get(matchIndex.get(i)),i,7);
-                    dataTable.setValueAt(times.get(matchIndex.get(i)),i,8);
+            // check day
+            if(!cbDay.getSelectedItem().toString().equals("全部")){
+                if(!cbDay.getSelectedItem().toString().equals(userArrayList.get(i).getDay()))
+                    continue;
+            }
+            // check identity
+            if(!cbIdentity.getSelectedItem().toString().equals("全部")){
+                if(!cbIdentity.getSelectedItem().toString().equals(userArrayList.get(i).getCNIdentity()))
+                    continue;
+            }
+            if(cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_STUDENT_CN)){
+                // check department
+                if(!cbSub.getSelectedItem().toString().equals("全部")){
+                    if(!cbSub.getSelectedItem().toString().equals(userArrayList.get(i).getDepartment()))
+                        continue;
                 }
-                dataTable.setVisible(true);
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+                // check grade
+                if(!cbGrade.getSelectedItem().toString().equals("全部")){
+                    if(!cbGrade.getSelectedItem().toString().equals(userArrayList.get(i).getGrade()))
+                        continue;
+                }
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            dataTable.setValueAt(userArrayList.get(i).getAccount(),tableIndex,0);
+            dataTable.setValueAt(userArrayList.get(i).getPassword(),tableIndex,1);
+            dataTable.setValueAt(userArrayList.get(i).getUserName(),tableIndex,2);
+            dataTable.setValueAt(userArrayList.get(i).getPhoneNumber(),tableIndex,3);
+            dataTable.setValueAt(userArrayList.get(i).getUserEmail(),tableIndex,4);
+            dataTable.setValueAt(userArrayList.get(i).getCNIdentity(),tableIndex,5);
+            dataTable.setValueAt(userArrayList.get(i).getDepartment(),tableIndex,6);
+            dataTable.setValueAt(userArrayList.get(i).getGrade(),tableIndex,7);
+            dataTable.setValueAt(userArrayList.get(i).getCreateTime(),tableIndex,8);
+            tableIndex ++;
+
         }
+        dataTable.setVisible(true);
+        bDelete.setVisible(true);
 
     }
 
-    private void b_delete(ActionEvent e) {
+    private void bDelete(ActionEvent e) {
         // TODO add your code here
+        Users users = new Users();
         int[] s = dataTable.getSelectedRows();
         ArrayList<String> deleteAccount = new ArrayList<>();
         // get selected account
         for(int i = 0 ; i < s.length ; i ++){
             deleteAccount.add(dataTable.getModel().getValueAt(s[i],0).toString());
         }
-        DefaultTableModel df = (DefaultTableModel) dataTable.getModel();
-        // refresh group num
 
-        Statement st = new GetDBdata().getStatement();
-
-        for(int i = 0 ; i < deleteAccount.size() ; i ++) {
-            // delete group name
-            try {
-                Statement st2 = new GetDBdata().getStatement();
-                st2.execute("select student_group from user where account = '"+
-                        deleteAccount.get(i)+"'");
-                ResultSet rs2 = st2.getResultSet();
-                String delG = "";
-                while(rs2.next()){
-                    delG = rs2.getString("student_group");
-                }
-                String peopleNum="";
-                st2.execute("select people_num from all_group where name='"+delG+"'");
-
-                ResultSet rs3 = st2.getResultSet();
-                while(rs3.next())
-                    peopleNum = rs3.getString("people_num");
-                // t
-                System.out.println(peopleNum);
-                String newP = String.valueOf(Integer.parseInt(peopleNum) - 1);
-                st2.execute("update all_group set people_num='"+newP+"' where name='"+delG+"'");
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+        for(int i = 0 ; i < deleteAccount.size() ; i ++){
+            User user = users.getUser(deleteAccount.get(i));
+            if(!user.getStudentGroup().equals("")) {
+                Group group = new Group(user.getStudentGroup());
+                group.updateGroupPeopleNumber(-1);
             }
-            // search deleted account
-            STOP_SEARCH:
+            User.deleteUser(user.getAccount());
             for(int j = 0 ; j < dataTable.getRowCount() ; j ++){
-                if(dataTable.getModel().getValueAt(j,0).toString().equals(deleteAccount.get(i))){
-                    try {
-                        st.execute("delete from user where account='" + deleteAccount.get(i) + "'");
-                        df.removeRow(j);
-                        break STOP_SEARCH;
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
+                if(dataTable.getValueAt(j,0).toString().equals(user.getAccount())){
+                    DefaultTableModel df = (DefaultTableModel) dataTable.getModel();
+                    df.removeRow(j);
+                    break;
                 }
             }
         }
-
     }
 
 
@@ -268,44 +188,44 @@ public class AccountManagement extends JPanel {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         panel1 = new JPanel();
         label1 = new JLabel();
-        tf_account = new JTextField();
+        tfAccount = new JTextField();
         label2 = new JLabel();
-        tf_name = new JTextField();
+        tfName = new JTextField();
         label3 = new JLabel();
-        cb_year = new JComboBox();
+        cbYear = new JComboBox();
         label4 = new JLabel();
-        cb_month = new JComboBox();
+        cbMonth = new JComboBox();
         label5 = new JLabel();
-        cb_day = new JComboBox();
+        cbDay = new JComboBox();
         label6 = new JLabel();
         label7 = new JLabel();
-        cb_identity = new JComboBox();
-        l_sub = new JLabel();
-        cb_sub = new JComboBox();
-        l_grade = new JLabel();
-        cb_grade = new JComboBox();
-        b_search = new JButton();
+        cbIdentity = new JComboBox();
+        lSub = new JLabel();
+        cbSub = new JComboBox();
+        lGrade = new JLabel();
+        cbGrade = new JComboBox();
+        bSearch = new JButton();
         panel2 = new JPanel();
         scrollPane1 = new JScrollPane();
         dataTable = new JTable();
-        b_delete = new JButton();
+        bDelete = new JButton();
 
         //======== this ========
         setBackground(new Color(102, 255, 153));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-        EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
-        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
-        throw new RuntimeException( ); }} );
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
+        .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax
+        . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
+        12 ) ,java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans
+        .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e.
+        getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
         //======== panel1 ========
         {
             panel1.setBackground(new Color(204, 204, 204));
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {82, 50, 170, 50, 170, 51, 109, 25, 83, 0, 103, 0, 146, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {82, 50, 170, 50, 170, 51, 109, 25, 83, 0, 114, 123, 151, 0, 0};
             ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {34, 0, 32, 521, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
             ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
             //---- label1 ----
@@ -315,7 +235,7 @@ public class AccountManagement extends JPanel {
             panel1.add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(tf_account, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+            panel1.add(tfAccount, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -326,7 +246,7 @@ public class AccountManagement extends JPanel {
             panel1.add(label2, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(tf_name, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
+            panel1.add(tfName, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -337,7 +257,7 @@ public class AccountManagement extends JPanel {
             panel1.add(label3, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_year, new GridBagConstraints(6, 1, 1, 1, 0.0, 0.0,
+            panel1.add(cbYear, new GridBagConstraints(6, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -347,7 +267,7 @@ public class AccountManagement extends JPanel {
             panel1.add(label4, new GridBagConstraints(7, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_month, new GridBagConstraints(8, 1, 1, 1, 0.0, 0.0,
+            panel1.add(cbMonth, new GridBagConstraints(8, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -357,16 +277,16 @@ public class AccountManagement extends JPanel {
             panel1.add(label5, new GridBagConstraints(9, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_day, new GridBagConstraints(10, 1, 1, 1, 0.0, 0.0,
+            panel1.add(cbDay, new GridBagConstraints(10, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
             //---- label6 ----
             label6.setText("\u65e5");
             label6.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
-            panel1.add(label6, new GridBagConstraints(11, 1, 1, 1, 0.0, 0.0,
+            panel1.add(label6, new GridBagConstraints(13, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
+                new Insets(0, 0, 5, 0), 0, 0));
 
             //---- label7 ----
             label7.setText("\u8eab\u5206");
@@ -376,38 +296,38 @@ public class AccountManagement extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- cb_identity ----
-            cb_identity.addActionListener(e -> cb_identity(e));
-            panel1.add(cb_identity, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
+            //---- cbIdentity ----
+            cbIdentity.addActionListener(e -> cbIdentity(e));
+            panel1.add(cbIdentity, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- l_sub ----
-            l_sub.setText("\u79d1\u7cfb");
-            l_sub.setHorizontalAlignment(SwingConstants.RIGHT);
-            l_sub.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
-            panel1.add(l_sub, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0,
+            //---- lSub ----
+            lSub.setText("\u79d1\u7cfb");
+            lSub.setHorizontalAlignment(SwingConstants.RIGHT);
+            lSub.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
+            panel1.add(lSub, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_sub, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
-
-            //---- l_grade ----
-            l_grade.setText("\u5e74\u7d1a");
-            l_grade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
-            l_grade.setHorizontalAlignment(SwingConstants.RIGHT);
-            panel1.add(l_grade, new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_grade, new GridBagConstraints(6, 2, 1, 1, 0.0, 0.0,
+            panel1.add(cbSub, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_search ----
-            b_search.setText("\u641c\u5c0b");
-            b_search.addActionListener(e -> b_search(e));
-            panel1.add(b_search, new GridBagConstraints(8, 2, 1, 1, 0.0, 0.0,
+            //---- lGrade ----
+            lGrade.setText("\u5e74\u7d1a");
+            lGrade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
+            lGrade.setHorizontalAlignment(SwingConstants.RIGHT);
+            panel1.add(lGrade, new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+            panel1.add(cbGrade, new GridBagConstraints(6, 2, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+
+            //---- bSearch ----
+            bSearch.setText("\u641c\u5c0b");
+            bSearch.addActionListener(e -> bSearch(e));
+            panel1.add(bSearch, new GridBagConstraints(8, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -440,15 +360,15 @@ public class AccountManagement extends JPanel {
                         .addGap(0, 516, Short.MAX_VALUE)
                 );
             }
-            panel1.add(panel2, new GridBagConstraints(1, 3, 10, 1, 0.0, 0.0,
+            panel1.add(panel2, new GridBagConstraints(1, 3, 11, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_delete ----
-            b_delete.setText("\u522a\u9664\u5e33\u865f");
-            b_delete.setBackground(new Color(255, 51, 51));
-            b_delete.addActionListener(e -> b_delete(e));
-            panel1.add(b_delete, new GridBagConstraints(10, 4, 1, 1, 0.0, 0.0,
+            //---- bDelete ----
+            bDelete.setText("\u522a\u9664\u5e33\u865f");
+            bDelete.setBackground(new Color(255, 51, 51));
+            bDelete.addActionListener(e -> bDelete(e));
+            panel1.add(bDelete, new GridBagConstraints(11, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 5), 0, 0));
         }
@@ -470,26 +390,26 @@ public class AccountManagement extends JPanel {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel panel1;
     private JLabel label1;
-    private JTextField tf_account;
+    private JTextField tfAccount;
     private JLabel label2;
-    private JTextField tf_name;
+    private JTextField tfName;
     private JLabel label3;
-    private JComboBox cb_year;
+    private JComboBox cbYear;
     private JLabel label4;
-    private JComboBox cb_month;
+    private JComboBox cbMonth;
     private JLabel label5;
-    private JComboBox cb_day;
+    private JComboBox cbDay;
     private JLabel label6;
     private JLabel label7;
-    private JComboBox cb_identity;
-    private JLabel l_sub;
-    private JComboBox cb_sub;
-    private JLabel l_grade;
-    private JComboBox cb_grade;
-    private JButton b_search;
+    private JComboBox cbIdentity;
+    private JLabel lSub;
+    private JComboBox cbSub;
+    private JLabel lGrade;
+    private JComboBox cbGrade;
+    private JButton bSearch;
     private JPanel panel2;
     private JScrollPane scrollPane1;
     private JTable dataTable;
-    private JButton b_delete;
+    private JButton bDelete;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

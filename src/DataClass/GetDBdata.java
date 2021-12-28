@@ -1,3 +1,5 @@
+package DataClass;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,8 +14,8 @@ public class GetDBdata {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection( "jdbc:mysql://localhost:3306/" + SecretData.DB_NAME
-                    ,"root",SecretData.DB_PASSWORD);
+            connection = DriverManager.getConnection( "jdbc:mysql://localhost:3306/" + Data.DB_NAME
+                    ,"root", Data.DB_PASSWORD);
             statement = connection.createStatement();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

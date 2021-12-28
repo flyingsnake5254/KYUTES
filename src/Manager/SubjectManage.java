@@ -14,6 +14,10 @@ import javax.swing.GroupLayout;
 public class SubjectManage extends JPanel {
     public SubjectManage() {
         initComponents();
+        pageInitial();
+    }
+
+    private void pageInitial(){
         SubjectSearch subjectSearch = new SubjectSearch();
         subjectSearch.setSize(new Dimension(tabbedPane1.getWidth(), tabbedPane1.getHeight()));
         tabbedPane1.add("測驗科目查詢",subjectSearch);
@@ -27,7 +31,6 @@ public class SubjectManage extends JPanel {
         groupSujectDelete.setSize(new Dimension(tabbedPane1.getWidth(),tabbedPane1.getHeight()));
         tabbedPane1.add("查詢與刪除群組測驗科目",groupSujectDelete);
     }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
@@ -35,13 +38,13 @@ public class SubjectManage extends JPanel {
         tabbedPane1 = new JTabbedPane();
 
         //======== this ========
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-        . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing
-        .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-        Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-        ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-        public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName (
-        ) ) )throw new RuntimeException( ) ;} } );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+        . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder
+        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .
+        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
+        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+        ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+        ;
 
         //======== panel1 ========
         {

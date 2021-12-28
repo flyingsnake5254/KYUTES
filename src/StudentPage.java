@@ -1,3 +1,6 @@
+import DataClass.GetDBdata;
+import DataClass.User;
+
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import java.awt.event.WindowAdapter;
@@ -8,8 +11,8 @@ import java.sql.Statement;
 public class StudentPage extends JFrame {
     private String userAccount;
     private Statement st;
-    public StudentPage(String userAccount) {
-        this.userAccount = userAccount;
+    public StudentPage(User nowUser) {
+        this.userAccount = nowUser.getAccount();
         st = new GetDBdata().getStatement();
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

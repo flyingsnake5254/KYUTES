@@ -15,6 +15,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
+import DataClass.GetDBdata;
+import DataClass.Data;
 
 /**
  * @author peiChun lu
@@ -43,8 +45,8 @@ public class GroupMemberAdd extends JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        for(int i = 0 ; i < SecretData.SUBJECTS.length ; i ++){
-            cb_suject.addItem(SecretData.SUBJECTS[i]);
+        for(int i = 0 ; i < Data.SUBJECTS.length ; i ++){
+            cb_suject.addItem(Data.SUBJECTS[i]);
         }
         cb_grade.addItem("一年級");
         cb_grade.addItem("二年級");

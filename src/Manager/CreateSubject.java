@@ -4,6 +4,8 @@
 
 package Manager;
 
+import DataClass.GetDBdata;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
@@ -54,21 +56,14 @@ public class CreateSubject extends JPanel {
                 else{
                     // add to subject table
                     Statement st2 = new GetDBdata().getStatement();
-                    st2.execute("insert into suject (name,question_num) " +
+                    st2.execute("insert into suject (name,bank_num,question_num) " +
                             "values " +
-                            "('"+subjectName+"','0')");
+                            "('"+subjectName+"','0','0')");
                     // 建立題庫
                     st2.execute("create table "+subjectName+"(" +
-                            "data_id int not null auto_increment," +
-                            "question varchar(300) not null default ''," +
-                            "ans varchar(300) not null default ''," +
-                            "level varchar(20) not null default ''," +
-                            "type varchar(5) not null default ''," +
-                            "c1 varchar(300) not null default ''," +
-                            "c2 varchar(300) not null default ''," +
-                            "c3 varchar(300) not null default ''," +
-                            "c4 varchar (300) not null default ''," +
-                            "primary key(data_id))");
+                            "name varchar(30) not null default ''," +
+                            "question_num varchar(30) not null default '0'," +
+                            "primary key(name))");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -93,13 +88,12 @@ public class CreateSubject extends JPanel {
         b_create = new JButton();
 
         //======== this ========
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
-        javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax
-        . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
-        . awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt
-        . Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .
-        PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .
-        equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+        . EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax
+        . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,
+        12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans
+        . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .
+        getPropertyName () )) throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {

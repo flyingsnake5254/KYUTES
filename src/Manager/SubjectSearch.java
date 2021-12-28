@@ -4,6 +4,9 @@
 
 package Manager;
 
+import DataClass.GetDBdata;
+import DataClass.Sujects;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Array;
@@ -23,40 +26,33 @@ public class SubjectSearch extends JPanel {
     
     public SubjectSearch() {
         initComponents();
-        cb_suject.addItem("全部");
+        cbSuject.addItem("全部");
         table1.setVisible(false);
-        b_delete.setVisible(false);
+        bDelete.setVisible(false);
     }
 
-    private void b_search(ActionEvent e) {
+    private void bSearch(ActionEvent e) {
         // TODO add your code here
-        ArrayList<String> sujects = new ArrayList<>();
-        ArrayList<String> question_num = new ArrayList<>();
-        Statement st = new GetDBdata().getStatement();
-        try {
-            st.execute("select * from suject");
-            ResultSet rs = st.getResultSet();
-            while(rs.next()){
-                sujects.add(rs.getString("name"));
-                question_num.add(rs.getString("question_num"));
-            }
-            DefaultTableModel df = new DefaultTableModel(sujects.size(),2);
-            table1.setModel(df);
-            table1.getColumnModel().getColumn(0).setHeaderValue("科目名稱");
-            table1.getColumnModel().getColumn(1).setHeaderValue("題目數量");
-            for(int i = 0 ; i < sujects.size() ; i ++){
-                table1.setValueAt(sujects.get(i),i,0);
-                table1.setValueAt(question_num.get(i),i,1);
-            }
-            table1.setVisible(true);
-            b_delete.setVisible(true);
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        Sujects mySuject = new Sujects();
+        ArrayList<String> sujects = mySuject.getNames();
+        ArrayList<Integer> question_num = mySuject.getQuestion_nums();
+        ArrayList<Integer> bank_num = mySuject.getBank_nums();
+        // table setting
+        DefaultTableModel df = new DefaultTableModel(sujects.size(),3);
+        table1.setModel(df);
+        table1.getColumnModel().getColumn(0).setHeaderValue("科目名稱");
+        table1.getColumnModel().getColumn(1).setHeaderValue("題庫數量");
+        table1.getColumnModel().getColumn(2).setHeaderValue("題目數量");
+        for(int i = 0 ; i < sujects.size() ; i ++){
+            table1.setValueAt(sujects.get(i),i,0);
+            table1.setValueAt(bank_num.get(i),i,1);
+            table1.setValueAt(question_num.get(i),i,2);
         }
+        table1.setVisible(true);
+        bDelete.setVisible(true);
     }
 
-    private void b_delete(ActionEvent e) {
+    private void bDelete(ActionEvent e) {
         // TODO add your code here
         int[] select = table1.getSelectedRows();
         ArrayList<String> selectSuject = new ArrayList<>();
@@ -119,19 +115,20 @@ public class SubjectSearch extends JPanel {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         panel1 = new JPanel();
         label1 = new JLabel();
-        cb_suject = new JComboBox();
-        b_search = new JButton();
-        b_delete = new JButton();
+        cbSuject = new JComboBox();
+        bSearch = new JButton();
+        bDelete = new JButton();
         panel2 = new JPanel();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
 
         //======== this ========
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder ( 0
-        , 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
-        , new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,
-         getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
-        ) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
+        EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing.border.TitledBorder.CENTER,javax.swing
+        .border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069al\u006fg",java.awt.Font.BOLD,12),
+        java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062or\u0064er".equals(e.getPropertyName()))
+        throw new RuntimeException();}});
 
         //======== panel1 ========
         {
@@ -149,22 +146,22 @@ public class SubjectSearch extends JPanel {
             panel1.add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_suject, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+            panel1.add(cbSuject, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_search ----
-            b_search.setText("\u641c\u5c0b");
-            b_search.addActionListener(e -> b_search(e));
-            panel1.add(b_search, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
+            //---- bSearch ----
+            bSearch.setText("\u641c\u5c0b");
+            bSearch.addActionListener(e -> bSearch(e));
+            panel1.add(bSearch, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_delete ----
-            b_delete.setText("\u522a\u9664\u79d1\u76ee");
-            b_delete.setBackground(Color.red);
-            b_delete.addActionListener(e -> b_delete(e));
-            panel1.add(b_delete, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
+            //---- bDelete ----
+            bDelete.setText("\u522a\u9664\u79d1\u76ee");
+            bDelete.setBackground(Color.red);
+            bDelete.addActionListener(e -> bDelete(e));
+            panel1.add(bDelete, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -210,9 +207,9 @@ public class SubjectSearch extends JPanel {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel panel1;
     private JLabel label1;
-    private JComboBox cb_suject;
-    private JButton b_search;
-    private JButton b_delete;
+    private JComboBox cbSuject;
+    private JButton bSearch;
+    private JButton bDelete;
     private JPanel panel2;
     private JScrollPane scrollPane1;
     private JTable table1;

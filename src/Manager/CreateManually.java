@@ -4,6 +4,11 @@
 
 package Manager;
 
+import DataClass.Data;
+import DataClass.Dialog;
+import DataClass.User;
+import DataClass.Users;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
@@ -22,131 +27,89 @@ import javax.swing.GroupLayout;
  * @author peiChun lu
  */
 public class CreateManually extends JPanel {
-    private String[] cbIdentityItems = {"學生","教師","管理者"};
-    private String[] cbGradeItems = {"一年級","二年級","三年級","四年級"};
+
     public CreateManually() {
         initComponents();
-        for(String s : cbIdentityItems)
-            cb_identity.addItem(s);
-        for(String s : SecretData.SUBJECTS)
-            cb_subject.addItem(s);
-        for(String s : cbGradeItems)
-            cb_grade.addItem(s);
-
-
+        comboBoxInitial();
+    }
+    
+    private void comboBoxInitial(){
+        for(String s : Data.USER_IDENTITIES_CN)
+            cbIdentity.addItem(s);
+        for(String s : Data.SUBJECTS)
+            cbSubject.addItem(s);
+        for(String s : Data.STUDENT_GRADES)
+            cbGrade.addItem(s);
     }
 
-    private void cb_identity(ActionEvent e) {
+    private void cbIdentity(ActionEvent e) {
         // TODO add your code here
-        if(cb_identity.getSelectedItem().toString().equals("學生")){
-            l_subject.setVisible(true);
-            cb_subject.setVisible(true);
-            l_grade.setVisible(true);
-            cb_grade.setVisible(true);
+        if(cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_STUDENT_CN)){
+            lSubject.setVisible(true);
+            cbSubject.setVisible(true);
+            lGrade.setVisible(true);
+            cbGrade.setVisible(true);
         }
         else{
-            l_subject.setVisible(false);
-            cb_subject.setVisible(false);
-            l_grade.setVisible(false);
-            cb_grade.setVisible(false);
+            lSubject.setVisible(false);
+            cbSubject.setVisible(false);
+            lGrade.setVisible(false);
+            cbGrade.setVisible(false);
         }
     }
 
-    private void button1(ActionEvent e) {
+    private void bCreateAccount(ActionEvent e) {
         // TODO add your code here
-        String defaultPassword = tf_password.getText().trim();
-        String sNumber = tf_num.getText().trim();
+        String defaultPassword = tfPassword.getText().trim();
+        String sNumber = tfNum.getText().trim();
         if(defaultPassword.equals("") || sNumber.equals("")){
-            JOptionPane.showMessageDialog(null
-                    ,"必要欄位不可為空"
-                    ,"錯誤",JOptionPane.ERROR_MESSAGE);
+            Dialog.wrong("必要欄位不可為空");
         }
         else{
+            // 帳號數
             int number = Integer.parseInt(sNumber);
-            Statement st = new GetDBdata().getStatement();
-            ArrayList<String> accounts = new ArrayList<>();
+            Users users = new Users();
             ArrayList<String> newAccounts = new ArrayList<>();
-            boolean createState = true;
-            try {
-                st.execute("select * from user");
-                ResultSet rs = st.getResultSet();
-                while(rs.next())
-                    accounts.add(rs.getString("account"));
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            
             // 產生隨機帳號
             Random random = new Random();
             while(newAccounts.size() < number){
                 IntStream intStream = random.ints(1,10000001,99999999);
                 int[] arr = intStream.toArray();
-                if(accounts.indexOf(String.valueOf(arr[0])) == -1 && newAccounts.indexOf(String.valueOf(arr[0])) == -1)
+                if(!users.accountHasCreated(String.valueOf(arr[0])) && newAccounts.indexOf(String.valueOf(arr[0])) == -1)
                     newAccounts.add(String.valueOf(arr[0]));
             }
             // 學生
-            if(cb_identity.getSelectedItem().toString().equals("學生")){
-                String sSub, sGrade;
-                sSub = cb_subject.getSelectedItem().toString();
-                sGrade = cb_grade.getSelectedItem().toString();
-                String sql = "insert into user (" +
-                        "account,password,department,grade,create_time,identity) values ";
+            if(cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_STUDENT_CN)){
+                String sDepartment, sGrade;
+                sDepartment = cbSubject.getSelectedItem().toString();
+                sGrade = cbGrade.getSelectedItem().toString();
                 for(int i = 0 ; i < number ; i ++){
-                    String sql2 = "('" + newAccounts.get(i) + "'";
-                    sql2 += ",'" + defaultPassword + "'";
-                    sql2 += ",'" + sSub + "'";
-                    sql2 += ",'" + sGrade + "'";
-                    sql2 += ",'" + LocalDate.now() + "'";
-                    sql2 += ",'student')";
-                    try {
-                        st.execute(sql + sql2);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null,
-                                "創建失敗","錯誤"
-                        ,JOptionPane.ERROR_MESSAGE);
-                        createState = false;
-                    }
+                    User.createAccount(newAccounts.get(i));
+                    User.setPassword(newAccounts.get(i) , defaultPassword);
+                    User.setDepartment(newAccounts.get(i) , sDepartment);
+                    User.setGrade(newAccounts.get(i) , sGrade);
+                    User.setCreateTime(newAccounts.get(i) , LocalDate.now() + "");
+                    User.setIdentity(newAccounts.get(i) , Data.USER_IDENTITY_STUDENT);
                 }
-                if(createState){
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "創建成功",
-                            "訊息",JOptionPane.DEFAULT_OPTION
-                    );
-                }
+                Dialog.message("創建成功");
             }
             // 教師
-            else if(cb_identity.getSelectedItem().toString().equals("教師")
-            || cb_identity.getSelectedItem().toString().equals("管理者")){
+            else if(cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_EXAM_MANAGER_CN)
+            || cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_SYSTEM_MANAGER_CN)){
                 String iden;
-                if(cb_identity.getSelectedItem().toString().equals("教師"))
-                    iden = "teacher";
+                if(cbIdentity.getSelectedItem().toString().equals(Data.USER_IDENTITY_EXAM_MANAGER_CN))
+                    iden = Data.USER_IDENTITY_EXAM_MANAGER;
                 else
-                    iden = "manager";
-                String sql = "insert into user (" +
-                        "account,password,create_time,identity) values ";
+                    iden = Data.USER_IDENTITY_SYSTEM_MANAGER;
+              
                 for(int i = 0 ; i < number ; i ++){
-                    String sql2 = "('" + newAccounts.get(i) + "'";
-                    sql2 += ",'" + defaultPassword + "'";
-                    sql2 += ",'" + LocalDate.now() + "'";
-                    sql2 += ",'" + iden + "')";
-                    try {
-                        st.execute(sql + sql2);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null,
-                                "創建失敗","錯誤"
-                                ,JOptionPane.ERROR_MESSAGE);
-                        createState = false;
-                    }
+                    User.createAccount(newAccounts.get(i));
+                    User.setPassword(newAccounts.get(i) , defaultPassword);
+                    User.setCreateTime(newAccounts.get(i) , LocalDate.now() + "");
+                    User.setIdentity(newAccounts.get(i) , iden);
                 }
-                if(createState){
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "創建成功",
-                            "訊息",JOptionPane.DEFAULT_OPTION
-                    );
-                }
+                Dialog.message("創建成功");
             }
         }
 
@@ -158,27 +121,26 @@ public class CreateManually extends JPanel {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         label6 = new JLabel();
         label1 = new JLabel();
-        cb_identity = new JComboBox();
-        l_subject = new JLabel();
-        cb_subject = new JComboBox();
-        l_grade = new JLabel();
-        cb_grade = new JComboBox();
-        button1 = new JButton();
+        cbIdentity = new JComboBox();
+        lSubject = new JLabel();
+        cbSubject = new JComboBox();
+        lGrade = new JLabel();
+        cbGrade = new JComboBox();
+        bCreateAccount = new JButton();
         label4 = new JLabel();
-        tf_password = new JTextField();
+        tfPassword = new JTextField();
         label5 = new JLabel();
-        tf_num = new JTextField();
+        tfNum = new JTextField();
 
         //======== this ========
         setBackground(new Color(204, 204, 204));
         setBorder(null);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-        . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
-        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
-        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
-        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-        ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-        ;
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+        ( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+        . TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
+        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+        propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+        ; }} );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {98, 107, 71, 225, 74, 138, 93, 197, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 119, 0, 0, 0, 0, 34, 0, 516, 0};
@@ -199,46 +161,46 @@ public class CreateManually extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- cb_identity ----
-        cb_identity.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        cb_identity.addActionListener(e -> cb_identity(e));
-        add(cb_identity, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+        //---- cbIdentity ----
+        cbIdentity.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        cbIdentity.addActionListener(e -> cbIdentity(e));
+        add(cbIdentity, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- l_subject ----
-        l_subject.setText("\u79d1\u7cfb");
-        l_subject.setHorizontalAlignment(SwingConstants.RIGHT);
-        l_subject.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        add(l_subject, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
+        //---- lSubject ----
+        lSubject.setText("\u79d1\u7cfb");
+        lSubject.setHorizontalAlignment(SwingConstants.RIGHT);
+        lSubject.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        add(lSubject, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- cb_subject ----
-        cb_subject.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        add(cb_subject, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0,
+        //---- cbSubject ----
+        cbSubject.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        add(cbSubject, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- l_grade ----
-        l_grade.setText("\u5e74\u7d1a");
-        l_grade.setHorizontalAlignment(SwingConstants.RIGHT);
-        l_grade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        add(l_grade, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
+        //---- lGrade ----
+        lGrade.setText("\u5e74\u7d1a");
+        lGrade.setHorizontalAlignment(SwingConstants.RIGHT);
+        lGrade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        add(lGrade, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- cb_grade ----
-        cb_grade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        add(cb_grade, new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0,
+        //---- cbGrade ----
+        cbGrade.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        add(cbGrade, new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- button1 ----
-        button1.setText("\u5275\u5efa\u5e33\u865f");
-        button1.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 12));
-        button1.addActionListener(e -> button1(e));
-        add(button1, new GridBagConstraints(6, 2, 1, 1, 0.0, 0.0,
+        //---- bCreateAccount ----
+        bCreateAccount.setText("\u5275\u5efa\u5e33\u865f");
+        bCreateAccount.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 12));
+        bCreateAccount.addActionListener(e -> bCreateAccount(e));
+        add(bCreateAccount, new GridBagConstraints(6, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -250,9 +212,9 @@ public class CreateManually extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- tf_password ----
-        tf_password.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        add(tf_password, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0,
+        //---- tfPassword ----
+        tfPassword.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        add(tfPassword, new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -264,9 +226,9 @@ public class CreateManually extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- tf_num ----
-        tf_num.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
-        add(tf_num, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+        //---- tfNum ----
+        tfNum.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 16));
+        add(tfNum, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -276,15 +238,15 @@ public class CreateManually extends JPanel {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label6;
     private JLabel label1;
-    private JComboBox cb_identity;
-    private JLabel l_subject;
-    private JComboBox cb_subject;
-    private JLabel l_grade;
-    private JComboBox cb_grade;
-    private JButton button1;
+    private JComboBox cbIdentity;
+    private JLabel lSubject;
+    private JComboBox cbSubject;
+    private JLabel lGrade;
+    private JComboBox cbGrade;
+    private JButton bCreateAccount;
     private JLabel label4;
-    private JTextField tf_password;
+    private JTextField tfPassword;
     private JLabel label5;
-    private JTextField tf_num;
+    private JTextField tfNum;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

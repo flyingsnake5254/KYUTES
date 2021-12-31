@@ -10,6 +10,7 @@ public class Group {
     private ArrayList<String> testSujects;
     private Integer peopleNumber;
     private Integer testSujectNumber;
+    private ArrayList<Suject> examSujects;
 
     public Group(String groupName){
         this.groupName = groupName;
@@ -17,13 +18,18 @@ public class Group {
         this.testSujectNumber = testSujects.size();
     }
     public void groupInitial(){
+        examSujects = new ArrayList<>();
         testSujects = new ArrayList<>();
         Statement st = new GetDBdata().getStatement();
         try {
+            Sujects sujects = new Sujects();
             st.execute("select * from " + this.groupName);
             ResultSet rs = st.getResultSet();
             while(rs.next()){
-                testSujects.add(rs.getString("name"));
+                String sName = rs.getString("name");
+                examSujects.add(sujects.getSuject(sName));
+                //testSujects.add(rs.getString("name"));
+                testSujects.add(sName);
             }
             st.execute("select people_num from all_group where name='"
             + this.groupName +"'");

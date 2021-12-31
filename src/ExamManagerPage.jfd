@@ -21,9 +21,9 @@ new FormModel {
 				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "b_questionBankManage"
+				name: "bQuestionBankManage"
 				"text": "題庫管理"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_questionBankManage", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bQuestionBankManage", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
 				"gridy": 2
@@ -41,14 +41,15 @@ new FormModel {
 				"gridheight": 6
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "b_questionManage"
+				name: "bQuestionManage"
 				"text": "試題管理"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bQuestionManage", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
 				"gridy": 3
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "b_examManage"
+				name: "bExamManage"
 				"text": "測驗試卷管理"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1

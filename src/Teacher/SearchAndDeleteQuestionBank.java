@@ -6,8 +6,7 @@ package Teacher;
 
 import java.awt.event.*;
 
-import DataClass.Suject;
-import DataClass.Sujects;
+import DataClass.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,33 +24,55 @@ public class SearchAndDeleteQuestionBank extends JPanel {
     }
 
     private void pageInitial(){
-        Sujects allSujects = new Sujects();
+        Sujects1 allSujects = new Sujects1();
         ArrayList<String> arrSuject = allSujects.getNames();
         for(int i = 0 ; i < arrSuject.size() ; i ++){
-            cb_suject.addItem(arrSuject.get(i));
+            cbSuject.addItem(arrSuject.get(i));
         }
         table1.setVisible(false);
-        b_delete.setVisible(false);
+        bDelete.setVisible(false);
     }
 
     String selectSuject = "";
-    private void b_search(ActionEvent e) {
+    private void bSearch(ActionEvent e) {
         // TODO add your code here
-        selectSuject = cb_suject.getSelectedItem().toString();
-        Suject suject = new Suject(selectSuject);
-        ArrayList<String> bankName = suject.getNames();
-        ArrayList<Integer> questionNum = suject.getQuestion_nums();
-        // table setting
-        DefaultTableModel df = new DefaultTableModel(bankName.size(),2);
+        selectSuject = cbSuject.getSelectedItem().toString();
+        Sujects sujects = new Sujects();
+        Suject suject = sujects.getSuject(selectSuject);
+        DefaultTableModel df = new DefaultTableModel(suject.getQuestionBankNumber(),2);
         table1.setModel(df);
         table1.getColumnModel().getColumn(0).setHeaderValue("題庫名稱");
         table1.getColumnModel().getColumn(1).setHeaderValue("題目數量");
-        for(int i = 0 ; i < bankName.size() ; i ++){
-            table1.setValueAt(bankName.get(i),i,0);
-            table1.setValueAt(questionNum.get(i),i,1);
+        int tableIndex = 0;
+        for(QuestionBank qb : suject.getQuestionBanks()){
+            table1.setValueAt(qb.getName(), tableIndex,0);
+            table1.setValueAt(qb.getQuestionNumber() , tableIndex , 1);
+            tableIndex ++;
         }
         table1.setVisible(true);
-        label1.setVisible(true);
+        bDelete.setVisible(true);
+    }
+
+    private void bDelete(ActionEvent e) {
+        // TODO add your code here
+        // get select question bank
+        int[] selectIndex = table1.getSelectedRows();
+        ArrayList<String> selectQB = new ArrayList<>();
+        for(int i = 0 ; i < selectIndex.length ; i ++)
+            selectQB.add(table1.getValueAt(selectIndex[i],0).toString());
+
+        for(int i = 0 ; i < selectQB.size() ; i ++){
+            Sujects sujects = new Sujects();
+            Suject suject = sujects.getSuject(selectSuject);
+            suject.deleteQuestionBank(selectQB.get(i));
+
+            for(int j = 0 ; j < table1.getRowCount() ; j ++){
+                if(table1.getValueAt(j , 0).toString().equals(selectQB.get(i))){
+                    DefaultTableModel df = (DefaultTableModel) table1.getModel();
+                    df.removeRow(j);
+                }
+            }
+        }
     }
 
     private void initComponents() {
@@ -59,20 +80,20 @@ public class SearchAndDeleteQuestionBank extends JPanel {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         panel1 = new JPanel();
         label1 = new JLabel();
-        cb_suject = new JComboBox();
-        b_search = new JButton();
+        cbSuject = new JComboBox();
+        bSearch = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        b_delete = new JButton();
+        bDelete = new JButton();
 
         //======== this ========
         setBackground(new Color(255, 102, 102));
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
-        (0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing.border
-        .TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
-        .Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void
-        propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-        ;}});
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {
@@ -88,14 +109,14 @@ public class SearchAndDeleteQuestionBank extends JPanel {
             panel1.add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
-            panel1.add(cb_suject, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+            panel1.add(cbSuject, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_search ----
-            b_search.setText("\u67e5\u8a62");
-            b_search.addActionListener(e -> b_search(e));
-            panel1.add(b_search, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
+            //---- bSearch ----
+            bSearch.setText("\u67e5\u8a62");
+            bSearch.addActionListener(e -> bSearch(e));
+            panel1.add(bSearch, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -107,9 +128,10 @@ public class SearchAndDeleteQuestionBank extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_delete ----
-            b_delete.setText("\u522a\u9664");
-            panel1.add(b_delete, new GridBagConstraints(5, 4, 1, 1, 0.0, 0.0,
+            //---- bDelete ----
+            bDelete.setText("\u522a\u9664");
+            bDelete.addActionListener(e -> bDelete(e));
+            panel1.add(bDelete, new GridBagConstraints(5, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
         }
@@ -131,10 +153,10 @@ public class SearchAndDeleteQuestionBank extends JPanel {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel panel1;
     private JLabel label1;
-    private JComboBox cb_suject;
-    private JButton b_search;
+    private JComboBox cbSuject;
+    private JButton bSearch;
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton b_delete;
+    private JButton bDelete;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

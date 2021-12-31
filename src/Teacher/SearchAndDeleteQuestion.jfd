@@ -4,21 +4,20 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp panel1::l:::x}"
+			"$horizontalGroup": "par l {comp panel1::t:::x}"
 			"$verticalGroup": "par l {comp panel1::l:::x}"
 		} ) {
 			name: "this"
-			"background": new java.awt.Color( 255, 102, 102, 255 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "37, 0, 190, 0, 571, 63, 0"
-				"$rowSpecs": "42, 0, 509, 0, 23, 0"
+				"$columnSpecs": "0, 0, 206, 0, 176, 0, 0, 350, 72, 0"
+				"$rowSpecs": "0, 0, 0, 522, 0, 0"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
-				"background": new java.awt.Color( 102, 255, 102, 255 )
+				"background": new java.awt.Color( 255, 255, 153, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "科目"
@@ -28,17 +27,57 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JComboBox" ) {
 					name: "cbSuject"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cbSuject", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 2
 					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "題庫"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 3
+					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "cbQB"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 4
+					"gridy": 1
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "題目類型"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "cbType"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 2
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "難易度"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 3
+					"gridy": 2
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "cbDifficulty"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 4
+					"gridy": 2
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "bSearch"
 					"text": "查詢"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bSearch", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 3
-					"gridy": 1
+					"gridx": 8
+					"gridy": 2
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
@@ -47,16 +86,15 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 1
-					"gridy": 2
-					"gridwidth": 5
-					"gridheight": 2
+					"gridy": 3
+					"gridwidth": 8
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "bDelete"
 					"text": "刪除"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bDelete", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 5
+					"gridx": 8
 					"gridy": 4
 				} )
 			} )

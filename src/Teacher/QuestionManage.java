@@ -1,5 +1,5 @@
 /*
- * Created by JFormDesigner on Mon Dec 27 13:23:59 CST 2021
+ * Created by JFormDesigner on Thu Dec 30 07:38:45 CST 2021
  */
 
 package Teacher;
@@ -11,17 +11,18 @@ import javax.swing.GroupLayout;
 /**
  * @author peiChun lu
  */
-public class QuestionBankManage extends JPanel {
-    public QuestionBankManage() {
+public class QuestionManage extends JPanel {
+    public QuestionManage() {
         initComponents();
         pageInit();
     }
-    
+
     private void pageInit(){
         ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1330, 0, 0};
         ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 700, 0, 0};
-        tabbedPane1.add("查詢與刪除題庫",new SearchAndDeleteQuestionBank());
-        tabbedPane1.add("建立題庫",new CreateQuestionBank());
+        tabbedPane1.add("查詢與刪除試題",new SearchAndDeleteQuestion());
+        tabbedPane1.add("建立試題",new CreateQuestion());
+
     }
 
     private void initComponents() {
@@ -31,24 +32,24 @@ public class QuestionBankManage extends JPanel {
         tabbedPane1 = new JTabbedPane();
 
         //======== this ========
-        setBackground(new Color(255, 153, 102));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
-        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-        .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
-        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
-        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
-        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBackground(new Color(102, 255, 204));
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
+        . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder
+        . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .
+        awt . Font. BOLD ,12 ) ,java . awt. Color .red ) , getBorder () ) )
+        ;  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+        ) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
+        ;
 
         //======== panel1 ========
         {
-            panel1.setBackground(new Color(153, 255, 255));
+            panel1.setBackground(new Color(0, 255, 51));
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1012, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 627, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
-            panel1.add(tabbedPane1, new GridBagConstraints(0, 0, 3, 3, 0.0, 0.0,
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 830, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 588, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+            panel1.add(tabbedPane1, new GridBagConstraints(0, 0, 2, 2, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
         }

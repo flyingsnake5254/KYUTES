@@ -5,18 +5,16 @@
 package Manager;
 
 import DataClass.GetDBdata;
-import DataClass.Sujects;
+import DataClass.Sujects1;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,7 +31,7 @@ public class SubjectSearch extends JPanel {
 
     private void bSearch(ActionEvent e) {
         // TODO add your code here
-        Sujects mySuject = new Sujects();
+        Sujects1 mySuject = new Sujects1();
         ArrayList<String> sujects = mySuject.getNames();
         ArrayList<Integer> question_num = mySuject.getQuestion_nums();
         ArrayList<Integer> bank_num = mySuject.getBank_nums();

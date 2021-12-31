@@ -1,6 +1,7 @@
 import DataClass.GetDBdata;
 import DataClass.User;
 import Teacher.QuestionBankManage;
+import Teacher.QuestionManage;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -29,7 +30,7 @@ public class ExamManagerPage extends JFrame {
         this.add(mainpanel);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, (this.getWidth() - b_questionBankManage.getWidth() - 200), 0, 0};
+        ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, (this.getWidth() - bQuestionBankManage.getWidth() - 200), 0, 0};
         ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, (this.getHeight() - 200), 0, 0};
         frameClose();
     }
@@ -49,13 +50,24 @@ public class ExamManagerPage extends JFrame {
         });
     }
 
-    private void b_questionBankManage(ActionEvent e) {
+    private void bQuestionBankManage(ActionEvent e) {
         // TODO add your code here
         panel1.removeAll();
         QuestionBankManage questionBankManage = new QuestionBankManage();
         questionBankManage.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
         questionBankManage.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
         panel1.add(questionBankManage);
+        this.invalidate();
+        this.validate();
+    }
+
+    private void bQuestionManage(ActionEvent e) {
+        // TODO add your code here
+        panel1.removeAll();
+        QuestionManage questionManage = new QuestionManage();
+        questionManage.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        questionManage.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(questionManage);
         this.invalidate();
         this.validate();
     }
@@ -68,20 +80,21 @@ public class ExamManagerPage extends JFrame {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         mainpanel = new JPanel();
         label1 = new JLabel();
-        b_questionBankManage = new JButton();
+        bQuestionBankManage = new JButton();
         panel1 = new JPanel();
-        b_questionManage = new JButton();
-        b_examManage = new JButton();
+        bQuestionManage = new JButton();
+        bExamManage = new JButton();
 
         //======== mainpanel ========
         {
             mainpanel.setBackground(new Color(102, 255, 102));
-            mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            mainpanel.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
+            swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border
+            . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog"
+            , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,mainpanel. getBorder
+            () ) ); mainpanel. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
+            . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException
+            ( ) ;} } );
             mainpanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, 838, 0, 0};
             ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 472, 0, 0};
@@ -94,10 +107,10 @@ public class ExamManagerPage extends JFrame {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_questionBankManage ----
-            b_questionBankManage.setText("\u984c\u5eab\u7ba1\u7406");
-            b_questionBankManage.addActionListener(e -> b_questionBankManage(e));
-            mainpanel.add(b_questionBankManage, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+            //---- bQuestionBankManage ----
+            bQuestionBankManage.setText("\u984c\u5eab\u7ba1\u7406");
+            bQuestionBankManage.addActionListener(e -> bQuestionBankManage(e));
+            mainpanel.add(bQuestionBankManage, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -120,15 +133,16 @@ public class ExamManagerPage extends JFrame {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
 
-            //---- b_questionManage ----
-            b_questionManage.setText("\u8a66\u984c\u7ba1\u7406");
-            mainpanel.add(b_questionManage, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+            //---- bQuestionManage ----
+            bQuestionManage.setText("\u8a66\u984c\u7ba1\u7406");
+            bQuestionManage.addActionListener(e -> bQuestionManage(e));
+            mainpanel.add(bQuestionManage, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- b_examManage ----
-            b_examManage.setText("\u6e2c\u9a57\u8a66\u5377\u7ba1\u7406");
-            mainpanel.add(b_examManage, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+            //---- bExamManage ----
+            bExamManage.setText("\u6e2c\u9a57\u8a66\u5377\u7ba1\u7406");
+            mainpanel.add(bExamManage, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
         }
@@ -139,9 +153,9 @@ public class ExamManagerPage extends JFrame {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel mainpanel;
     private JLabel label1;
-    private JButton b_questionBankManage;
+    private JButton bQuestionBankManage;
     private JPanel panel1;
-    private JButton b_questionManage;
-    private JButton b_examManage;
+    private JButton bQuestionManage;
+    private JButton bExamManage;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

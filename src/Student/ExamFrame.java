@@ -75,7 +75,7 @@ public class ExamFrame extends JFrame {
                 correct ++;
             }
         }
-        double grade = Math.round(getExamGrade(correct , questions.size());
+        double grade = Math.round(getExamGrade(correct , questions.size()));
         Dialog.message("得分：" + String.valueOf(grade));
         Statement st = new GetDBdata().getStatement();
         try {

@@ -1,5 +1,8 @@
 package DataClass;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Data {
     public static String DB_PASSWORD = "Holmes5254";
     public static String DB_NAME = "kyutes";
@@ -43,4 +46,22 @@ public class Data {
             DEGREE_OF_DIFFICULTY_MEDIUM,
             DEGREE_OF_DIFFICULTY_DIFFICULT
     };
+    private static HashMap<String , Integer> MONTH_INITIAL(){
+        HashMap<String , Integer> hashMap = new HashMap<>();
+        hashMap.put("Jan" , 1);
+        hashMap.put("Feb" , 2);
+        hashMap.put("Mar" , 3);
+        hashMap.put("Apr" , 4);
+        hashMap.put("May" , 5);
+        hashMap.put("Jun" , 6);
+        hashMap.put("Jul" , 7);
+        hashMap.put("Aug" , 8);
+        hashMap.put("Sep" , 9);
+        hashMap.put("Oct" , 10);
+        hashMap.put("Nov" , 11);
+        hashMap.put("Dec" , 12);
+        return hashMap;
+    }
+    public static HashMap<String , Integer> MONTH = Data.MONTH_INITIAL();
+
 }

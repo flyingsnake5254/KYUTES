@@ -1,9 +1,9 @@
 import DataClass.GetDBdata;
 import DataClass.User;
-import Manager.AccountManagement;
-import Manager.CreateAccount;
-import Manager.GroupManage;
-import Manager.SubjectManage;
+import SystemManager.AccountManagement;
+import SystemManager.CreateAccount;
+import SystemManager.GroupManage;
+import SystemManager.SubjectManage;
 
 import java.awt.*;
 import javax.swing.*;
@@ -11,7 +11,6 @@ import javax.swing.GroupLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SystemManagerPage extends JFrame {

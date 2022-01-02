@@ -34,14 +34,44 @@ public class LoginActivity extends JPanel {
                 Dialog.wrong("此帳號已在其他裝置登入");
             }
             else{
-                if(user.getIdentity().equals(Data.USER_IDENTITY_SYSTEM_MANAGER))
-                    new SystemManagerPage(user);
-                else if(user.getIdentity().equals(Data.USER_IDENTITY_EXAM_MANAGER))
-                    new ExamManagerPage(user);
-                else if(user.getIdentity().equals(Data.USER_IDENTITY_STUDENT))
-                    new StudentPage(user);
-                user.setOnline(true);
-                frame1.dispose();
+                if(user.isFirstLogin()){
+                    Dialog.wrong("第一次登入請點選'第一次登入'按鈕");
+                }
+                else{
+                    if(user.getIdentity().equals(Data.USER_IDENTITY_SYSTEM_MANAGER))
+                        new SystemManagerPage(user);
+                    else if(user.getIdentity().equals(Data.USER_IDENTITY_EXAM_MANAGER))
+                        new ExamManagerPage(user);
+                    else if(user.getIdentity().equals(Data.USER_IDENTITY_STUDENT))
+                        new StudentPage(user);
+                    user.setOnline(true);
+                    frame1.dispose();
+                }
+            }
+        }
+        else{
+            Dialog.wrong("帳號或密碼錯誤");
+        }
+    }
+
+    private void bFirstLogin(ActionEvent e) {
+        // TODO add your code here
+        inputAccount = tfAccount.getText();
+        inputPassword = tfPassword.getText();
+        Users users = new Users();
+        if(users.checkAccount(inputAccount,inputPassword)){
+            User user = users.getUser(inputAccount);
+            if(!user.isFirstLogin()){
+                Dialog.wrong("此帳號不是第一次登入");
+            }
+            else{
+                if(user.isOnline()){
+                    Dialog.wrong("此帳號已在其他裝置登入");
+                }
+                else{
+                    new FirstLoginFrame(user);
+                    frame1.dispose();
+                }
             }
         }
         else{
@@ -63,7 +93,7 @@ public class LoginActivity extends JPanel {
         label3 = new JLabel();
         tfPassword = new JPasswordField();
         bLogin = new JButton();
-        button2 = new JButton();
+        bFirstLogin = new JButton();
 
         //======== frame1 ========
         {
@@ -96,9 +126,10 @@ public class LoginActivity extends JPanel {
             bLogin.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 18));
             bLogin.addActionListener(e -> bLogin(e));
 
-            //---- button2 ----
-            button2.setText("\u7b2c\u4e00\u6b21\u767b\u5165");
-            button2.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 18));
+            //---- bFirstLogin ----
+            bFirstLogin.setText("\u7b2c\u4e00\u6b21\u767b\u5165");
+            bFirstLogin.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.BOLD, 18));
+            bFirstLogin.addActionListener(e -> bFirstLogin(e));
 
             GroupLayout frame1ContentPaneLayout = new GroupLayout(frame1ContentPane);
             frame1ContentPane.setLayout(frame1ContentPaneLayout);
@@ -111,7 +142,7 @@ public class LoginActivity extends JPanel {
                                 .addGroup(frame1ContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addGroup(GroupLayout.Alignment.TRAILING, frame1ContentPaneLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(button2)
+                                        .addComponent(bFirstLogin)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                                         .addComponent(bLogin))
                                     .addGroup(frame1ContentPaneLayout.createSequentialGroup()
@@ -143,7 +174,7 @@ public class LoginActivity extends JPanel {
                         .addGap(31, 31, 31)
                         .addGroup(frame1ContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(bLogin)
-                            .addComponent(button2))
+                            .addComponent(bFirstLogin))
                         .addContainerGap(38, Short.MAX_VALUE))
             );
             frame1.pack();
@@ -161,6 +192,6 @@ public class LoginActivity extends JPanel {
     private JLabel label3;
     private JPasswordField tfPassword;
     private JButton bLogin;
-    private JButton button2;
+    private JButton bFirstLogin;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -68,4 +68,8 @@ public class Group {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Suject> getExamSujects() {
+        return examSujects;
+    }
 }

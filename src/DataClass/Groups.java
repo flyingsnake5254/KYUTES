@@ -28,5 +28,15 @@ public class Groups {
         return groups;
     }
 
+    public Group getGroup(String groupName){
+        Group group = null;
+        for(Group g : this.groups){
+            if(g.getGroupName().equals(groupName)){
+                group = g;
+                break;
+            }
+        }
+        return group;
+    }
 
 }

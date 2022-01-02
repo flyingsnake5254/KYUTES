@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class QuestionBank {
     private String name;
@@ -85,4 +86,45 @@ public class QuestionBank {
         return state;
     }
 
+    public Question getDegreeQuestion(String degree){
+        Question question = null;
+        if(this.questions != null && this.questions.size() != 0){
+            ArrayList<Question> pickQuestion = new ArrayList<>();
+            if(degree.equals(Data.DEGREE_OF_DIFFICULTY_EASY)){
+                for(Question q : this.questions){
+                    if(q.getDegreeOfDifficulty().equals(Data.DEGREE_OF_DIFFICULTY_EASY))
+                        pickQuestion.add(q);
+                }
+            }
+            else if(degree.equals(Data.DEGREE_OF_DIFFICULTY_MEDIUM)){
+                for(Question q : this.questions){
+                    if(q.getDegreeOfDifficulty().equals(Data.DEGREE_OF_DIFFICULTY_MEDIUM))
+                        pickQuestion.add(q);
+                }
+            }
+            else if(degree.equals(Data.DEGREE_OF_DIFFICULTY_DIFFICULT)){
+                for(Question q : this.questions){
+                    if(q.getDegreeOfDifficulty().equals(Data.DEGREE_OF_DIFFICULTY_DIFFICULT))
+                        pickQuestion.add(q);
+                }
+            }
+
+            if(pickQuestion.size() != 0){
+                Random random = new Random();
+                question = pickQuestion.get(random.nextInt(pickQuestion.size()));
+            }
+        }
+        return question;
+    }
+
+    public Question getQuestion(String content){
+        Question question = null;
+        for(Question q : this.questions){
+            if(q.getContent().equals(content)){
+                question = q;
+                break;
+            }
+        }
+        return question;
+    }
 }

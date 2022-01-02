@@ -2,6 +2,7 @@ package DataClass;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class Question {
     private int questionID;
@@ -63,4 +64,32 @@ public class Question {
         return questionType;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question = (Question) o;
+        return questionID == question.questionID && Objects.equals(content, question.content) && Objects.equals(answer, question.answer) && Objects.equals(degreeOfDifficulty, question.degreeOfDifficulty) && Objects.equals(questionType, question.questionType) && Objects.equals(c1, question.c1) && Objects.equals(c2, question.c2) && Objects.equals(c3, question.c3) && Objects.equals(c4, question.c4);
+    }
+
+    public String getC1() {
+        return c1;
+    }
+
+    public String getC2() {
+        return c2;
+    }
+
+    public String getC3() {
+        return c3;
+    }
+
+    public String getC4() {
+        return c4;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(questionID, content, answer, degreeOfDifficulty, questionType, c1, c2, c3, c4);
+    }
 }

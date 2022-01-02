@@ -1,6 +1,7 @@
 import DataClass.GetDBdata;
 import DataClass.User;
 import DataClass.AccountManage;
+import Student.ExamArea;
 import Student.PracticeManage;
 
 import java.awt.*;
@@ -83,6 +84,13 @@ public class StudentPage extends JFrame {
 
     private void bExam(ActionEvent e) {
         // TODO add your code here
+        panel1.removeAll();
+        ExamArea examArea = new ExamArea(this.nowUser);
+        examArea.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        examArea.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(examArea);
+        this.invalidate();
+        this.validate();
     }
 
     private void initComponents() {

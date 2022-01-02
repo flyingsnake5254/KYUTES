@@ -1,24 +1,21 @@
 /*
- * Created by JFormDesigner on Sun Jan 02 19:04:55 CST 2022
+ * Created by JFormDesigner on Sun Jan 02 22:42:03 CST 2022
  */
 
 package Student;
 
-import java.awt.*;
 import DataClass.User;
-import ExamManager.CreateExam;
-import ExamManager.SearchAndDeleteExam;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-import org.jdesktop.swingx.*;
 
 /**
  * @author peiChun lu
  */
-public class PracticeManage extends JPanel {
+public class ExamManage extends JPanel {
     private User nowUser;
-    public PracticeManage(User nowUser) {
+    public ExamManage(User nowUser) {
         initComponents();
         this.nowUser = nowUser;
         pageInit();
@@ -27,9 +24,10 @@ public class PracticeManage extends JPanel {
     private void pageInit(){
         ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1330, 0, 0};
         ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 700, 0, 0};
-        tabbedPane1.add("練習區",new Practice(this.nowUser));
+        tabbedPane1.add("測驗區",new ExamArea(this.nowUser));
 
     }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -38,18 +36,18 @@ public class PracticeManage extends JPanel {
         tabbedPane1 = new JTabbedPane();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax
-        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-        .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
-        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
-        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .
-        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
+        .border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder
+        .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.
+        awt.Font.BOLD,12),java.awt.Color.red), getBorder()))
+        ; addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+        ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}})
+        ;
 
         //======== panel1 ========
         {
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1001, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1005, 0};
             ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 653, 0};
             ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
             ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};

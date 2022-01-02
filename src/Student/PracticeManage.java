@@ -1,20 +1,34 @@
 /*
- * Created by JFormDesigner on Fri Dec 31 22:13:58 CST 2021
+ * Created by JFormDesigner on Sun Jan 02 19:04:55 CST 2022
  */
 
-package ExamManager;
+package Student;
 
 import java.awt.*;
+import DataClass.User;
+import ExamManager.CreateExam;
+import ExamManager.SearchAndDeleteExam;
+
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import org.jdesktop.swingx.*;
 
 /**
  * @author peiChun lu
  */
-public class ExamManage extends JPanel {
-    public ExamManage() {
+public class PracticeManage extends JPanel {
+    private User nowUser;
+    public PracticeManage(User nowUser) {
         initComponents();
+        this.nowUser = nowUser;
         pageInit();
+    }
+
+    private void pageInit(){
+        ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1330, 0, 0};
+        ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 700, 0, 0};
+        tabbedPane1.add("練習區",new Practice(this.nowUser));
+
     }
 
     private void initComponents() {
@@ -24,19 +38,19 @@ public class ExamManage extends JPanel {
         tabbedPane1 = new JTabbedPane();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
-        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-        .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
-        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
-        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+        . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
+        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
+        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
+        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+        ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+        ;
 
         //======== panel1 ========
         {
             panel1.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1002, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 652, 0};
+            ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1001, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 653, 0};
             ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
             ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
             panel1.add(tabbedPane1, new GridBagConstraints(0, 0, 2, 2, 0.0, 0.0,
@@ -55,13 +69,6 @@ public class ExamManage extends JPanel {
                 .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
-    }
-
-    private void pageInit(){
-        ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 1330, 0, 0};
-        ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 700, 0, 0};
-        tabbedPane1.add("查詢與刪除測驗",new SearchAndDeleteExam());
-        tabbedPane1.add("建立測驗",new CreateExam());
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

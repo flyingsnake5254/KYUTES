@@ -1,7 +1,7 @@
 import DataClass.GetDBdata;
 import DataClass.User;
-import ExamManager.ExamManage;
-import Student.AccountManage;
+import DataClass.AccountManage;
+import Student.PracticeManage;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -33,7 +33,7 @@ public class StudentPage extends JFrame {
         System.out.println(path);
         this.setIconImage(new ImageIcon(path+"\\image\\nknu_logo.png").getImage());
         this.setVisible(true);
-        this.setTitle("KYUTES 評量管理者");
+        this.setTitle("KYUTES 學生");
         this.setSize(1000,800);
         initComponents();
         this.add(mainpanel);
@@ -62,7 +62,7 @@ public class StudentPage extends JFrame {
     private void bAccountManage(ActionEvent e) {
         // TODO add your code here
         panel1.removeAll();
-        AccountManage accountManage = new AccountManage();
+        AccountManage accountManage = new AccountManage(this.nowUser);
         accountManage.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
         accountManage.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
         panel1.add(accountManage);
@@ -72,6 +72,13 @@ public class StudentPage extends JFrame {
 
     private void bPractice(ActionEvent e) {
         // TODO add your code here
+        panel1.removeAll();
+        PracticeManage practice = new PracticeManage(this.nowUser);
+        practice.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        practice.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(practice);
+        this.invalidate();
+        this.validate();
     }
 
     private void bExam(ActionEvent e) {
@@ -92,12 +99,11 @@ public class StudentPage extends JFrame {
         //======== mainpanel ========
         {
             mainpanel.setBackground(new Color(102, 255, 102));
-            mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
+            , 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
+            mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             mainpanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, 838, 0, 0};
             ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 472, 0, 0};

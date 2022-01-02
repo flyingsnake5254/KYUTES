@@ -9,14 +9,17 @@ new FormModel {
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "0"
-				"$rowSpecs": "0"
+				"$columnSpecs": "1027"
+				"$rowSpecs": "675"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignTop": true
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
+				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+					name: "tabbedPane1"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

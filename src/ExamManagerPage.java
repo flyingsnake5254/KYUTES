@@ -1,3 +1,4 @@
+import DataClass.AccountManage;
 import DataClass.GetDBdata;
 import DataClass.User;
 import ExamManager.ExamManage;
@@ -16,9 +17,11 @@ import java.sql.Statement;
 public class ExamManagerPage extends JFrame {
     private String userAccount;
     private Statement st;
+    private User nowUser;
     public ExamManagerPage(User nowUser) {
         st = new GetDBdata().getStatement();
-        this.userAccount = nowUser.getAccount();
+        this.nowUser = nowUser;
+        this.userAccount = this.nowUser.getAccount();
         //this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String path = System.getProperty("user.dir");
@@ -84,6 +87,17 @@ public class ExamManagerPage extends JFrame {
         this.validate();
     }
 
+    private void bAccountManage(ActionEvent e) {
+        // TODO add your code here
+        panel1.removeAll();
+        AccountManage accountManage = new AccountManage(this.nowUser);
+        accountManage.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        accountManage.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(accountManage);
+        this.invalidate();
+        this.validate();
+    }
+
 
 
 
@@ -92,20 +106,22 @@ public class ExamManagerPage extends JFrame {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         mainpanel = new JPanel();
         label1 = new JLabel();
-        bQuestionBankManage = new JButton();
+        bAccountManage = new JButton();
         panel1 = new JPanel();
+        bQuestionBankManage = new JButton();
         bQuestionManage = new JButton();
         bExamManage = new JButton();
 
         //======== mainpanel ========
         {
             mainpanel.setBackground(new Color(102, 255, 102));
-            mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            mainpanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+            javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax
+            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
+            .awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
+            .Color.red),mainpanel. getBorder()));mainpanel. addPropertyChangeListener(new java.beans.
+            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".
+            equals(e.getPropertyName()))throw new RuntimeException();}});
             mainpanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, 838, 0, 0};
             ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 472, 0, 0};
@@ -118,10 +134,10 @@ public class ExamManagerPage extends JFrame {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- bQuestionBankManage ----
-            bQuestionBankManage.setText("\u984c\u5eab\u7ba1\u7406");
-            bQuestionBankManage.addActionListener(e -> bQuestionBankManage(e));
-            mainpanel.add(bQuestionBankManage, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+            //---- bAccountManage ----
+            bAccountManage.setText("\u500b\u4eba\u5e33\u865f\u7ba1\u7406");
+            bAccountManage.addActionListener(e -> bAccountManage(e));
+            mainpanel.add(bAccountManage, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -144,17 +160,24 @@ public class ExamManagerPage extends JFrame {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
 
+            //---- bQuestionBankManage ----
+            bQuestionBankManage.setText("\u984c\u5eab\u7ba1\u7406");
+            bQuestionBankManage.addActionListener(e -> bQuestionBankManage(e));
+            mainpanel.add(bQuestionBankManage, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+
             //---- bQuestionManage ----
             bQuestionManage.setText("\u8a66\u984c\u7ba1\u7406");
             bQuestionManage.addActionListener(e -> bQuestionManage(e));
-            mainpanel.add(bQuestionManage, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+            mainpanel.add(bQuestionManage, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
             //---- bExamManage ----
             bExamManage.setText("\u6e2c\u9a57\u8a66\u5377\u7ba1\u7406");
             bExamManage.addActionListener(e -> bExamManage(e));
-            mainpanel.add(bExamManage, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+            mainpanel.add(bExamManage, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
         }
@@ -165,8 +188,9 @@ public class ExamManagerPage extends JFrame {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel mainpanel;
     private JLabel label1;
-    private JButton bQuestionBankManage;
+    private JButton bAccountManage;
     private JPanel panel1;
+    private JButton bQuestionBankManage;
     private JButton bQuestionManage;
     private JButton bExamManage;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

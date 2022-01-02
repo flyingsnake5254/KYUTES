@@ -149,6 +149,18 @@ public class User {
         }
     }
 
+    public static void setFirstLogin(String act , boolean b){
+        Statement st = new GetDBdata().getStatement();
+        try {
+            String input = "";
+            if(b) input = "true";
+            else input = "false";
+            st.execute("update user set first_login='" + input + "' where account='" + act + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void setIdentity(String act , String idt){
         Statement st = new GetDBdata().getStatement();
         try {

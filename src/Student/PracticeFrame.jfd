@@ -1,0 +1,100 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp mainpanel::l:::x}"
+			"$verticalGroup": "par l {comp mainpanel::l:::x}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {comp panel1:::::x, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp panel1:::p:396:p, space :::x}}"
+			} ) {
+				name: "mainpanel"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0, 0, 259, 306, 62, 0"
+					"$rowSpecs": "0, 0, 155, 0, 0, 0, 0, 0, 31, 0"
+					"$hGap": 5
+					"$vGap": 5
+					"$alignTop": true
+					"$alignLeft": true
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lQuestionNum"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lDegree"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JTextArea" ) {
+						name: "taContent"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 2
+						"gridx": 1
+						"gridwidth": 4
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "c1"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 3
+						"gridwidth": 2
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "c2"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 4
+						"gridwidth": 2
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "c3"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 5
+						"gridwidth": 2
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "c4"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 6
+						"gridwidth": 2
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lAns"
+						"text": "答案："
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 7
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "tfAns"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 7
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "bNext"
+						"text": "next"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bNext", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 4
+						"gridy": 8
+					} )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 755, 460 )
+		} )
+	}
+}

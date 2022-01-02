@@ -65,6 +65,7 @@ public class FirstLoginFrame extends JFrame {
                 else if(user.getIdentity().equals(Data.USER_IDENTITY_STUDENT))
                     new StudentPage(user);
                 user.setOnline(true);
+                User.setFirstLogin(user.getAccount() , false);
                 this.dispose();
             }
             else{

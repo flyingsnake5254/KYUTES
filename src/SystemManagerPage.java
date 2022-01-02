@@ -1,3 +1,4 @@
+import DataClass.AccountManage;
 import DataClass.GetDBdata;
 import DataClass.User;
 import SystemManager.AccountManagement;
@@ -91,6 +92,18 @@ public class SystemManagerPage extends JFrame {
         this.validate();
     }
 
+    private void bPersonAccountManage(ActionEvent e) {
+        // TODO add your code here
+        panel1.removeAll();
+        AccountManage accountManage = new AccountManage(this.nowUser);
+        accountManage.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        accountManage.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(accountManage);
+        this.invalidate();
+        this.validate();
+
+    }
+
     private void b_buildAccount(ActionEvent e) {
         // TODO add your code here
     }
@@ -112,25 +125,27 @@ public class SystemManagerPage extends JFrame {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         mainPanel = new JPanel();
         label1 = new JLabel();
-        bBuildAccount = new JButton();
+        bPersonAccountManage = new JButton();
         panel1 = new JPanel();
+        bBuildAccount = new JButton();
         bAccountManage = new JButton();
         bGroupManage = new JButton();
         bSubjectManage = new JButton();
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
+            awt .Font .BOLD ,12 ), java. awt. Color. red) ,mainPanel. getBorder( )) )
+            ; mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+            ;
             mainPanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainPanel.getLayout()).columnWidths = new int[] {0, 0, 1287, 0};
-            ((GridBagLayout)mainPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 593, 0};
+            ((GridBagLayout)mainPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 444, 0};
             ((GridBagLayout)mainPanel.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
-            ((GridBagLayout)mainPanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)mainPanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
             //---- label1 ----
             label1.setText("\u7cfb\u7d71\u7ba1\u7406\u8005");
@@ -138,13 +153,10 @@ public class SystemManagerPage extends JFrame {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
-            //---- bBuildAccount ----
-            bBuildAccount.setText("\u5efa\u7acb\u4f7f\u7528\u8005\u5e33\u865f");
-            bBuildAccount.addActionListener(e -> {
-			b_buildAccount(e);
-			bBuildAccount(e);
-		});
-            mainPanel.add(bBuildAccount, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+            //---- bPersonAccountManage ----
+            bPersonAccountManage.setText("\u500b\u4eba\u5e33\u865f\u7ba1\u7406");
+            bPersonAccountManage.addActionListener(e -> bPersonAccountManage(e));
+            mainPanel.add(bPersonAccountManage, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -163,9 +175,19 @@ public class SystemManagerPage extends JFrame {
                         .addGap(0, 733, Short.MAX_VALUE)
                 );
             }
-            mainPanel.add(panel1, new GridBagConstraints(1, 1, 2, 5, 0.0, 0.0,
+            mainPanel.add(panel1, new GridBagConstraints(1, 1, 2, 6, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
+
+            //---- bBuildAccount ----
+            bBuildAccount.setText("\u5efa\u7acb\u4f7f\u7528\u8005\u5e33\u865f");
+            bBuildAccount.addActionListener(e -> {
+			b_buildAccount(e);
+			bBuildAccount(e);
+		});
+            mainPanel.add(bBuildAccount, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
 
             //---- bAccountManage ----
             bAccountManage.setText("\u5e33\u865f\u7ba1\u7406");
@@ -173,7 +195,7 @@ public class SystemManagerPage extends JFrame {
 			b_accountManage(e);
 			bAccountManage(e);
 		});
-            mainPanel.add(bAccountManage, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+            mainPanel.add(bAccountManage, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -183,7 +205,7 @@ public class SystemManagerPage extends JFrame {
 			b_groupManage(e);
 			bGroupManage(e);
 		});
-            mainPanel.add(bGroupManage, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+            mainPanel.add(bGroupManage, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
@@ -193,7 +215,7 @@ public class SystemManagerPage extends JFrame {
 			b_subjectManage(e);
 			bSubjectManage(e);
 		});
-            mainPanel.add(bSubjectManage, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+            mainPanel.add(bSubjectManage, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
         }
@@ -204,8 +226,9 @@ public class SystemManagerPage extends JFrame {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel mainPanel;
     private JLabel label1;
-    private JButton bBuildAccount;
+    private JButton bPersonAccountManage;
     private JPanel panel1;
+    private JButton bBuildAccount;
     private JButton bAccountManage;
     private JButton bGroupManage;
     private JButton bSubjectManage;

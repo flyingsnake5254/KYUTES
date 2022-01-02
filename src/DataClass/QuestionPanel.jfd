@@ -10,7 +10,7 @@ new FormModel {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "0, 0, 614, 0, 0"
-				"$rowSpecs": "0, 0, 155, 0, 0, 0, 0, 0"
+				"$rowSpecs": "0, 0, 155, 0, 0, 0, 0, 0, 0"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignTop": true
@@ -97,6 +97,19 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridx": 2
 					"gridy": 7
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lYourAns"
+					"text": "你的答案："
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+					"gridy": 8
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lYourAns2"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 2
+					"gridy": 8
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

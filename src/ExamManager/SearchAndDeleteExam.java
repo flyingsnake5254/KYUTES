@@ -146,7 +146,7 @@ public class SearchAndDeleteExam extends JPanel {
                 panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
                 ArrayList<Question> questions = selectExam.getQuestions();
                 for(int i = 0 ; i < questions.size() ; i ++){
-                    panel.add(new QuestionPanel(questions.get(i) , i + 1));
+                    panel.add(new QuestionPanel(questions.get(i) , i + 1 , false , ""));
                 }
                 scrollPane2.setViewportView(panel);
                 scrollPane2.revalidate();

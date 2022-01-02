@@ -14,9 +14,13 @@ import javax.swing.GroupLayout;
 public class QuestionPanel extends JPanel {
     Question question ;
     int questionNum;
-    public QuestionPanel(Question question , int questionNum) {
+    private String yourAns;
+    private boolean showYourAns;
+    public QuestionPanel(Question question , int questionNum , boolean showYourAns , String yourAns) {
         initComponents();
         tpContent.setEditable(false);
+        this.showYourAns = showYourAns;
+        this.yourAns = yourAns;
         this.question = question;
         this.questionNum = questionNum;
         panelInitial();
@@ -56,6 +60,19 @@ public class QuestionPanel extends JPanel {
         lAnswer.setVisible(true);
         lAns.setText(this.question.getAnswer());
         lAns.setVisible(true);
+        if(showYourAns){
+            lYourAns2.setVisible(true);
+            lYourAns.setVisible(true);
+            lYourAns2.setText(yourAns);
+            if(this.question.getAnswer().equals(yourAns)){
+                lYourAns2.setForeground(Color.BLACK);
+            }
+            else lYourAns2.setForeground(Color.red);
+        }
+        else{
+            lYourAns2.setVisible(false);
+            lYourAns.setVisible(false);
+        }
     }
 
     private void initComponents() {
@@ -75,22 +92,24 @@ public class QuestionPanel extends JPanel {
         lC4 = new JLabel();
         lAnswer = new JLabel();
         lAns = new JLabel();
+        lYourAns = new JLabel();
+        lYourAns2 = new JLabel();
 
         //======== this ========
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-        ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-        .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-        . Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-        propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-        ;} } );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {
             panel1.setLayout(new GridBagLayout());
             ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 619, 0, 0, 0};
-            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 160, 0, 0, 0, 0, 0, 0};
+            ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 160, 0, 0, 0, 0, 0, 0, 0};
             ((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
-            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
             panel1.add(lQuestionNum, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
@@ -143,8 +162,17 @@ public class QuestionPanel extends JPanel {
             lAnswer.setText("\u7b54\u6848\uff1a");
             panel1.add(lAnswer, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 5), 0, 0));
+                new Insets(0, 0, 5, 5), 0, 0));
             panel1.add(lAns, new GridBagConstraints(2, 7, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 5, 5), 0, 0));
+
+            //---- lYourAns ----
+            lYourAns.setText("\u4f60\u7684\u7b54\u6848\uff1a");
+            panel1.add(lYourAns, new GridBagConstraints(1, 8, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 5), 0, 0));
+            panel1.add(lYourAns2, new GridBagConstraints(2, 8, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 5), 0, 0));
         }
@@ -178,5 +206,7 @@ public class QuestionPanel extends JPanel {
     private JLabel lC4;
     private JLabel lAnswer;
     private JLabel lAns;
+    private JLabel lYourAns;
+    private JLabel lYourAns2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

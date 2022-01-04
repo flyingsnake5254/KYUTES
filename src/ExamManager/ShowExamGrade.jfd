@@ -3,15 +3,15 @@ JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {comp panel1::l:::x}"
 			"$verticalGroup": "par l {comp panel1::l:::x}"
 		} ) {
 			name: "this"
 			"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "0, 1002"
-				"$rowSpecs": "0, 652"
+				"$columnSpecs": "0, 773"
+				"$rowSpecs": "0, 447"
 				"$hGap": 5
 				"$vGap": 5
 				"$alignTop": true
@@ -19,16 +19,19 @@ new FormModel {
 			} ) {
 				name: "panel1"
 				"background": #ColorUIResource0
-				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
-					name: "tabbedPane1"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "table1"
+					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridwidth": 2
-					"gridheight": 2
+					"gridx": 1
+					"gridy": 1
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1030, 680 )
+			"size": new java.awt.Dimension( 825, 525 )
 		} )
 	}
 }

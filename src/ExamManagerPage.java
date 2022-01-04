@@ -1,3 +1,4 @@
+import javax.swing.plaf.*;
 import DataClass.AccountManage;
 import DataClass.GetDBdata;
 import DataClass.User;
@@ -114,14 +115,14 @@ public class ExamManagerPage extends JFrame {
 
         //======== mainpanel ========
         {
-            mainpanel.setBackground(new Color(102, 255, 102));
-            mainpanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
-            javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax
-            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
-            .awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
-            .Color.red),mainpanel. getBorder()));mainpanel. addPropertyChangeListener(new java.beans.
-            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".
-            equals(e.getPropertyName()))throw new RuntimeException();}});
+            mainpanel.setBackground(new Color(214, 214, 214));
+            mainpanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
+            swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border
+            .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
+            ,java.awt.Font.BOLD,12),java.awt.Color.red),mainpanel. getBorder
+            ()));mainpanel. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
+            .beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
+            ();}});
             mainpanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, 838, 0, 0};
             ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 472, 0, 0};
@@ -143,7 +144,7 @@ public class ExamManagerPage extends JFrame {
 
             //======== panel1 ========
             {
-                panel1.setBackground(new Color(153, 153, 255));
+                panel1.setBackground(new Color(214, 214, 214));
 
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);

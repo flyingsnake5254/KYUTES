@@ -5,11 +5,19 @@
 package ExamManager;
 
 import javax.swing.event.*;
+import javax.swing.plaf.*;
 import DataClass.*;
+import DataClass.Dialog;
 import org.jdesktop.swingx.JXDatePicker;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -250,18 +258,69 @@ public class CreateExam extends JPanel {
         // TODO add your code here
         String[] dateStart = datepickFrom.getDate().toString().split("\\s+");
         String[] dateEnd = datepickTo.getDate().toString().split("\\s+");
+        StringBuilder hourStart = new StringBuilder();
+        StringBuilder hourEnd = new StringBuilder();
+        StringBuilder minStart = new StringBuilder();
+        StringBuilder minEnd = new StringBuilder();
+        if(startHour.getValue().toString().length() == 1){
+            hourStart.append("0");
+        }
+        hourStart.append(startHour.getValue().toString());
+
+        if(endHour.getValue().toString().length() == 1){
+            hourEnd.append("0");
+        }
+        hourEnd.append(endHour.getValue().toString());
+
+        if(startMinute.getValue().toString().length() == 1){
+            minStart.append("0");
+        }
+        minStart.append(startMinute.getValue().toString());
+
+        if(endMinute.getValue().toString().length() == 1){
+            minEnd.append("0");
+        }
+        minEnd.append(endMinute.getValue().toString());
+
+
         String startTime = dateStart[5] + "/"
                 + Data.MONTH.get(dateStart[1]) + "/"
                 + dateStart[2] + " "
-                + startHour.getValue().toString() + ":"
-                + startMinute.getValue().toString();
+                + hourStart.toString() + ":"
+                + minStart.toString();
         String endTime = dateEnd[5] + "/"
                 + Data.MONTH.get(dateEnd[1]) + "/"
                 + dateEnd[2] + " "
-                + endHour.getValue().toString() + ":"
-                + endMinute.getValue().toString();
-        Exams exams = new Exams();
-        exams.createExam(selectGroup , selectSuject , startTime , endTime , addQuestion , qbNames);
+                + hourEnd.toString() + ":"
+                + minEnd.toString();
+
+        System.out.println(startTime + "\n" + endTime);
+        if(!dateCheck(startTime,endTime)) Dialog.wrong("時間設定錯誤");
+        else{
+            Exams exams = new Exams();
+            exams.createExam(selectGroup , selectSuject , startTime , endTime , addQuestion , qbNames);
+        }
+
+    }
+
+    public boolean dateCheck(String startTime , String endTime){
+        boolean state = false;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        try {
+            String[] t1 = LocalTime.now().toString().split(":");
+            Date now = simpleDateFormat2.parse(LocalDate.now().toString() + " " + t1[0] + ":" + t1[1]);
+            Date date1 = simpleDateFormat.parse(startTime);
+            Date date2 = simpleDateFormat.parse(endTime);
+            if(date2.before(date1) || date2.equals(date1)) return false;
+            if(now.after(date2) || now.equals(date2)) return false;
+            return true;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return state;
     }
 
     private void initComponents() {
@@ -297,17 +356,17 @@ public class CreateExam extends JPanel {
         bCreate = new JButton();
 
         //======== this ========
-        setBackground(new Color(153, 255, 153));
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-        .EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax
-        .swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,
-        12),java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans
-        .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.
-        getPropertyName()))throw new RuntimeException();}});
+        setBackground(new Color(214, 214, 214));
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
 
         //======== panel2 ========
         {
-            panel2.setBackground(new Color(255, 153, 153));
+            panel2.setBackground(new Color(214, 214, 214));
             panel2.setLayout(new GridBagLayout());
             ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {1030, 0};
             ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {676, 0};

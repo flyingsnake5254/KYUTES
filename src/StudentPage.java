@@ -1,8 +1,10 @@
+import javax.swing.plaf.*;
 import DataClass.GetDBdata;
 import DataClass.User;
 import DataClass.AccountManage;
 import Student.ExamArea;
 import Student.PracticeManage;
+import Student.SearchGrade;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -93,6 +95,17 @@ public class StudentPage extends JFrame {
         this.validate();
     }
 
+    private void bSearchGrade(ActionEvent e) {
+        // TODO add your code here
+        panel1.removeAll();
+        SearchGrade searchGrade = new SearchGrade(this.nowUser);
+        searchGrade.setSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+        searchGrade.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.add(searchGrade);
+        this.invalidate();
+        this.validate();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
@@ -106,16 +119,16 @@ public class StudentPage extends JFrame {
 
         //======== mainpanel ========
         {
-            mainpanel.setBackground(new Color(102, 255, 102));
+            mainpanel.setBackground(new Color(214, 214, 214));
             mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
-            , 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
+            , 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
             mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             mainpanel.setLayout(new GridBagLayout());
-            ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, 838, 0, 0};
+            ((GridBagLayout)mainpanel.getLayout()).columnWidths = new int[] {0, 0, 0, 838, 0, 0, 0};
             ((GridBagLayout)mainpanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 472, 0, 0};
-            ((GridBagLayout)mainpanel.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            ((GridBagLayout)mainpanel.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
             ((GridBagLayout)mainpanel.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
             //---- label1 ----
@@ -133,7 +146,7 @@ public class StudentPage extends JFrame {
 
             //======== panel1 ========
             {
-                panel1.setBackground(new Color(153, 153, 255));
+                panel1.setBackground(new Color(214, 214, 214));
 
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
@@ -146,7 +159,7 @@ public class StudentPage extends JFrame {
                         .addGap(0, 622, Short.MAX_VALUE)
                 );
             }
-            mainpanel.add(panel1, new GridBagConstraints(2, 2, 3, 6, 0.0, 0.0,
+            mainpanel.add(panel1, new GridBagConstraints(3, 2, 3, 6, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
 
@@ -166,6 +179,7 @@ public class StudentPage extends JFrame {
 
             //---- bSearchGrade ----
             bSearchGrade.setText("\u6e2c\u9a57\u6210\u7e3e\u67e5\u8a62");
+            bSearchGrade.addActionListener(e -> bSearchGrade(e));
             mainpanel.add(bSearchGrade, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));

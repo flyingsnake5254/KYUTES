@@ -5,6 +5,7 @@
 package ExamManager;
 
 import java.awt.event.*;
+import javax.swing.plaf.*;
 
 import DataClass.*;
 import DataClass.Dialog;
@@ -141,6 +142,7 @@ public class SearchAndDeleteExam extends JPanel {
             int[] selectIndex = table1.getSelectedRows();
             Exams exams = new Exams();
             Exam selectExam = exams.getExam(table1.getValueAt(selectIndex[0],0).toString());
+            new ShowExamGrade(selectExam.getID());
             if(selectExam != null){
                 JPanel panel = new JPanel();
                 panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
@@ -184,17 +186,16 @@ public class SearchAndDeleteExam extends JPanel {
         scrollPane2 = new JScrollPane();
 
         //======== this ========
-        setBackground(new Color(153, 255, 204));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
-        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ),
-        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () ))
-        throw new RuntimeException( ); }} );
+        setBackground(new Color(214, 214, 214));
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
+        0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
+        . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
+        red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
+        beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
         //======== panel1 ========
         {
-            panel1.setBackground(new Color(255, 255, 102));
+            panel1.setBackground(new Color(214, 214, 214));
             panel1.setLayout(new GridBagLayout());
             ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 153, 0, 169, 0, 0, 152, 198, 0, 0, 0};
             ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 142, 35, 376, 0, 0, 0, 0};

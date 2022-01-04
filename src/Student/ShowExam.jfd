@@ -13,6 +13,7 @@ new FormModel {
 				"$verticalGroup": "par l {comp scrollPane1::l::568:x}"
 			} ) {
 				name: "panel1"
+				"background": new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
 				} )

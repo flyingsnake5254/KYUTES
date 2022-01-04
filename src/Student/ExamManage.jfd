@@ -19,6 +19,7 @@ new FormModel {
 				name: "panel1"
 				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 					name: "tabbedPane1"
+					"background": new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 					"gridwidth": 2
 					"gridheight": 2

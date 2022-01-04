@@ -8,7 +8,7 @@ new FormModel {
 			"$verticalGroup": "par l {comp panel1::l::675:x}"
 		} ) {
 			name: "this"
-			"background": new java.awt.Color( 153, 255, 204, 255 )
+			"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "0, 0, 148, 0, 164, 0, 0, 147, 193, 0, 0"
 				"$rowSpecs": "0, 0, 137, 30, 371, 0, 0, 0"
@@ -18,7 +18,7 @@ new FormModel {
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
-				"background": new java.awt.Color( 255, 255, 102, 255 )
+				"background": #ColorUIResource0
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "測驗群組"

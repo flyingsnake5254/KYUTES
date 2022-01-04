@@ -6,10 +6,20 @@ package Student;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.plaf.*;
 
 import DataClass.*;
 import DataClass.Dialog;
+import ExamManager.CreateExam;
 
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -80,13 +90,54 @@ public class ExamArea extends JPanel {
     private void table1MouseClicked(MouseEvent e) {
         // TODO add your code here
         if(e.getClickCount() == 2){
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             int[] selectIndex = table1.getSelectedRows();
             String examID = table1.getValueAt(selectIndex[0] , 0).toString();
             Exams exams = new Exams();
             Exam exam = exams.getExam(examID);
-            new ExamFrame(this.nowUser , exam);
+            if(dateCheck(exam.getStartTime() , exam.getEndTime())){
+                Statement st = new GetDBdata().getStatement();
+                ArrayList<String> hasTest = new ArrayList<>();
+                try {
+                    st.execute("select account from examState where id='" + examID + "'");
+                    ResultSet rs = st.getResultSet();
+                    while(rs.next()){
+                        hasTest.add(rs.getString("account"));
+                    }
+                    if(hasTest.contains(nowUser.getAccount())){
+                        Dialog.wrong("已參加過此測驗");
+                    }
+                    else{
+                        st.execute("insert into examState (id,account) values ('" + exam.getID() + "','" + nowUser.getAccount() + "')");
+                        new ExamFrame(this.nowUser , exam);
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            else{
+                Dialog.wrong("現在非測驗時間");
+            }
+
         }
+    }
+
+    public boolean dateCheck(String startTime , String endTime){
+        boolean state = false;
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            String[] t1 = LocalTime.now().toString().split(":");
+            Date now = simpleDateFormat2.parse(LocalDate.now().toString() + " " + t1[0] + ":" + t1[1]);
+            Date date1 = simpleDateFormat.parse(startTime);
+            Date date2 = simpleDateFormat.parse(endTime);
+            if((now.after(date1) || now.equals(date1)) && (now.before(date2) || now.equals(date2))) return true;
+            else return false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return state;
     }
 
     private void initComponents() {
@@ -100,13 +151,13 @@ public class ExamArea extends JPanel {
         table1 = new JTable();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-        .border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder
-        .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.
-        awt.Font.BOLD,12),java.awt.Color.red), getBorder()))
-        ; addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-        ){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}})
-        ;
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+        .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
+        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
+        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {
@@ -136,6 +187,7 @@ public class ExamArea extends JPanel {
             {
 
                 //---- table1 ----
+                table1.setBackground(new Color(214, 214, 214));
                 table1.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {

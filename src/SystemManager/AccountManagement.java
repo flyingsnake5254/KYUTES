@@ -49,10 +49,18 @@ public class AccountManagement extends JPanel {
         for(int i = 0 ; i < 10 ; i ++, y --){
             cbYear.addItem(String.valueOf(y));
         }
-        for(int i = 1 ; i <= 12 ; i ++)
-            cbMonth.addItem(String.valueOf(i));
-        for(int i = 1 ; i <= 31 ; i ++)
-            cbDay.addItem(String.valueOf(i));
+        for(int i = 1 ; i <= 12 ; i ++) {
+            StringBuilder sb = new StringBuilder();
+            if(i >= 1 || i <= 9) sb.append("0");
+            sb.append(String.valueOf(i));
+            cbMonth.addItem(sb.toString());
+        }
+        for(int i = 1 ; i <= 31 ; i ++) {
+            StringBuilder sb = new StringBuilder();
+            if(i >= 1 || i <= 9) sb.append("0");
+            sb.append(String.valueOf(i));
+            cbDay.addItem(sb.toString());
+        }
         
         
     }

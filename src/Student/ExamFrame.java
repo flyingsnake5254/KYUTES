@@ -4,6 +4,7 @@
 
 package Student;
 
+import javax.swing.plaf.*;
 import DataClass.*;
 import DataClass.Dialog;
 
@@ -11,7 +12,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -91,6 +98,31 @@ public class ExamFrame extends JFrame {
         if(correct == totalQuestionNum) return 100;
         return (100 * ((double) correct / totalQuestionNum));
     }
+
+//    public boolean timeCheck(String endTime){
+//        boolean state = false;
+//        String[] dateTime2 = endTime.split(" ");
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date now = simpleDateFormat2.parse(LocalDate.now().toString());
+//            Date date2 = simpleDateFormat.parse(dateTime2[0]);
+//            String[] time2 = dateTime2[1].split(":");
+//            int hour2 = Integer.parseInt(time2[0]);
+//            int minute2 = Integer.parseInt(time2[1]);
+//            String[] nowTime = LocalTime.now().toString().split(":");
+//            int nowHour = Integer.parseInt(nowTime[0]);
+//            int nowMin = Integer.parseInt(nowTime[1]);
+//
+//            if(now.after(date2)) return true;
+//            if(now.equals(date2)){
+//                if(nowHour > hour2) return
+//            }
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return state;
+//    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
@@ -104,12 +136,13 @@ public class ExamFrame extends JFrame {
 
         //======== panel1 ========
         {
+            panel1.setBackground(new Color(214, 214, 214));
             panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
-            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax
+            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax
             . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
-            . awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt
+            . awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt
             . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .
-            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .
+            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .
             equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
             panel1.setLayout(new GridBagLayout());
             ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {805, 81, 0};

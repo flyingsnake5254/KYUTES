@@ -17,6 +17,7 @@ new FormModel {
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
+				"background": new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 					"$horizontalGroup": "par l {seq l {comp scrollPane1::::880:x, space :::p}}"
 					"$verticalGroup": "par l {seq l {comp scrollPane1::::592:x, space :::p}}"

@@ -5,7 +5,8 @@
 package SystemManager;
 
 import DataClass.GetDBdata;
-import DataClass.Sujects1;
+import DataClass.Suject;
+import DataClass.Sujects;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -31,20 +32,27 @@ public class SubjectSearch extends JPanel {
 
     private void bSearch(ActionEvent e) {
         // TODO add your code here
-        Sujects1 mySuject = new Sujects1();
-        ArrayList<String> sujects = mySuject.getNames();
-        ArrayList<Integer> question_num = mySuject.getQuestion_nums();
-        ArrayList<Integer> bank_num = mySuject.getBank_nums();
+        Sujects sujects = new Sujects();
+        ArrayList<Suject> sujectArrayList = sujects.getSujects();
+        //Sujects1 mySuject = new Sujects1();
+//        ArrayList<String> sujects = mySuject.getNames();
+//        ArrayList<Integer> question_num = mySuject.getQuestion_nums();
+//        ArrayList<Integer> bank_num = mySuject.getBank_nums();
         // table setting
-        DefaultTableModel df = new DefaultTableModel(sujects.size(),3);
+        DefaultTableModel df = new DefaultTableModel(sujectArrayList.size(),3);
         table1.setModel(df);
         table1.getColumnModel().getColumn(0).setHeaderValue("科目名稱");
         table1.getColumnModel().getColumn(1).setHeaderValue("題庫數量");
         table1.getColumnModel().getColumn(2).setHeaderValue("題目數量");
-        for(int i = 0 ; i < sujects.size() ; i ++){
-            table1.setValueAt(sujects.get(i),i,0);
-            table1.setValueAt(bank_num.get(i),i,1);
-            table1.setValueAt(question_num.get(i),i,2);
+//        for(Suject s : sujects.getSujects()){
+//            table1.setValueAt(sujects.get(i),i,0);
+//            table1.setValueAt(bank_num.get(i),i,1);
+//            table1.setValueAt(question_num.get(i),i,2);
+//        }
+        for(int i = 0 ; i < sujectArrayList.size() ; i ++){
+            table1.setValueAt(sujectArrayList.get(i).getName(),i,0);
+            table1.setValueAt(sujectArrayList.get(i).getQuestionBankNumber(),i,1);
+            table1.setValueAt(sujectArrayList.get(i).getQuestionNumber(),i,2);
         }
         table1.setVisible(true);
         bDelete.setVisible(true);

@@ -5,6 +5,7 @@
 package Student;
 
 import java.awt.event.*;
+import javax.swing.plaf.*;
 import DataClass.*;
 import DataClass.Dialog;
 
@@ -185,16 +186,17 @@ public class PracticeFrame extends JFrame {
 
         //======== mainpanel ========
         {
-            mainpanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,mainpanel. getBorder( )) ); mainpanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            mainpanel.setBackground(new Color(214, 214, 214));
+            mainpanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+            border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
+            ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
+            .BOLD,12),java.awt.Color.red),mainpanel. getBorder()));mainpanel. addPropertyChangeListener(
+            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
+            .equals(e.getPropertyName()))throw new RuntimeException();}});
 
             //======== panel1 ========
             {
+                panel1.setBackground(new Color(214, 214, 214));
                 panel1.setLayout(new GridBagLayout());
                 ((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 264, 311, 67, 0, 0};
                 ((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 160, 0, 0, 0, 0, 0, 36, 0, 0};

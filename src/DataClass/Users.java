@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Users {
-    ArrayList<User> users;
+    private ArrayList<User> users;
     public Users(){
         dataInitial();
     }

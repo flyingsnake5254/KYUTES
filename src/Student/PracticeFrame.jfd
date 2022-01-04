@@ -13,6 +13,7 @@ new FormModel {
 				"$verticalGroup": "par l {seq l {space :::p, comp panel1:::p:396:p, space :::x}}"
 			} ) {
 				name: "mainpanel"
+				"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 					"$columnSpecs": "0, 0, 259, 306, 62, 0"
 					"$rowSpecs": "0, 0, 155, 0, 0, 0, 0, 0, 31, 0"
@@ -22,6 +23,7 @@ new FormModel {
 					"$alignLeft": true
 				} ) {
 					name: "panel1"
+					"background": #ColorUIResource0
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lQuestionNum"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {

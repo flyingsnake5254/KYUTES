@@ -12,7 +12,7 @@ new FormModel {
 			"$alignLeft": true
 		} ) {
 			name: "mainpanel"
-			"background": new java.awt.Color( 102, 255, 102, 255 )
+			"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "評量管理員"
@@ -33,7 +33,7 @@ new FormModel {
 				"$verticalGroup": "par l {space :0:622:x}"
 			} ) {
 				name: "panel1"
-				"background": new java.awt.Color( 153, 153, 255, 255 )
+				"background": #ColorUIResource0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
 				"gridy": 2

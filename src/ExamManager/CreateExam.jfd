@@ -8,7 +8,7 @@ new FormModel {
 			"$verticalGroup": "par l {comp panel2:::p::p}"
 		} ) {
 			name: "this"
-			"background": new java.awt.Color( 153, 255, 153, 255 )
+			"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "1030"
 				"$rowSpecs": "676"
@@ -18,7 +18,7 @@ new FormModel {
 				"$alignLeft": true
 			} ) {
 				name: "panel2"
-				"background": new java.awt.Color( 255, 153, 153, 255 )
+				"background": #ColorUIResource0
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 					"$columnSpecs": "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 217, 0"
 					"$rowSpecs": "0, 0, 0, 0, 0, 452, 0, 0"

@@ -8,6 +8,7 @@ new FormModel {
 			"$verticalGroup": "par l {comp panel1::l:::x}"
 		} ) {
 			name: "this"
+			"background": &ColorUIResource0 new javax.swing.plaf.ColorUIResource( 214, 214, 214 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 				"$columnSpecs": "0, 1001"
 				"$rowSpecs": "0, 653"
@@ -17,6 +18,7 @@ new FormModel {
 				"$alignLeft": true
 			} ) {
 				name: "panel1"
+				"background": #ColorUIResource0
 				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 					name: "tabbedPane1"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {

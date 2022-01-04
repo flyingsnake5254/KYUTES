@@ -21,15 +21,15 @@ new FormModel {
 				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "cb_group"
+				name: "cbGroup"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
 				"gridy": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "b_search"
+				name: "bSearch"
 				"text": "確認"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_search", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bSearch", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 3
 				"gridy": 1
@@ -45,9 +45,9 @@ new FormModel {
 				"gridwidth": 5
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "b_add"
+				name: "bAdd"
 				"text": "新增"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_add", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bAdd", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 5
 				"gridy": 3

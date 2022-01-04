@@ -4,6 +4,7 @@
 
 package SystemManager;
 
+import javax.swing.plaf.*;
 import DataClass.GetDBdata;
 
 import java.awt.*;
@@ -23,9 +24,9 @@ public class CreateSubject extends JPanel {
         initComponents();
     }
 
-    private void b_create(ActionEvent e) {
+    private void bCreate(ActionEvent e) {
         // TODO add your code here
-        String subjectName = tf_subjectName.getText().trim();
+        String subjectName = tfSubjectName.getText().trim();
         if(subjectName.equals(""))
             JOptionPane.showMessageDialog(
                     null,
@@ -83,16 +84,16 @@ public class CreateSubject extends JPanel {
         // Generated using JFormDesigner Evaluation license - peiChun lu
         panel1 = new JPanel();
         label1 = new JLabel();
-        tf_subjectName = new JTextField();
-        b_create = new JButton();
+        tfSubjectName = new JTextField();
+        bCreate = new JButton();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-        . EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax
-        . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,
-        12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans
-        . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .
-        getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
+        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
+        throw new RuntimeException( ); }} );
 
         //======== panel1 ========
         {
@@ -110,17 +111,17 @@ public class CreateSubject extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 5), 0, 0));
 
-            //---- tf_subjectName ----
-            tf_subjectName.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
-            panel1.add(tf_subjectName, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+            //---- tfSubjectName ----
+            tfSubjectName.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
+            panel1.add(tfSubjectName, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 5), 0, 0));
 
-            //---- b_create ----
-            b_create.setText("\u5275\u5efa");
-            b_create.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
-            b_create.addActionListener(e -> b_create(e));
-            panel1.add(b_create, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
+            //---- bCreate ----
+            bCreate.setText("\u5275\u5efa");
+            bCreate.setFont(new Font("\u5fae\u8edf\u6b63\u9ed1\u9ad4", Font.PLAIN, 14));
+            bCreate.addActionListener(e -> bCreate(e));
+            panel1.add(bCreate, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
         }
@@ -142,7 +143,7 @@ public class CreateSubject extends JPanel {
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JPanel panel1;
     private JLabel label1;
-    private JTextField tf_subjectName;
-    private JButton b_create;
+    private JTextField tfSubjectName;
+    private JButton bCreate;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

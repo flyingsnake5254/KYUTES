@@ -104,21 +104,6 @@ public class SystemManagerPage extends JFrame {
 
     }
 
-    private void b_buildAccount(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void b_accountManage(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void b_groupManage(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void b_subjectManage(ActionEvent e) {
-        // TODO add your code here
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -134,13 +119,12 @@ public class SystemManagerPage extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
-            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
-            awt .Font .BOLD ,12 ), java. awt. Color. red) ,mainPanel. getBorder( )) )
-            ; mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-            ;
+            mainPanel.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
+            ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
+            .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,mainPanel. getBorder () ) ); mainPanel. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
+            propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
+            ;} } );
             mainPanel.setLayout(new GridBagLayout());
             ((GridBagLayout)mainPanel.getLayout()).columnWidths = new int[] {0, 0, 1287, 0};
             ((GridBagLayout)mainPanel.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 444, 0};
@@ -181,40 +165,28 @@ public class SystemManagerPage extends JFrame {
 
             //---- bBuildAccount ----
             bBuildAccount.setText("\u5efa\u7acb\u4f7f\u7528\u8005\u5e33\u865f");
-            bBuildAccount.addActionListener(e -> {
-			b_buildAccount(e);
-			bBuildAccount(e);
-		});
+            bBuildAccount.addActionListener(e -> bBuildAccount(e));
             mainPanel.add(bBuildAccount, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
             //---- bAccountManage ----
             bAccountManage.setText("\u5e33\u865f\u7ba1\u7406");
-            bAccountManage.addActionListener(e -> {
-			b_accountManage(e);
-			bAccountManage(e);
-		});
+            bAccountManage.addActionListener(e -> bAccountManage(e));
             mainPanel.add(bAccountManage, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
             //---- bGroupManage ----
             bGroupManage.setText("\u6e2c\u9a57\u7fa4\u7d44\u7ba1\u7406");
-            bGroupManage.addActionListener(e -> {
-			b_groupManage(e);
-			bGroupManage(e);
-		});
+            bGroupManage.addActionListener(e -> bGroupManage(e));
             mainPanel.add(bGroupManage, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));
 
             //---- bSubjectManage ----
             bSubjectManage.setText("\u6e2c\u9a57\u79d1\u76ee\u7ba1\u7406");
-            bSubjectManage.addActionListener(e -> {
-			b_subjectManage(e);
-			bSubjectManage(e);
-		});
+            bSubjectManage.addActionListener(e -> bSubjectManage(e));
             mainPanel.add(bSubjectManage, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 5, 5), 0, 0));

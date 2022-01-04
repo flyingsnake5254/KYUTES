@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 import DataClass.Data;
 import DataClass.GetDBdata;
@@ -25,22 +26,22 @@ public class GroupCreate extends JPanel {
     }
     
     private void comboInit(){
-        cb_suject.addItem("全部");
+        cbSuject.addItem("全部");
         for(int i = 0 ; i < Data.SUBJECTS.length ; i ++){
-            cb_suject.addItem(Data.SUBJECTS[i]);
+            cbSuject.addItem(Data.SUBJECTS[i]);
         }
-        cb_grade.addItem("全部");
-        cb_grade.addItem("一年級");
-        cb_grade.addItem("二年級");
-        cb_grade.addItem("三年級");
-        cb_grade.addItem("四年級");
+        cbGrade.addItem("全部");
+        cbGrade.addItem("一年級");
+        cbGrade.addItem("二年級");
+        cbGrade.addItem("三年級");
+        cbGrade.addItem("四年級");
         
     }
 
-    private void b_search(ActionEvent e) {
+    private void bSearch(ActionEvent e) {
         // TODO add your code here
-        String selectSuject = cb_suject.getSelectedItem().toString();
-        String selectGrade = cb_grade.getSelectedItem().toString();
+        String selectSuject = cbSuject.getSelectedItem().toString();
+        String selectGrade = cbGrade.getSelectedItem().toString();
         // get DB data
         ArrayList<String> accounts, names, identity, subjects, grade;
         accounts = new ArrayList<>();
@@ -108,10 +109,10 @@ public class GroupCreate extends JPanel {
 
     }
 
-    private void b_create(ActionEvent e) {
+    private void bCreate(ActionEvent e) {
         // TODO add your code here
         boolean createState = true;
-        if(tf_groupName.getText().trim().equals("")){
+        if(tfGroupName.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,
                     "群組名稱不可為空",
                     "錯誤",JOptionPane.ERROR_MESSAGE);
@@ -130,7 +131,7 @@ public class GroupCreate extends JPanel {
                 createState = false;
             }
             boolean hasCreate = false;
-            String groupName = tf_groupName.getText().trim();
+            String groupName = tfGroupName.getText().trim();
             for(int i = 0 ; i < allGroupName.size() ; i ++){
                 if(groupName.equals(allGroupName.get(i))){
                     hasCreate = true;
@@ -202,23 +203,25 @@ public class GroupCreate extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
         label1 = new JLabel();
-        tf_groupName = new JTextField();
-        b_create = new JButton();
+        tfGroupName = new JTextField();
+        bCreate = new JButton();
         label2 = new JLabel();
-        cb_suject = new JComboBox();
+        cbSuject = new JComboBox();
         label3 = new JLabel();
-        cb_grade = new JComboBox();
-        b_search = new JButton();
+        cbGrade = new JComboBox();
+        bSearch = new JButton();
         scrollPane1 = new JScrollPane();
         dataTable = new JTable();
 
         //======== this ========
         setBackground(new Color(214, 214, 214));
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
-        , 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-        , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
-         getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-        ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
+        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+        .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
+        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
+        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 145, 54, 75, 0, 537, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 522, 0};
@@ -230,14 +233,14 @@ public class GroupCreate extends JPanel {
         add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(tf_groupName, new GridBagConstraints(2, 1, 3, 1, 0.0, 0.0,
+        add(tfGroupName, new GridBagConstraints(2, 1, 3, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- b_create ----
-        b_create.setText("\u5efa\u7acb");
-        b_create.addActionListener(e -> b_create(e));
-        add(b_create, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
+        //---- bCreate ----
+        bCreate.setText("\u5efa\u7acb");
+        bCreate.addActionListener(e -> bCreate(e));
+        add(bCreate, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -247,7 +250,7 @@ public class GroupCreate extends JPanel {
         add(label2, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_suject, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
+        add(cbSuject, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -257,14 +260,14 @@ public class GroupCreate extends JPanel {
         add(label3, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_grade, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
+        add(cbGrade, new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- b_search ----
-        b_search.setText("\u67e5\u8a62");
-        b_search.addActionListener(e -> b_search(e));
-        add(b_search, new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0,
+        //---- bSearch ----
+        bSearch.setText("\u67e5\u8a62");
+        bSearch.addActionListener(e -> bSearch(e));
+        add(bSearch, new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -281,13 +284,13 @@ public class GroupCreate extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label1;
-    private JTextField tf_groupName;
-    private JButton b_create;
+    private JTextField tfGroupName;
+    private JButton bCreate;
     private JLabel label2;
-    private JComboBox cb_suject;
+    private JComboBox cbSuject;
     private JLabel label3;
-    private JComboBox cb_grade;
-    private JButton b_search;
+    private JComboBox cbGrade;
+    private JButton bSearch;
     private JScrollPane scrollPane1;
     private JTable dataTable;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

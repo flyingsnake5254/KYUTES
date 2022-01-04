@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 import DataClass.GetDBdata;
 
@@ -20,14 +21,14 @@ import DataClass.GetDBdata;
 public class GroupSearch extends JPanel {
     public GroupSearch() {
         initComponents();
-        cb_all.addItem("全部");
-        b_delete.setVisible(false);
+        cbAll.addItem("全部");
+        bDelete.setVisible(false);
         table1.setVisible(false);
     }
 
-    private void b_search(ActionEvent e) {
+    private void bSearch(ActionEvent e) {
         // TODO add your code here
-        if(cb_all.getSelectedItem().toString().equals("全部")){
+        if(cbAll.getSelectedItem().toString().equals("全部")){
             ArrayList<String> groupName = new ArrayList<>();
             ArrayList<String> peopleNum = new ArrayList<>();
             ArrayList<String> sujectNum = new ArrayList<>();
@@ -51,11 +52,11 @@ public class GroupSearch extends JPanel {
                     table1.setValueAt(sujectNum.get(i),i,2);
                 }
                 table1.setVisible(true);
-                b_delete.setVisible(true);
+                bDelete.setVisible(true);
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 table1.setVisible(false);
-                b_delete.setVisible(false);
+                bDelete.setVisible(false);
                 JOptionPane.showMessageDialog(
                         null,
                         "無法讀取資料庫",
@@ -67,7 +68,7 @@ public class GroupSearch extends JPanel {
         }
     }
 
-    private void b_delete(ActionEvent e) {
+    private void bDelete(ActionEvent e) {
         // TODO add your code here
         int[] selectIndex = table1.getSelectedRows();
         ArrayList<String> selectGroup = new ArrayList<>();
@@ -100,21 +101,21 @@ public class GroupSearch extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
         label1 = new JLabel();
-        cb_all = new JComboBox();
-        b_search = new JButton();
+        cbAll = new JComboBox();
+        bSearch = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        b_delete = new JButton();
+        bDelete = new JButton();
 
         //======== this ========
         setBackground(new Color(214, 214, 214));
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-        .border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder
-        .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.
-        awt.Font.BOLD,12),java.awt.Color.red), getBorder()))
-        ; addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-        ){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}})
-        ;
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
+        . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing
+        .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
+        Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
+        ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
+        public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName (
+        ) ) )throw new RuntimeException( ) ;} } );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 86, 0, 617, 65, 71, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 0, 0, 448, 37, 0};
@@ -126,14 +127,14 @@ public class GroupSearch extends JPanel {
         add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_all, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+        add(cbAll, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- b_search ----
-        b_search.setText("\u67e5\u8a62");
-        b_search.addActionListener(e -> b_search(e));
-        add(b_search, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
+        //---- bSearch ----
+        bSearch.setText("\u67e5\u8a62");
+        bSearch.addActionListener(e -> bSearch(e));
+        add(bSearch, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -145,11 +146,11 @@ public class GroupSearch extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 0), 0, 0));
 
-        //---- b_delete ----
-        b_delete.setText("\u522a\u9664");
-        b_delete.setBackground(Color.red);
-        b_delete.addActionListener(e -> b_delete(e));
-        add(b_delete, new GridBagConstraints(6, 5, 1, 1, 0.0, 0.0,
+        //---- bDelete ----
+        bDelete.setText("\u522a\u9664");
+        bDelete.setBackground(Color.red);
+        bDelete.addActionListener(e -> bDelete(e));
+        add(bDelete, new GridBagConstraints(6, 5, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -158,10 +159,10 @@ public class GroupSearch extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label1;
-    private JComboBox cb_all;
-    private JButton b_search;
+    private JComboBox cbAll;
+    private JButton bSearch;
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton b_delete;
+    private JButton bDelete;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

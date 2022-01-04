@@ -38,7 +38,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "bBuildAccount"
 				"text": "建立使用者帳號"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_buildAccount", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bBuildAccount", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 2
@@ -46,7 +45,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "bAccountManage"
 				"text": "帳號管理"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_accountManage", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bAccountManage", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 3
@@ -54,7 +52,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "bGroupManage"
 				"text": "測驗群組管理"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_groupManage", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bGroupManage", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 4
@@ -62,7 +59,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "bSubjectManage"
 				"text": "測驗科目管理"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "b_subjectManage", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bSubjectManage", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 5

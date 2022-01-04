@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 import DataClass.GetDBdata;
 import DataClass.Data;
@@ -22,12 +23,12 @@ public class GroupMemberAdd extends JPanel {
     public GroupMemberAdd() {
         initComponents();
         table1.setVisible(false);
-        b_add.setVisible(false);
+        bAdd.setVisible(false);
         initCombo();
     }
     
     private void initCombo(){
-        cb_group.addItem("請選擇群組");
+        cbGroup.addItem("請選擇群組");
         ArrayList<String> groups = new ArrayList<>();
         Statement st = new GetDBdata().getStatement();
         try {
@@ -37,24 +38,24 @@ public class GroupMemberAdd extends JPanel {
                 groups.add(rs.getString("name"));
             }
             for(int i = 0 ; i < groups.size() ; i ++){
-                cb_group.addItem(groups.get(i));
+                cbGroup.addItem(groups.get(i));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         for(int i = 0 ; i < Data.SUBJECTS.length ; i ++){
-            cb_suject.addItem(Data.SUBJECTS[i]);
+            cbSuject.addItem(Data.SUBJECTS[i]);
         }
-        cb_grade.addItem("一年級");
-        cb_grade.addItem("二年級");
-        cb_grade.addItem("三年級");
-        cb_grade.addItem("四年級");
+        cbGrade.addItem("一年級");
+        cbGrade.addItem("二年級");
+        cbGrade.addItem("三年級");
+        cbGrade.addItem("四年級");
     }
 
     String selectGroup;
-    private void b_search(ActionEvent e) {
+    private void bSearch(ActionEvent e) {
         // TODO add your code here
-        selectGroup = cb_group.getSelectedItem().toString();
+        selectGroup = cbGroup.getSelectedItem().toString();
         if(selectGroup.equals("請選擇群組")){
             JOptionPane.showMessageDialog(
                     null,
@@ -64,8 +65,8 @@ public class GroupMemberAdd extends JPanel {
             );
         }
         else{
-            String selectSuject = cb_suject.getSelectedItem().toString();
-            String selectGrade = cb_grade.getSelectedItem().toString();
+            String selectSuject = cbSuject.getSelectedItem().toString();
+            String selectGrade = cbGrade.getSelectedItem().toString();
             ArrayList<String> accounts = new ArrayList<>();
             ArrayList<String> names = new ArrayList<>();
             ArrayList<String> sujects = new ArrayList<>();
@@ -96,14 +97,14 @@ public class GroupMemberAdd extends JPanel {
                     table1.setValueAt(grade.get(i),i,3);
                 }
                 table1.setVisible(true);
-                b_add.setVisible(true);
+                bAdd.setVisible(true);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
     }
 
-    private void b_add(ActionEvent e) {
+    private void bAdd(ActionEvent e) {
         // TODO add your code here
         int[] selectIndex = table1.getSelectedRows();
         if(selectIndex.length == 0){
@@ -179,24 +180,25 @@ public class GroupMemberAdd extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
         label1 = new JLabel();
-        cb_group = new JComboBox();
+        cbGroup = new JComboBox();
         label2 = new JLabel();
-        cb_suject = new JComboBox();
+        cbSuject = new JComboBox();
         label3 = new JLabel();
-        cb_grade = new JComboBox();
-        b_search = new JButton();
+        cbGrade = new JComboBox();
+        bSearch = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        b_add = new JButton();
+        bAdd = new JButton();
 
         //======== this ========
         setBackground(new Color(214, 214, 214));
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-        ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-        .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-        . Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-        propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-        ;} } );
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
+        . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing
+        .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
+        Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
+        ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
+        public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName (
+        ) ) )throw new RuntimeException( ) ;} } );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 175, 0, 143, 0, 0, 0, 315, 67, 0, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {0, 0, 501, 33, 0, 0};
@@ -208,7 +210,7 @@ public class GroupMemberAdd extends JPanel {
         add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_group, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+        add(cbGroup, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -217,7 +219,7 @@ public class GroupMemberAdd extends JPanel {
         add(label2, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_suject, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
+        add(cbSuject, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -226,14 +228,14 @@ public class GroupMemberAdd extends JPanel {
         add(label3, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_grade, new GridBagConstraints(6, 1, 1, 1, 0.0, 0.0,
+        add(cbGrade, new GridBagConstraints(6, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- b_search ----
-        b_search.setText("\u67e5\u8a62");
-        b_search.addActionListener(e -> b_search(e));
-        add(b_search, new GridBagConstraints(7, 1, 1, 1, 0.0, 0.0,
+        //---- bSearch ----
+        bSearch.setText("\u67e5\u8a62");
+        bSearch.addActionListener(e -> bSearch(e));
+        add(bSearch, new GridBagConstraints(7, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -245,10 +247,10 @@ public class GroupMemberAdd extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- b_add ----
-        b_add.setText("\u65b0\u589e");
-        b_add.addActionListener(e -> b_add(e));
-        add(b_add, new GridBagConstraints(9, 3, 1, 1, 0.0, 0.0,
+        //---- bAdd ----
+        bAdd.setText("\u65b0\u589e");
+        bAdd.addActionListener(e -> bAdd(e));
+        add(bAdd, new GridBagConstraints(9, 3, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -257,14 +259,14 @@ public class GroupMemberAdd extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label1;
-    private JComboBox cb_group;
+    private JComboBox cbGroup;
     private JLabel label2;
-    private JComboBox cb_suject;
+    private JComboBox cbSuject;
     private JLabel label3;
-    private JComboBox cb_grade;
-    private JButton b_search;
+    private JComboBox cbGrade;
+    private JButton bSearch;
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton b_add;
+    private JButton bAdd;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

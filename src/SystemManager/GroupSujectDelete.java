@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.plaf.*;
 import javax.swing.table.DefaultTableModel;
 import DataClass.GetDBdata;
 
@@ -22,7 +23,7 @@ public class GroupSujectDelete extends JPanel {
         initComponents();
         initCombo();
         table1.setVisible(false);
-        b_delete.setVisible(false);
+        bDelete.setVisible(false);
     }
 
     private void initCombo(){
@@ -35,7 +36,7 @@ public class GroupSujectDelete extends JPanel {
                 groups.add(rs.getString("name"));
             }
             for(int i = 0 ; i < groups.size() ; i ++){
-                cb_group.addItem(groups.get(i));
+                cbGroup.addItem(groups.get(i));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,7 +47,7 @@ public class GroupSujectDelete extends JPanel {
     private void b_search(ActionEvent e) {
         // TODO add your code here
         boolean searchState = true;
-        selectGroup = cb_group.getSelectedItem().toString();
+        selectGroup = cbGroup.getSelectedItem().toString();
         // get group suject
         ArrayList<String> sujects = new ArrayList<>();
         Statement st = new GetDBdata().getStatement();
@@ -68,10 +69,10 @@ public class GroupSujectDelete extends JPanel {
             table1.setValueAt(sujects.get(i),i,0);
         }
         table1.setVisible(true);
-        b_delete.setVisible(true);
+        bDelete.setVisible(true);
     }
 
-    private void b_delete(ActionEvent e) {
+    private void bDelete(ActionEvent e) {
         // TODO add your code here
         // sub table all_group's suject_num
         // delete from group's table
@@ -148,20 +149,20 @@ public class GroupSujectDelete extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
         label1 = new JLabel();
-        cb_group = new JComboBox();
+        cbGroup = new JComboBox();
         b_search = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        b_delete = new JButton();
+        bDelete = new JButton();
 
         //======== this ========
         setBackground(new Color(214, 214, 214));
         setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-        swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border
-        . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
+        swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border
+        . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067"
         ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder
         ( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-        .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
+        .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException
         ( ); }} );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 178, 0, 595, 87, 0, 0};
@@ -174,7 +175,7 @@ public class GroupSujectDelete extends JPanel {
         add(label1, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
-        add(cb_group, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+        add(cbGroup, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
@@ -193,10 +194,10 @@ public class GroupSujectDelete extends JPanel {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
 
-        //---- b_delete ----
-        b_delete.setText("\u522a\u9664");
-        b_delete.addActionListener(e -> b_delete(e));
-        add(b_delete, new GridBagConstraints(5, 3, 1, 1, 0.0, 0.0,
+        //---- bDelete ----
+        bDelete.setText("\u522a\u9664");
+        bDelete.addActionListener(e -> bDelete(e));
+        add(bDelete, new GridBagConstraints(5, 3, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 5, 5), 0, 0));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -205,10 +206,10 @@ public class GroupSujectDelete extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - peiChun lu
     private JLabel label1;
-    private JComboBox cb_group;
+    private JComboBox cbGroup;
     private JButton b_search;
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton b_delete;
+    private JButton bDelete;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

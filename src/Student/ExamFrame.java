@@ -93,36 +93,12 @@ public class ExamFrame extends JFrame {
         }
     }
 
-    private double getExamGrade(int correct , int totalQuestionNum){
+    public double getExamGrade(int correct , int totalQuestionNum){
         if(correct == 0) return 0;
         if(correct == totalQuestionNum) return 100;
         return (100 * ((double) correct / totalQuestionNum));
     }
 
-//    public boolean timeCheck(String endTime){
-//        boolean state = false;
-//        String[] dateTime2 = endTime.split(" ");
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date now = simpleDateFormat2.parse(LocalDate.now().toString());
-//            Date date2 = simpleDateFormat.parse(dateTime2[0]);
-//            String[] time2 = dateTime2[1].split(":");
-//            int hour2 = Integer.parseInt(time2[0]);
-//            int minute2 = Integer.parseInt(time2[1]);
-//            String[] nowTime = LocalTime.now().toString().split(":");
-//            int nowHour = Integer.parseInt(nowTime[0]);
-//            int nowMin = Integer.parseInt(nowTime[1]);
-//
-//            if(now.after(date2)) return true;
-//            if(now.equals(date2)){
-//                if(nowHour > hour2) return
-//            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return state;
-//    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - peiChun lu
